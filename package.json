@@ -1,5 +1,5 @@
 {
-    "name": "BT",
+    "name": "bt-music-player",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
