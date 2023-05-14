@@ -4,7 +4,7 @@ import learnItLogo from '../../assets/logo.svg'
 import logoutIcon from '../../assets/logout.svg'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../contexts/AuthContext'
+import { AuthContext } from '../../HOC/IsAuthenticated'
 import { useContext } from 'react'
 
 const NavbarMenu = () => {
