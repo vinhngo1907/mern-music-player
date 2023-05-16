@@ -1,38 +1,37 @@
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
+const express = require('express');
+const compression = require('compression');
+const bodyParser = require('body-parser');
+const http = require('http');
+const path = require('path');
+const morgan = require('morgan');
+const debug = require('debug');
 
-const authRouter = require('./routes/auth')
-const postRouter = require('./routes/post')
+const info = debug('server:app:info');
+const error = debug('server:app:error');
+const database = require("./lib/Database");
+const routes = require("./app");
 
-const connectDB = async () => {
-	try {
-		await mongoose.connect(
-			`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@mern-learnit.j0fcc.mongodb.net/mern-learnit?retryWrites=true&w=majority`,
-			{
-				useCreateIndex: true,
-				useNewUrlParser: true,
-				useUnifiedTopology: true,
-				useFindAndModify: false
-			}
-		)
+const app = express();
+const server = http.createServer(app);
+app.disable('x-powered-by');
 
-		console.log('MongoDB connected')
-	} catch (error) {
-		console.log(error.message)
-		process.exit(1)
-	}
-}
+// Connect DB
+database.init().then(() => info('Connected to database')).catch(err => error(err));
 
-connectDB()
+// middlewares
+const env = app.get('env');
 
-const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(express.static('public'));
+app.use(bodyParser());
+app.use(cors());
 
-app.use('/api/auth', authRouter)
-app.use('/api/posts', postRouter)
+// routes
+routes(app);
+
+process.on('uncaughtException', (err) => {
+	error('crashed!!! - ' + (err.stack || err));
+});
 
 const PORT = process.env.PORT || 5000
 
