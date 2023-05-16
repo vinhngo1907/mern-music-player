@@ -3,3 +3,7 @@ require('app-module-path').addPath(__dirname);
 // const api = require('./routes/api');
 // const download = require('./routes/download');
 const path = require('path');
+
+module.exports = function (app) {
+    // app.use()
+}
