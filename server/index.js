@@ -1,6 +1,6 @@
 const express = require('express');
 const compression = require('compression');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const http = require('http');
 const path = require('path');
 const morgan = require('morgan');
