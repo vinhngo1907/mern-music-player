@@ -1,14 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const argon2 = require('argon2')
+const express = require('express');
+const User = require("../../../models/user");
 const jwt = require('jsonwebtoken')
-const verifyToken = require('../middleware/auth')
+const co = require("co");
+const signupValidatior = require("../../../shared/validations/register");
 
-const User = require('../../../models/User')
-
-// @route GET api/auth
-// @desc Check if user is logged in
-// @access Public
+/** 
+ *  @route GET api/auth
+ * @desc Check if user is logged in
+ * @access Public
+*/
 router.get('/', verifyToken, async (req, res) => {
 	try {
 		const user = await User.findById(req.userId).select('-password')
@@ -21,12 +21,16 @@ router.get('/', verifyToken, async (req, res) => {
 	}
 })
 
-// @route POST api/auth/register
-// @desc Register user
-// @access Public
+/**
+ * @route POST api/auth/register
+ * @desc Register user
+ * @access Public
+*/
 router.post('/register', async (req, res) => {
 	const { username, password } = req.body
-
+	const {isValid, errors} = signupValidatior(req.body);
+	
+	if(!isValid)
 	// Simple validation
 	if (!username || !password)
 		return res

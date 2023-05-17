@@ -1,5 +1,5 @@
-const BT_API = process.env.BT_API;
+const V_API = process.env.V_API;
 
 module.exports = {
-    BT_API: BT_API,
+    V_API: V_API,
 };
