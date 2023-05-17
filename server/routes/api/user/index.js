@@ -1,4 +1,5 @@
 const express = require('express');
+const router = express.Router();
 const User = require("../../../models/user");
 const jwt = require('jsonwebtoken')
 const co = require("co");
@@ -9,17 +10,7 @@ const signupValidatior = require("../../../shared/validations/register");
  * @desc Check if user is logged in
  * @access Public
 */
-router.post('/register', verifyToken, async (req, res) => {
-	try {
-		const user = await User.findById(req.userId).select('-password')
-		if (!user)
-			return res.status(400).json({ success: false, message: 'User not found' })
-		res.json({ success: true, user })
-	} catch (error) {
-		console.log(error)
-		res.status(500).json({ success: false, message: 'Internal server error' })
-	}
-})
+
 
 /**
  * @route POST api/auth/register
