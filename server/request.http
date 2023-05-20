@@ -1,9 +1,13 @@
-POST http://localhost:5000/api/auth/register
+@serverUrl = http://localhost:5001/api
+
+###
+POST {{serverUrl}}/user/register
 Content-Type: application/json
 
 {
-  "username": "jim",
-  "password": "jim"
+  "username": "vinhngo",
+  "password": "123456",
+  "passwordConfirmation" :"123456"
 }
 
 ###

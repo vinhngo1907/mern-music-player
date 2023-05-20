@@ -1,9 +1,9 @@
-const Validator = require("validator").default;
+const Validator = require("validator");
 const { isEmpty } = require("../../utils");
 
 module.exports = function validateInput(data) {
     let errors = {}
-    if (Validator.isEmpty(data.user || '')) {
+    if (Validator.isEmpty(data.username || '')) {
         errors.username = 'Username is required';
     }
 
