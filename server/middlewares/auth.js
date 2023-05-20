@@ -1,23 +1,32 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+require("dotenv").config();
 
-const verifyToken = (req, res, next) => {
-	const authHeader = req.header('Authorization')
-	const token = authHeader && authHeader.split(' ')[1]
+module.exports = function (req, res, next) {
+	const token = req.headers.authorization;
+	if (token) {
+		jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+			if (err) {
+				const error = new Error('Failed to authenticate');
+				error.status = 401;
+				next(error);
+			} else {
+				const { _doc: { _id: id } } = decoded;
+				User.findById(id).then(user => {
+					if (!user) {
+						const err = { status: 401, message: 'No such user' }
+						throw err;
+					}
 
-	if (!token)
-		return res
-			.status(401)
-			.json({ success: false, message: 'Access token not found' })
-
-	try {
-		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-
-		req.userId = decoded.userId
-		next()
-	} catch (error) {
-		console.log(error)
-		return res.status(403).json({ success: false, message: 'Invalid token' })
+					const { username, _id } = user;
+					req.currentUser = { username, _id }
+					return next();
+				}).catch(err => next(err));
+			}
+		})
+	} else {
+		const error = new Error("Failed to authenticate");
+		error.status = 401;
+		next(error);
 	}
 }
-
-module.exports = verifyToken
