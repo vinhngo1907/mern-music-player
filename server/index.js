@@ -17,7 +17,7 @@ app.disable('x-powered-by');
 
 database
 	.init()
-	.then(() => console.log('Connected to database'))
+	.then(() => info('Connected to database'))
 	.catch(err => error(err));
 
 // middlewares
