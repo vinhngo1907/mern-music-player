@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const getToken = require('../utils/getTokenForUser');
 
 const Schema = mongoose.Schema;
@@ -11,22 +11,31 @@ const userSchema = new Schema({
 });
 
 userSchema.pre('save', function (next) {
+	console.log("save")
 	const user = this;
 
 	bcrypt.genSalt(10, (err, salt) => {
-		if (err) return next(err);
+		if (err) {
+			console.log(err);
+			return next(err);
+		}
 
 		bcrypt.hash(user.password, salt, null, (err, hash) => {
-			if (err) return next(err);
+			if (err){
+				console.log(err);
+				return next(err);
+			}
 
 			user.password = hash;
 			user.access_token = getToken(user);
+			console.log({user})
 			next();
 		});
 	});
 });
 
 userSchema.methods.comparePassword = function (candidatePassword) {
+	console.log("asd")
 	return new Promise((resolve, reject) => {
 		bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
 			if (err) return reject(err);
