@@ -1,21 +1,6 @@
-import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+/**
+ *@description a library that can scrape anything from http://mp3.zing.vn
+ *@author vinhngo1907 https://github.com/vinhngo1907
+*/
 
-const About = () => {
-	return (
-		<Row className='mt-5' style={{ marginRight: 0 }}>
-			<Col className='text-center'>
-				<Button
-					variant='primary'
-					href='https://www.youtube.com/c/HenryWebDev'
-					size='lg'
-				>
-					Visit my channel for more tutorials
-				</Button>
-			</Col>
-		</Row>
-	)
-}
-
-export default About
+const cheerio = require('cheerio');

@@ -1,6 +1,12 @@
-/**
- *@description a library that can scrape anything from http://mp3.zing.vn
- *@author vinhngo1907 https://github.com/vinhngo1907
-*/
+const crypto = require("crypto");
 
-const cheerio = require('cheerio');
+module.exports = {
+    createHash256: function (str) {
+        return crypto.createHash('sha512').update(str).digest('hex');
+    },
+
+    createHmac512: function (str, key) {
+        let hmac = crypto.createHmac("sha512", key);
+        return hmac.update(Buffer.from(str, 'uft8')).digest('hex');
+    }
+}
