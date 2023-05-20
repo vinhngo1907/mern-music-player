@@ -50,18 +50,18 @@ router.post('/login', async (req, res) => {
 	co(function* () {
 		const user = yield User.findOne({ username });
 		if (!user) {
-			const error = { status: 400, errors: { username: 'Invalid username' } }
+			const error = { status: 401, errors: { username: 'Invalid username' } };
 			throw error;
 		}
 
 		const isMatch = yield user.comparePassword(password);
 		if (!isMatch) {
-			const error = { status: 400, errors: { password: 'Invalid password' } }
+			const error = { status: 401, errors: { password: 'Invalid password' } };
 			throw error;
 		}
 
 		return user;
-	}).then((user) => res.json({ username: user.username, access_token: user.access_token }))
+	}).then(user => res.json({ username: user.username, access_token: user.access_token }))
 		.catch(err => next(err));
 })
 

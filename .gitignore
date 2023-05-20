@@ -8,3 +8,4 @@ public/*
 !public/images
 .env
 .gitlab-ci.yml
+request.http
