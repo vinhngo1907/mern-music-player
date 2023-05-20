@@ -2,7 +2,7 @@ const crypto = require("crypto");
 
 module.exports = {
     createHash256: function (str) {
-        return crypto.createHash('sha512').update(str).digest('hex');
+        return crypto.createHash('sha256').update(str).digest('hex');
     },
 
     createHmac512: function (str, key) {
