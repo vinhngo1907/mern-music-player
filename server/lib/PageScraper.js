@@ -60,3 +60,5 @@ PageScraper.prototype.setKey = function (key) {
     }
     return this;
 };
+
+module.exports = PageScraper;

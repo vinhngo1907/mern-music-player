@@ -16,3 +16,5 @@ BaseScraper.prototype.setRoot = function(rootSelector){
     this.$root = this.$(rootSelector);
     return this;
 }
+
+module.exports = BaseScraper;
