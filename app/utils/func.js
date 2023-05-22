@@ -40,3 +40,15 @@ export function getSongUrl(name, id) {
 export function pageQuery(page) {
     return page ? `?page=${page}` : "";
 }
+
+export function range(r) {
+    const arr = [];
+    for (let i = 0; i < r; i++) {
+        arr.push(i);
+    }
+    return arr;
+}
+
+export function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
