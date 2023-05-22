@@ -1,11 +1,30 @@
-import axios from 'axios'
+export function loadQueueState() {
+	try {
+		const serializeQueueState = localStorage.getItem('queueState');
+		if (!serializeQueueState) return undefined;
 
-const setAuthToken = token => {
-	if (token) {
-		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-	} else {
-		delete axios.defaults.headers.common['Authorization']
+		return JSON.parse(serializeQueueState);
+	} catch (error) {
+		return undefined;
 	}
 }
 
-export default setAuthToken
+export function saveQueueState(state) {
+	try {
+		const serializeQueueState = JSON.stringify(state.queueState);
+		localStorage.setItem('queueState', serializeQueueState);
+	} catch (error) {
+		// ignore
+	}
+}
+
+export function loadUserdata() {
+	try {
+		serializeUserData = localStorage.getItem('queueState');
+		if (!serializeUserData) return undefined;
+
+		return JSON.parse(serializeUserData);
+	} catch (error) {
+		return undefined;
+	}
+}
