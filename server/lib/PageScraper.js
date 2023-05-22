@@ -17,4 +17,38 @@ const util = require('util');
         },
       ]
     }
+*/
+
+function PageScraper(...args) {
+    BaseScraper.apply(this, args);
+    this.key = ''; // key can be a noun for a list of result such as <songs, videos, albums>
+    this.attrs = {}; // attributes that will be extracted from the element
+    this.elements = [] // dom array
+}
+
+util.inherits(PageScraper, BaseScraper);
+
+// static methods
+PageScraper.pluralize = function(string){
+    return `${string}`;
+}
+
+/**
+ * @description get the list of element from the $(selector)
+ * @param <string> selector 
+ * @returns 
  */
+
+PageScraper.prototype.list = function(selector){
+    // test the validation of the passed selector see if it has the prefix '.' or '#'
+    this.testSelector(selector);
+    this.elements = this.$(selector);
+    return this;
+}
+
+/**
+ * @description pluralize the output key
+ * @param <string> key
+ * Ex: this.setKey('song');
+ * { 'songs': [] }
+*/
