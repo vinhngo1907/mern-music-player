@@ -6,5 +6,7 @@ import { fetchDataForHomePage, getCharts, getPlaylistOnEnter } from './route_cal
 import { fetchOnScroll } from './HOC';
 
 export default (
-    <Route path='/' component={Containers.App}></Route>
+    <Route path='/' component={Containers.App}>
+        <Route path="*" component={NotFound} />
+    </Route>
 )
