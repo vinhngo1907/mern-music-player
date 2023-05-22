@@ -4,3 +4,15 @@
 */
 
 const cheerio = require('cheerio');
+
+function BaseScraper(...args) {
+    const [html, opt] = args;
+    this.$ = opt ? cheerio.load(html, opt) : cheerio.load(html);
+    this.result = {};
+    this.$root = this.$('body');
+}
+
+BaseScraper.prototype.setRoot = function(rootSelector){
+    this.$root = this.$(rootSelector);
+    return this;
+}

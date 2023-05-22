@@ -29,7 +29,7 @@ function PageScraper(...args) {
 util.inherits(PageScraper, BaseScraper);
 
 // static methods
-PageScraper.pluralize = function(string){
+PageScraper.pluralize = function (string) {
     return `${string}`;
 }
 
@@ -39,7 +39,7 @@ PageScraper.pluralize = function(string){
  * @returns 
  */
 
-PageScraper.prototype.list = function(selector){
+PageScraper.prototype.list = function (selector) {
     // test the validation of the passed selector see if it has the prefix '.' or '#'
     this.testSelector(selector);
     this.elements = this.$(selector);
@@ -52,3 +52,11 @@ PageScraper.prototype.list = function(selector){
  * Ex: this.setKey('song');
  * { 'songs': [] }
 */
+PageScraper.prototype.setKey = function (key) {
+    if (/s$/.test(key)) {
+        this.key = key;
+    } else {
+        this.key = PageScraper.pluralize(key);
+    }
+    return this;
+};
