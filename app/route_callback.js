@@ -1,13 +1,7 @@
-const reportWebVitals = onPerfEntry => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
-};
-
-export default reportWebVitals;
+import store from './store';
+import { isEmpty, changeAlias } from './utils/func';
+import { fetchTracks } from './actions/home';
+import { fetchSong, fetchSuggestedSongs } from './actions/song';
+import { getChart, changeActiveChart } from './actions/chart';
+import { getPlaylistCollection } from './actions/user_playlist';
+import { loadUserData } from './localStorage';

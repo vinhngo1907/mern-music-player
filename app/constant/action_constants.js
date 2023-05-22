@@ -1,0 +1,4 @@
+// actions for player
+export const UPDATE_LYRIC = 'UPDATE_LYRIC';
+export const UPDATE_LYRIC_PERCENT = 'UPDATE_LYRIC_PERCENT';
+export const UPDATE_PLAYED_PERCENT = 'UPDATE_PLAYED_PERCENT';
