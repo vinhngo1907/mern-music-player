@@ -32,3 +32,11 @@ export function changeAlias(alias) {
 
     return arrStr.join("").replace(/-+/g, "-");
 }
+
+export function getSongUrl(name, id) {
+
+}
+
+export function pageQuery(page) {
+    return page ? `?page=${page}` : "";
+}
