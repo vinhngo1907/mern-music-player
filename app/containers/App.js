@@ -13,10 +13,14 @@ class App extends React.Component {
 		const className = `container animated ${slideInRight && "slideInRight"}`;
 		return (
 			<div>
-				<Nav />
+				<Nav auth={this.props.auth} dispatch={this.props.dispatch} />
+				<div className={className}>
+					{this.props.children}
+					{/* <Analyzer show={show} /> */}
+				</div>
 			</div>
 		)
 	}
 }
 
-export default App
+export default connect(mapStateToProps)(App);
