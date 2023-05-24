@@ -36,6 +36,7 @@ Or
 * Build with Docker Compose
 
 ```
+After building the app, frontend and backend servers will be merged into a single server and be available at http://localhost:3000
 
 ## Contributors
 - [Kuu Koo](https://github.com/vinhngo1907)
