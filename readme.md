@@ -26,7 +26,6 @@ Wait for the build process to complete
 3. Run `npm run dev:server` to start the api server
 
 Navigate to http://localhost:8000 in your browser to explore the app
-
 ## Build the app
 * Build manually
 ```
@@ -36,6 +35,10 @@ Or
 * Build with Docker Compose
 
 ```
+$ docker-compose build
+$ docker-compose up
+```
+
 After building the app, frontend and backend servers will be merged into a single server and be available at http://localhost:3000
 
 ## Contributors
