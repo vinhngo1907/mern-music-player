@@ -20,11 +20,12 @@ class App extends React.Component {
 				<div className={className}>
 					{this.props.children}
 					<Analyzer show={show} />
+					App
 				</div>
-				<Containers.Queue show={showQueue} />
+				{/* <Containers.Queue show={showQueue} />
 				{showPlayer ? <Containers.Player /> : null}
 				<Containers.Modal />
-				<ToastContainer position="top-right" autoClose={1000} />
+				<ToastContainer position="top-right" autoClose={1000} /> */}
 			</div>
 		);
 	}
