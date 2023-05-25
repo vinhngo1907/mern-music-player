@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import _throttle from 'lodash.throttle';
-// import { fetchTracks } from '../actions/home';
+import { fetchTracks } from '../actions/home';
 
 const NUMBER_OF_PAGES = 5;
 
@@ -15,7 +15,7 @@ export default function (ComposedComponent) {
         }
     }
     FetchOnScroll.propTypes = {
-        fetchTracks: PropTypes.func.isRequired,
+        // fetchTracks: PropTypes.func.isRequired,
         pageLoaded: PropTypes.number.isRequired,
         isLoading: PropTypes.bool.isRequired,
         activeId: PropTypes.string.isRequired,
@@ -26,5 +26,6 @@ export default function (ComposedComponent) {
       isLoading: state.trackState.isLoading,
       activeId: state.trackState.activeId,
     }),
-    { fetchTracks })(FetchOnScroll);
+    { fetchTracks })
+    (FetchOnScroll);
 }
