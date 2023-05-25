@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import authReducer from "./auth_reducer";
+import authReducer from "./authReducer";
+import UIReducer from './uiReducer';
+import queueReducer from './queueReducer';
 
 export default combineReducers({
+    routing: routerReducer,
     auth: authReducer,
-    routing: routerReducer
+    UIState: UIReducer,
+    queueState: queueReducer
 })

@@ -1,30 +1,30 @@
 export function loadQueueState() {
 	try {
-		const serializeQueueState = localStorage.getItem('queueState');
-		if (!serializeQueueState) return undefined;
+		const serializedQueueState = localStorage.getItem('queueState');
+		if (!serializedQueueState) return undefined;
 
-		return JSON.parse(serializeQueueState);
-	} catch (error) {
+		return JSON.parse(serializedQueueState);
+	} catch (err) {
 		return undefined;
 	}
 }
 
 export function saveQueueState(state) {
 	try {
-		const serializeQueueState = JSON.stringify(state.queueState);
-		localStorage.setItem('queueState', serializeQueueState);
-	} catch (error) {
+		const serializedQueueState = JSON.stringify(state.queueState);
+		localStorage.setItem('queueState', serializedQueueState);
+	} catch (err) {
 		// ignore
 	}
 }
 
 export function loadUserData() {
 	try {
-		serializeUserData = localStorage.getItem('user');
-		if (!serializeUserData) return undefined;
+		const serializedUserData = localStorage.getItem('user');
+		if (!serializedUserData) return undefined;
 
-		return JSON.parse(serializeUserData);
-	} catch (error) {
+		return JSON.parse(serializedUserData);
+	} catch (err) {
 		return undefined;
 	}
 }

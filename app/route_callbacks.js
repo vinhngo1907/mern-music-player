@@ -1,6 +1,6 @@
 import store from './store';
 import { isEmpty, changeAlias } from './utils/func';
-// import { fetchTracks } from './actions/home';
+import { fetchTracks } from './actions/home';
 import { fetchSong, fetchSuggestedSongs } from './actions/song';
 // import { getChart, changeActiveChart } from './actions/chart';
 // import { getPlaylistCollection } from './actions/user_playlist';
@@ -15,12 +15,16 @@ export function fetchDataForHomePage() {
     //     store.dispatch(changeActiveChart('pop'));
     // }
 
+    // if (!state.trackState.tracks.length) {
+    //     // only fetch tracks if there is no trackss in the trackState
+    //     store.dispatch(fetchTracks(1));
+    //   }
+
     // play the first song in the queue saved in localstorage if there is one
-    const queueState = state.queueState;
+    // const queueState = state.queueState;
     if (queueState.queue.length && isEmpty(state.songData.data)) {
         const { name, id, alias } = queueState.queue[0];
         store.dispatch(fetchSong(alias || changeAlias(name), id));
-        // store.dispatch(fetchSuggestedSongs(id));
     }
 }
 
