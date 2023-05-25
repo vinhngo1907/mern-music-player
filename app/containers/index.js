@@ -1,5 +1,7 @@
 import App from './App';
+import SongPage from './SongPage';
 
 export {
-	App
+	App,
+	SongPage
 }
