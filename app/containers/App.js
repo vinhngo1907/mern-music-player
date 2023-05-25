@@ -16,12 +16,11 @@ class App extends React.Component {
 
 		return (
 			<div>
-				App
-				{/* <Nav auth={this.props.auth} dispatch={this.props.dispatch} />
+				<Nav auth={this.props.auth} dispatch={this.props.dispatch} />
 				<div className={className}>
 					{this.props.children}
 					<Analyzer show={show} />
-				</div> */}
+				</div>
 				{/* <Containers.Queue show={showQueue} />
 				{showPlayer ? <Containers.Player /> : null}
 				<Containers.Modal />

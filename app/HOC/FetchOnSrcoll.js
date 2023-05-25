@@ -15,7 +15,7 @@ export default function (ComposedComponent) {
         }
     }
     FetchOnScroll.propTypes = {
-        // fetchTracks: PropTypes.func.isRequired,
+        fetchTracks: PropTypes.func.isRequired,
         pageLoaded: PropTypes.number.isRequired,
         isLoading: PropTypes.bool.isRequired,
         activeId: PropTypes.string.isRequired,

@@ -2,9 +2,10 @@ import React from "react";
 import axios from "axios";
 import debounce from "lodash.debounce";
 import PropTypes from "prop-types";
+import { IndexLink, Link } from "react-router";
 
 class Nav extends React.Component {
-    static contextType = {
+    static contextTypes = {
         router: PropTypes.object
     }
     constructor() {

@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./index.sass";
 
-const Analyzer = ({ show }) => {
+const Analyzer = ({ show }) => (
     <div id="analyzer" style={{ display: show ? "block" : "none" }}>
-        <canvas id="analyzer_render" />
+        <canvas id="analyser_render"></canvas>
     </div>
-}
+);
 
 Analyzer.propTypes = {
-    show: PropTypes.bool.isRequired
-}
+    show: PropTypes.bool.isRequired,
+};
 
 export default Analyzer;
