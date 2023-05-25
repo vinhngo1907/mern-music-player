@@ -8,7 +8,7 @@ import history from './history';
 import './styles/base.sass';
 
 render(
-    <Provider >
+    <Provider store={store}>
         <Router
             history={history}
             routes={routes}

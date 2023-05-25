@@ -21,7 +21,7 @@ export function fetchDataForHomePage() {
     //   }
 
     // play the first song in the queue saved in localstorage if there is one
-    // const queueState = state.queueState;
+    const queueState = state.queueState;
     if (queueState.queue.length && isEmpty(state.songData.data)) {
         const { name, id, alias } = queueState.queue[0];
         store.dispatch(fetchSong(alias || changeAlias(name), id));

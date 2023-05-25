@@ -35,7 +35,8 @@ function mapStateToProps({ songData, UIState, auth }) {
 	const { showQueue, showAnalyzer, slideInRight } = UIState;
 
 	return {
-		showPlayer: Object.keys(songData.data).length,
+		// showPlayer: Object.keys(songData.data).length,
+		showPlayer: 0,
 		showAnalyzer,
 		showQueue,
 		slideInRight,
