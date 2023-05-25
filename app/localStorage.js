@@ -18,7 +18,7 @@ export function saveQueueState(state) {
 	}
 }
 
-export function loadUserdata() {
+export function loadUserData() {
 	try {
 		serializeUserData = localStorage.getItem('user');
 		if (!serializeUserData) return undefined;
