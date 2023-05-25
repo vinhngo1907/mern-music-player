@@ -12,7 +12,16 @@ export default function (state = initialState, action) {
         case types.SIGN_UP_SUCCESS:
 
         case types.LOG_IN_SUCCESS:
-            return { ...state, user: action.user, authenticated: true }
+            return { ...state, user: action.user, authenticated: true };
+
+        case types.START_PROCESSING:
+            return { ...state, isProcessing: true };
+
+        case types.FINISH_PROCESSING:
+            return { ...state, isProcessing: false };
+
+        case types.CLEAR_ERRORS:
+            return { ...state, errors: {} };
 
         default:
             return state;
