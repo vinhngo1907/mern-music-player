@@ -14,7 +14,7 @@
         "build": "npm run clean && npm run webpack:prod",
         "test": "ava --verbose",
         "compile": "webpack --config webpack.config.js",
-        "run-webpack": "rmdir /s /q dist && webpack --mode development --config webpack.config.js"
+        "run-webpack": "webpack --mode development --config webpack.config.js"
     },
     "ava": {
         "files": [

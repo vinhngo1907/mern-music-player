@@ -4,5 +4,6 @@ import HomePage from './HomePageContainer';
 
 export {
 	App,
-	SongPage
+	SongPage,
+	HomePage
 }

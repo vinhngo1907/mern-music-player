@@ -22,7 +22,6 @@ const persistedData = {
         errors: {},
     },
 };
-
 const store = createStore(rootReducer, persistedData, applyMiddleware(...middleware));
 
 store.subscribe(_throttle(() => {
