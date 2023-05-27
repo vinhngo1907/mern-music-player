@@ -33,3 +33,6 @@ export const ADD_SONG_TO_QUEUE = 'ADD_SONG_TO_QUEUE';
 export const TOGGLE_QUEUE = 'TOGGLE_QUEUE';
 export const REPLACE_QUEUE = 'REPLACE_QUEUE';
 export const CLEAR_QUEUE = 'CLEAR_QUEUE';
+
+// action for user playlist
+export const CLEAR_USER_PLAYLIST = 'CLEAR_USER_PLAYLIST';
