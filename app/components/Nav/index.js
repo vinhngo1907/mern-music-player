@@ -3,7 +3,9 @@ import axios from "axios";
 import debounce from "lodash.debounce";
 import PropTypes from "prop-types";
 import { IndexLink, Link } from "react-router";
-import "./nav.sass"
+import { clearUserPlaylist } from "../../actions/user_playlist";
+import { logout } from "../../actions/auth";
+import "./nav.sass";
 
 class Nav extends React.Component {
     static contextTypes = {
@@ -24,8 +26,19 @@ class Nav extends React.Component {
         }).catch(err => { throw err; })
     }
 
-    handleOnChange(e){
+    handleOnChange(e) {
 
+    }
+
+    clearSearchResult() {
+        this.setState({ term: "", searchResult: {} });
+    }
+
+    logOut(e) {
+        e.preventDefault();
+        this.props.dispatch(clearUserPlaylist());
+        this.props.dispatch(logout());
+        this.context.router.push("/");
     }
 
     render() {
@@ -52,6 +65,64 @@ class Nav extends React.Component {
                         />
                     )} */}
                 </div>
+                <div className="navRight">
+                    <ul className="nav-menu">
+                        <li>
+                            <IndexLink
+                                to="/"
+                                className="animating_link"
+                                activeClassName="nav-menu-link-active"
+                            >
+                                Home
+                            </IndexLink>
+                        </li>
+                        <li>
+                            <Link
+                                to="/charts"
+                                className="animating_link"
+                                activeClassName="nav-menu-link-active"
+                            >
+                                Charts
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/albums"
+                                className="animating_link"
+                                activeClassName="nav-menu-link-active"
+                            >
+                                Albums
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/artists"
+                                className="animating_link"
+                                activeClassName="nav-menu-link-active"
+                            >
+                                Artists
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                {
+                    !authenticated
+                        ? (<div className="auth-btns">
+                            <Link to="/login" className="animating_link"><img src="/svg/login.svg" />Login In</Link>
+                            <Link to="/signup" className="animating_link">
+                                Sign Up
+                            </Link>
+                        </div>)
+                        : (<div className="user">
+                            <Link to={`/user/${user.username}`} className="animating_link_ellipsis">{user.username}</Link>
+                            <a
+                            href="#"
+                            title="Log out"
+                            onClick={this.logOut.bind(this)}
+                            className="animating_link"
+                            ><img src="/svg/sign-out-option.svg"/></a>
+                        </div>)
+                }
             </nav>
         )
     }
