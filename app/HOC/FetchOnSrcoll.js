@@ -12,6 +12,30 @@ export default function (ComposedComponent) {
             super(props);
             this.onScroll = this.onScroll.bind(this);
         }
+
+        componentDidMount() {
+            window.addEventListener('scroll', this.onScroll, false);
+        }
+
+        componentWillUnmount() {
+            window.removeEventListener('scroll', this.onScroll, false);
+        }
+
+        onScroll() {
+            // delay the scroll event
+
+            _throttle(() => {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
+                    if (this.props.pageLoaded < NUMBER_OF_PAGES && !this.props.isLoading) {
+                        const page = this.props.pageLoaded + 1;
+                        this.props.fetchTracks(page, this.props.activeId);
+                    }
+                }
+            }, 100)();
+        }
+        render() {
+            return <ComposedComponent {...this.props} />;
+        }
     }
 
     FetchOnScroll.propTypes = {
@@ -29,4 +53,12 @@ export default function (ComposedComponent) {
     }),
         { fetchTracks })
         (FetchOnScroll);
+}
+
+function compareTwoFirstTrack(track1, track2) {
+    return track1.encodeId === track2.encodeId;
+}
+
+function fetchTrackSuccess() {
+
 }
