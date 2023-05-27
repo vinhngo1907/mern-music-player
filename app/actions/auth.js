@@ -6,6 +6,10 @@ export function login(userCredentials){
 
 }
 
+export function signup(userCredentials){
+    
+}
+
 export function logout(){
     localStorage.removeItem("user");
     return {

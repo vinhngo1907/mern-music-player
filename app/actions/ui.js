@@ -13,3 +13,9 @@ export function startFading() {
 export function stopFading() {
 
 }
+
+export function resetSlideInRight() {
+    return {
+        type: types.RESET_SLIDE_IN_RIGHT,
+    };
+}
