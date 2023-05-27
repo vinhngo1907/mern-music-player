@@ -8,6 +8,7 @@ class Nav extends React.Component {
     static contextTypes = {
         router: PropTypes.object
     }
+    
     constructor() {
         super();
         this.state = { term: "", searchResult: {} }

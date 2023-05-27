@@ -6,7 +6,6 @@ import { fetchTracks } from '../actions/home';
 
 const NUMBER_OF_PAGES = 5;
 
-
 export default function (ComposedComponent) {
     class FetchOnScroll extends Component {
         constructor(props) {
@@ -14,6 +13,7 @@ export default function (ComposedComponent) {
             this.onScroll = this.onScroll.bind(this);
         }
     }
+
     FetchOnScroll.propTypes = {
         fetchTracks: PropTypes.func.isRequired,
         pageLoaded: PropTypes.number.isRequired,
@@ -22,10 +22,11 @@ export default function (ComposedComponent) {
     };
 
     return connect((state) =>
-    ({ pageLoaded: state.trackState.pageLoaded,
-      isLoading: state.trackState.isLoading,
-      activeId: state.trackState.activeId,
+    ({
+        pageLoaded: state.trackState.pageLoaded,
+        isLoading: state.trackState.isLoading,
+        activeId: state.trackState.activeId,
     }),
-    { fetchTracks })
-    (FetchOnScroll);
+        { fetchTracks })
+        (FetchOnScroll);
 }
