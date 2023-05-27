@@ -24,6 +24,16 @@ class SignUpPage extends React.Component {
 		});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.authenticated) {
+			this.setState({ leave: true });
+			setTimeout(() => {
+				this.props.dispatch(slideInRight()); // UI action
+				this.context.router.push('/');
+			}, 700);
+		}
+	}
+
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value })
 	}
@@ -54,7 +64,7 @@ class SignUpPage extends React.Component {
 							onChange={this.onChange.bind(this)}
 
 						/>
-						
+
 						<TextInputGroup
 							placeholder="Passord"
 							name='password'
@@ -78,7 +88,7 @@ class SignUpPage extends React.Component {
 					</form>
 				</div>
 			</div>
-		)
+		);
 	}
 
 	render() {
