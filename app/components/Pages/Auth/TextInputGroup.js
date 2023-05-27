@@ -11,7 +11,7 @@ const TextInputGroup = ({ placeholder, name, error, onChange, type }) => {
         name={name}
         onChange={onChange}
       />
-      { error ? <div className="input-error">{error}</div> : null }
+      {error ? <div className="input-error">{error}</div> : null}
     </div>
   );
 };

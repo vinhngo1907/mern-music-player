@@ -26,3 +26,9 @@ class SignUpPage extends React.Component {
         )
     }
 }
+
+function mapStateToProps({ auth, UIState }) {
+    return { auth, slideInRight: UIState.slideInRight };
+}
+
+export default connect(mapStateToProps)(SignUpPage);  

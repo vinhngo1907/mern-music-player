@@ -10,6 +10,7 @@ export default (
         <IndexRoute component={fetchOnScroll(Containers.HomePage)} onEnter={fetchDataForHomePage} />
         <Route path='song/:name/:id' component={Containers.SongPage} />
         <Route path='login' component={Containers.LoginPage} />
+        <Route path='signup' component={Containers.SignUpPage} />
         <Route path="*" component={NotFound} />
     </Route>
 )
