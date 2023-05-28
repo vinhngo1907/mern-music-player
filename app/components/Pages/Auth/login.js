@@ -6,7 +6,9 @@ import { login } from '../../../actions/auth';
 import './index.sass';
 
 class LogInPage extends React.Component {
-	static contextTypes = {}
+	static contextTypes = {
+		router: PropTypes.object,
+	}
 
 	state = {
 		animate: false,
@@ -28,7 +30,7 @@ class LogInPage extends React.Component {
 			leave: false,
 		});
 	}
-	
+
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value })
 	}
