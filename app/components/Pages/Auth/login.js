@@ -37,7 +37,7 @@ class LogInPage extends React.Component {
 
 	onSubmit(e) {
 		e.preventDefault();
-		const { username, password } = state;
+		const { username, password } = this.state;
 		this.props.dispatch(login({ username, password }))
 	}
 
