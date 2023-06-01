@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { IndexLink, Link } from "react-router";
 import { clearUserPlaylist } from "../../actions/user_playlist";
 import { logout } from "../../actions/auth";
+import SearchMenu from "../SearchMenu";
 import "./nav.sass";
 
 class Nav extends React.Component {
@@ -58,12 +59,12 @@ class Nav extends React.Component {
                             onChange={this.handleOnChange.bind(this)}
                         />
                     </div>
-                    {/* {this.state.searchResult.msg === "Success" && (
+                    {this.state.searchResult.msg === "Success" && (
                         <SearchMenu
                             searchResult={this.state.searchResult}
                             clearSearchResult={this.clearSearchResult.bind(this)}
                         />
-                    )} */}
+                    )}
                 </div>
                 <div className="navRight">
                     <ul className="nav-menu">

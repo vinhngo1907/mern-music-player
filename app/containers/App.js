@@ -24,7 +24,8 @@ class App extends React.Component {
 				{/* <Containers.Queue show={showQueue} />
 				{showPlayer ? <Containers.Player /> : null}
 				<Containers.Modal />
-				<ToastContainer position="top-right" autoClose={1000} /> */}
+				 */}
+				<ToastContainer position="top-right" autoClose={1000} />
 			</div>
 		);
 	}
