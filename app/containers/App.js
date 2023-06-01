@@ -21,10 +21,9 @@ class App extends React.Component {
 					{this.props.children}
 					<Analyzer show={show} />
 				</div>
-				{/* <Containers.Queue show={showQueue} />
-				{showPlayer ? <Containers.Player /> : null}
-				<Containers.Modal />
-				 */}
+				<Containers.Queue show={showQueue} />
+				{/* {showPlayer ? <Containers.Player /> : null}
+				<Containers.Modal /> */}
 				<ToastContainer position="top-right" autoClose={1000} />
 			</div>
 		);

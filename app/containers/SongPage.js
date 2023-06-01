@@ -10,8 +10,28 @@ import { getSongUrl, isEmpty } from '../utils/func';
 
 
 class SongPage extends React.Component {
-    componentDidMount(){
-        this.props.showAnalyer();
+    componentDidMount() {
+        // this.props.showAnalyer();
+
+        const { name, id } = this.props.params;
+
+        if (isEmpty(this.props.songData) || id !== this.props.songData.id) {
+            this.props.fetchSong(name, id);
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { routing: { localtionBeforeTransitions: currLoc } } = this.props;
+        const { routing: { localtionBeforeTransitions: nextLoc } } = this.nextProps;
+        const { id: nextId, name } = nextProps.songData;
+
+    }
+
+    render(){
+        return (
+            <div>
+            </div>
+        )
     }
 }
 
