@@ -10,7 +10,8 @@ module.exports = async function getSong(req, res, next) {
     // })
     try {
         const response = await axios.get(`https://mp3.zing.vn/bai-hat/${name}/${id}.html`);
-        console.log(response.data)
+        response = JSON.parse(response);
+        res.json(response.data)
     } catch (error) {
         console.log(error);
         next(error);
