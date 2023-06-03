@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { HomePage } from '../components';
-// import { changeActiveChart } from '../actions/chart';
+import { changeActiveChart } from '../actions/chart';
 import { fetchTracks } from '../actions/home';
-import { download } from '../actions/song';
+// import { download } from '../actions/song';
 
 class HomePageContainer extends Component {
     render() {
@@ -30,5 +30,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps,
     {
+        changeActiveChart,
         fetchTracks,
     })(HomePageContainer);

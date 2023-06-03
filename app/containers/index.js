@@ -4,6 +4,7 @@ import HomePage from './HomePageContainer';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignupPage';
 import Queue from './QueueContainer';
+import ChartPage from './ChartPage';
 
 export {
 	App,
@@ -11,5 +12,6 @@ export {
 	HomePage,
 	LoginPage,
 	SignUpPage,
-	Queue
+	Queue,
+	ChartPage
 }
