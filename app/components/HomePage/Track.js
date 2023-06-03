@@ -43,7 +43,10 @@ const Track = props => {
     const id = encodeId
     const name = title
     return (
-        <li></li>
+        <li>
+             {props.renderDropDown("Track", { id, name, thumbnail, artists })}
+            <div className="trackPosition">{order}</div>
+        </li>
     )
 }
 Track.propTypes = {
