@@ -14,6 +14,13 @@ export function stopFading() {
 
 }
 
+export function toggleModal(){
+
+}
+export function toggleTrackDropDown(){
+
+}
+
 export function resetSlideInRight() {
     return {
         type: types.RESET_SLIDE_IN_RIGHT,

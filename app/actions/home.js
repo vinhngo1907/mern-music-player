@@ -7,14 +7,24 @@ import { startFading, stopFading } from '../actions/ui';
 // the POP music type id
 let cachedId = 'ZWZB96AB';
 
-export function fetchTracks(page, id='ZWZB96AB'){
-    return dispatch =>{
-        dispatch({type:types.START_FETCHING_SONG});
-        if(id !== cachedId){
+export function fetchTracks(page, id = 'ZWZB96AB') {
+    return dispatch => {
+        dispatch({ type: types.START_FETCHING_SONG });
+        if (id !== cachedId) {
             dispatch(startFading())
             cachedId = id;
         }
-        // axios.get(`${MEDIA_ENDPOINT}/top100/${id}`)
+        axios.get(`${MEDIA_ENDPOINT}/top100/${id}${pageQuery(page)}`)
+            .then(({ data }) => {
+                dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.items, page, id });
+                dispatch(stopFading());
+            }).catch(() => {
+                dispatch({ type: types.FETCH_TRACK_FAILURE });
+
+                if (id !== cachedId) {
+                    dispatch(stopFading());
+                }
+            })
     }
 
 }

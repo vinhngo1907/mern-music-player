@@ -19,3 +19,7 @@ export function clearUserPlaylist() {
         type: types.CLEAR_USER_PLAYLIST
     }
 }
+
+export function addSongToStoreTemporarily(){
+    
+}

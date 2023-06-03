@@ -5,10 +5,9 @@ const { V_API } = require("consts");
 module.exports = function (req, res, next) {
     const { genre, id, page } = req.query;
 
-    const start = page ? (page - 1) * 20 : 0;
     request(`http://mp3.zing.vn/the-loai-nghe-si/${genre}/${id}.html?${pageQuery(page)}`)
         .then(html => {
-            const parser = new Scraper();
+            const parser = new Scraper(html);
             parser
                 .list('.pone-of-five .item')
                 .setKey('artist')

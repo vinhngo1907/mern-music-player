@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import TrackList from "./TrackList";
+import TrackList from "./TrackList";
 // import Chart from "../Chart";
-// import Choices from "./Choices";
+import Choices from "./Choices";
 import "./index.sass";
 
 class ChartPanel extends React.Component {
@@ -19,16 +19,16 @@ const HomePage = (props) => (
         </div>
         <div className="homepage home-container">
             <div className="home-nav">
-          {/* <Choices
-            fetchTracks={props.fetchTracks}
-            activeChoiceId={props.activeChoiceId}
-          /> */}
-        </div>
-        {/* <TrackList {...props} /> */}
-        <div className="chart-wrapper">
-          {/* <ChartPanel changeActiveChart={props.changeActiveChart} />
+                <Choices
+                    fetchTracks={props.fetchTracks}
+                    activeChoiceId={props.activeChoiceId}
+                />
+            </div>
+            <TrackList {...props} />
+            <div className="chart-wrapper">
+                {/* <ChartPanel changeActiveChart={props.changeActiveChart} />
           <Chart chart={props.chart} /> */}
-        </div>
+            </div>
         </div>
     </div>
 );

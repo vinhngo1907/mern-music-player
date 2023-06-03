@@ -7,3 +7,52 @@ const datas = {
     'ZWZB96DC': 'Popular Korean songs',
     'ZWZB969E': 'Popular Vietnamese songs',
 };
+
+class Choices extends Component {
+    state = { showMenu: false };
+    handleClickOutSide = () => {
+
+    }
+
+    toggle() {
+        this.setState({ showMenu: false });
+    }
+
+    handleOnClick(id) {
+        if (id === this.props.activeChoiceId) {
+
+        }
+
+        this.props.fetchTracks(1, id);
+    }
+
+    render() {
+        const { activeChoiceId } = this.props;
+        return (
+            <div
+                className={`choice ${this.state.showMenu ? 'choice-active' : null}`}
+                onClick={this.toggle.bind(this)}
+            >
+                {datas[activeChoiceId] || Object.values(datas)[0]}
+                <i className="ion-chevron-down"></i>
+                {
+                    this.state.showMenu &&
+                    <ul className="choice-list">
+                        {
+                            Object.keys(datas).map(key =>
+                                <li key={key} onClick={this.handleOnClick.bind(this, key)}>{datas[key]}</li>
+                            )
+                        }
+                    </ul>
+                }
+            </div>
+        );
+    }
+}
+
+Choices.propTypes = {
+    fetchTracks: PropTypes.func.isRequired,
+    activeChoiceId: PropTypes.string,
+};
+
+export default onClickOutside(Choices);  
