@@ -9,22 +9,24 @@ let cachedId = 'ZWZB96AB';
 
 export function fetchTracks(page, id = 'ZWZB96AB') {
     return dispatch => {
-        dispatch({ type: types.START_FETCHING_SONG });
+        dispatch({ type: types.START_FETCHING_TRACKS });
         if (id !== cachedId) {
-            dispatch(startFading())
+            dispatch(startFading()); // only fade when fetch new music type
             cachedId = id;
         }
+
         axios.get(`${MEDIA_ENDPOINT}/top100/${id}${pageQuery(page)}`)
             .then(({ data }) => {
                 dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.items, page, id });
                 dispatch(stopFading());
-            }).catch(() => {
+            })
+            .catch(() => {
                 dispatch({ type: types.FETCH_TRACK_FAILURE });
 
                 if (id !== cachedId) {
                     dispatch(stopFading());
                 }
-            })
-    }
+            });
+    };
 
 }

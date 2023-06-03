@@ -6,7 +6,6 @@ const { V_API } = require("consts");
 const axios = require("axios");
 
 module.exports = function getTop100(req, res, next) {
-    console.log(req.params)
     const [popId, kpopId, vpopId] = ["ZWZB96AB", "ZWZB96DC", "ZWZB969E"];
     let id;
 

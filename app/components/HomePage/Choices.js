@@ -20,7 +20,7 @@ class Choices extends Component {
 
     handleOnClick(id) {
         if (id === this.props.activeChoiceId) {
-
+            return;
         }
 
         this.props.fetchTracks(1, id);

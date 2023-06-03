@@ -15,10 +15,10 @@ export function fetchDataForHomePage() {
     //     store.dispatch(changeActiveChart('pop'));
     // }
 
-    // if (!state.trackState.tracks.length) {
-    //     // only fetch tracks if there is no trackss in the trackState
-    //     store.dispatch(fetchTracks(1));
-    //   }
+    if (!state.trackState.tracks.length) {
+        // only fetch tracks if there is no trackss in the trackState
+        store.dispatch(fetchTracks(1));
+      }
 
     // play the first song in the queue saved in localstorage if there is one
     const queueState = state.queueState;
