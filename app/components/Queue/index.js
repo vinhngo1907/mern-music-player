@@ -10,7 +10,12 @@ function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue, show }) {
                 <div className="queue-title">
                     Next Up
                 </div>
-
+                <div className="queue-clear">
+                    <button onClick={clearQueue}>Clear</button>
+                </div>
+                <div className="queue-hide">
+                    <button className="sc-ir" onClick={toggleQueue}>Hide queue</button>
+                </div>
             </div>
         </div>
     )
@@ -22,6 +27,6 @@ Queue.propTypes = {
     // toggleQueue: PropTypes.func.isRequired,
     // removeSongFromQueue: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired,
-  };
-  
-  export default Queue;
+};
+
+export default Queue;

@@ -8,6 +8,7 @@ import { loadUserData } from './localStorage';
 
 export function fetchDataForHomePage() {
     const state = store.getState();
+    console.log({state})
     // Only fetch `pop` chart if there isn't one else get it from the state
     if (isEmpty(state.chartState.pop)) {
         store.dispatch(getChart('pop'));
