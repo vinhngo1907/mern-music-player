@@ -4,6 +4,6 @@ const user = require("./user");
 const media = require("./media");
 
 router.use('/user', user);
-router.use('/song', media);
+router.use('/media', media);
 
 module.exports = router;

@@ -17,46 +17,49 @@ const V2 = {
 
 // composeParamsMessage used for generating for signature
 // { ctime: 2131414, id: 'testid' } => ctime=213414id=tesid
-
-const composeParamsMessage = (paramStr) => {
+const composeParamMessage = (paramStr) => {
     const urlParams = new URLSearchParams(paramStr);
     // sort params by key
     const sortedKeys = Array.from(urlParams.keys()).sort();
     const pickOnly = ["id", "type", "page", "count", "ctime", "version"];
-    return sortedKeys.filter(key => pickOnly.includes(key))
-        .map(key => `${key}=${urlParams.get(key)}`)
+    return sortedKeys
+        .filter((key) => pickOnly.includes(key))
+        .map((key) => `${key}=${urlParams.get(key)}`)
         .join("");
-}
+};
 
 const computeSignature = (paramStr, resourcePath) => {
-    const paramMessage = composeParamsMessage(paramStr);
+    const paramMessage = composeParamMessage(paramStr);
     const hash = Crypto.createHash256(paramMessage);
     const signature = Crypto.createHmac512(resourcePath + hash, ZING_MP3_SECRET);
     return signature;
-}
+};
 
 // compose an api url with computed signature
 const composeURL = (resourcePath, params) => {
     params.ctime = ctime();
     params.version = ZING_MP3_VERSION;
+
     let paramStr = querystring.stringify(params);
+
     const signature = computeSignature(paramStr, resourcePath);
+
     const extendedParams = {
         ...params,
         sig: signature,
-        apiKey: ZING_MP3_API_KEY
+        apiKey: ZING_MP3_API_KEY,
     };
 
     paramStr = querystring.stringify(extendedParams);
     const url = V2.host + resourcePath + "?" + paramStr;
     return url;
-}
+};
 
 const ctime = () => {
     return String(Math.floor(new Date() / 1e3));
-}
+};
 
 module.exports = {
     V2,
     composeURL
-}
+};

@@ -1,4 +1,5 @@
-const crypto = require("crypto");
+const crypto = require('crypto');
+
 
 module.exports = {
     createHash256: function (str) {
@@ -7,6 +8,6 @@ module.exports = {
 
     createHmac512: function (str, key) {
         let hmac = crypto.createHmac("sha512", key);
-        return hmac.update(Buffer.from(str, 'uft8')).digest('hex');
+        return hmac.update(Buffer.from(str, 'utf8')).digest('hex');
     }
 }
