@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { HomePage } from '../components';
 // import { changeActiveChart } from '../actions/chart';
@@ -22,6 +22,9 @@ function mapStateToProps(state) {
         isLoading,
         tracks,
         authenticated,
+        downloadProgress: state.UIState.downloadProgress,
+        isFading: state.UIState.isFading,
+        activeChoiceId: state.trackState.activeId
     }
 }
 

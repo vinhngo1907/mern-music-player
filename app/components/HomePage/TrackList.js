@@ -22,7 +22,7 @@ class TrackList extends React.Component {
             <div className='hp-track-list-wrapper'>
                 <ul className={`hp-track-list ${isFading ? 'isFading' : ''}`}>
                     {
-                        this.props.tracks.map((track, index) => {
+                        this.props.tracks.map((track,index) =>
                             <Track
                                 key={track.encodeId}
                                 order={index + 1}
@@ -30,7 +30,7 @@ class TrackList extends React.Component {
                                 {...this.props}
                                 download={this.downloadSong.bind(this)}
                             />
-                        })
+                        )
                     }
                     {this.props.isLoading && <div className='loader'></div>}
                 </ul>

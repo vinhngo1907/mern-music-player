@@ -35,8 +35,8 @@ const HomePage = (props) => (
 
 HomePage.propTypes = {
     tracks: PropTypes.array.isRequired,
-    chart: PropTypes.object.isRequired,
-    changeActiveChart: PropTypes.func.isRequired,
+    // chart: PropTypes.object.isRequired,
+    // changeActiveChart: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     authenticated: PropTypes.bool.isRequired,
     downloadProgress: PropTypes.object.isRequired,

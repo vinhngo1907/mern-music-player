@@ -10,12 +10,13 @@ const datas = {
 
 class Choices extends Component {
     state = { showMenu: false };
-    handleClickOutSide = () => {
 
+    handleClickOutside = () => {
+        this.setState({ showMenu: false });
     }
 
     toggle() {
-        this.setState({ showMenu: false });
+        this.setState({ showMenu: !this.state.showMenu });
     }
 
     handleOnClick(id) {
@@ -28,6 +29,7 @@ class Choices extends Component {
 
     render() {
         const { activeChoiceId } = this.props;
+
         return (
             <div
                 className={`choice ${this.state.showMenu ? 'choice-active' : null}`}
@@ -55,4 +57,4 @@ Choices.propTypes = {
     activeChoiceId: PropTypes.string,
 };
 
-export default onClickOutside(Choices);  
+export default onClickOutside(Choices);
