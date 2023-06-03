@@ -14,11 +14,12 @@ class HomePageContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    // const { activeChart } = state.chartState;
+    const { activeChart } = state.chartState;
     const { isLoading, tracks } = state.trackState;
     const { authenticated } = state.auth;
 
     return {
+        chart: state.chartState[activeChart],
         isLoading,
         tracks,
         authenticated,
