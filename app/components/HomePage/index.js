@@ -7,6 +7,7 @@ import "./index.sass";
 
 class ChartPanel extends React.Component {
     state = { activeChart: "pop" };
+    
     handleOnClick(alias) {
         this.props.changeActiveChart(alias);
         this.setState({ activeChart: alias });
