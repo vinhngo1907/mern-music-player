@@ -11,7 +11,7 @@ import { getSongUrl, isEmpty } from '../utils/func';
 
 class SongPage extends React.Component {
     componentDidMount() {
-        // this.props.showAnalyer();
+        this.props.showAnalyer();
 
         const { name, id } = this.props.params;
 
@@ -27,9 +27,16 @@ class SongPage extends React.Component {
 
     }
 
-    render(){
+    render() {
         return (
             <div>
+                <Pages.SongHeader
+                    songData={this.props.songData}
+                    download={this.props.download}
+                    downloadProgress={this.props.downloadProgress}
+                    toggleModal={this.props.toggleModal}
+                    addSongToStoreTemporarily={this.props.addSongToStoreTemporarily}
+                />
             </div>
         )
     }

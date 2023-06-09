@@ -33,7 +33,21 @@ export function fetchSong(name, id) {
 
 export function fetchSuggestedSongs({ songId, artistId }) {
     return (dispatch) => {
-
+        axios
+        .get(
+          `${MEDIA_ENDPOINT}/suggested-song?artistId=${artistId}&songId=${songId}`
+        )
+        .then(({ data }) =>
+          dispatch({
+            type: types.FETCH_SUGGESTED_SONG_SUCCESS,
+            songs: data.data.items,
+          })
+        )
+        .catch((err) =>
+          dispatch({
+            type: types.FETCH_SUGGESTED_SONG_FAILURE,
+          })
+        );
     }
 }
 
