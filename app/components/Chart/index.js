@@ -7,6 +7,7 @@ import WithBackgroundImage from "../WithBgImg";
 import "./index.sass";
 
 const Chart = props => {
+  console.log(">>>>",props)
   const { chart } = props;
   if (!chart.items) {
     return null;

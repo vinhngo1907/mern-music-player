@@ -8,7 +8,7 @@ import { loadUserData } from './localStorage';
 
 export function fetchDataForHomePage() {
     const state = store.getState();
-    console.log({state})
+
     // Only fetch `pop` chart if there isn't one else get it from the state
     if (isEmpty(state.chartState.pop)) {
         store.dispatch(getChart('pop'));
@@ -19,7 +19,7 @@ export function fetchDataForHomePage() {
     if (!state.trackState.tracks.length) {
         // only fetch tracks if there is no trackss in the trackState
         store.dispatch(fetchTracks(1));
-      }
+    }
 
     // play the first song in the queue saved in localstorage if there is one
     const queueState = state.queueState;
@@ -33,4 +33,12 @@ function shouldGetChart(charts, type) {
     if (isEmpty(charts[type])) {
         return true;
     } return false;
+}
+
+export function getCharts() {
+    const state = store.getState();
+    const charts = state.chartState;
+    if (shouldGetChart(charts, 'pop')) store.dispatch(getChart('pop'));
+    if (shouldGetChart(charts, 'kpop')) store.dispatch(getChart('kpop'));
+    if (shouldGetChart(charts, 'vpop')) store.dispatch(getChart('vpop'));
 }

@@ -9,7 +9,7 @@ class ChartPanel extends React.Component {
     state = { activeChart: "pop" };
     handleOnClick(alias) {
         this.props.changeActiveChart(alias);
-        this.setState({ activeChart: alias })
+        this.setState({ activeChart: alias });
     }
 
     render() {
@@ -25,8 +25,7 @@ class ChartPanel extends React.Component {
                     <button
                         key={item.alias}
                         onClick={() => this.handleOnClick(item.alias)}
-                        className={`sc-ir ${activeChart === item.alias ? "chart-panel-btn-active" : ""
-                            }`}
+                        className={`sc-ir ${activeChart === item.alias ? "chart-panel-btn-active" : ""}`}
                     >
                         {item.title}
                     </button>
