@@ -42,10 +42,13 @@ export function finishLoading() {
 }
 
 export function toggleModal() {
-
+    return {
+        type: types.TOGGLE_MODAL,
+      };
 }
-export function toggleTrackDropDown() {
 
+export function toggleTrackDropDown() {
+    
 }
 
 export function slideInRight() {
