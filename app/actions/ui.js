@@ -47,8 +47,11 @@ export function toggleModal() {
     };
 }
 
-export function toggleTrackDropDown() {
-
+export function toggleTrackDropDown(id, where) {
+    return {
+        type: types.TOGGLE_TRACK_DROPDOWN,
+        dropDown: { activeId: id, where },
+    };
 }
 
 export function toggleQueue() {
