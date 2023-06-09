@@ -44,11 +44,17 @@ export function finishLoading() {
 export function toggleModal() {
     return {
         type: types.TOGGLE_MODAL,
-      };
+    };
 }
 
 export function toggleTrackDropDown() {
-    
+
+}
+
+export function toggleQueue() {
+    return {
+        type: types.TOGGLE_QUEUE
+    }
 }
 
 export function slideInRight() {
