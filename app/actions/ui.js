@@ -6,6 +6,12 @@ export function showAnalyzer() {
     };
 }
 
+export function hideAnalyzer() {
+    return {
+        type: types.HIDE_ANALYZER,
+    };
+}
+
 export function startFading() {
     return {
         type: types.START_FADING
