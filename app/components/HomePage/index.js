@@ -7,7 +7,7 @@ import "./index.sass";
 
 class ChartPanel extends React.Component {
     state = { activeChart: "pop" };
-    
+
     handleOnClick(alias) {
         this.props.changeActiveChart(alias);
         this.setState({ activeChart: alias });
@@ -22,15 +22,17 @@ class ChartPanel extends React.Component {
         const { activeChart } = this.state;
         return (
             <div className="chart-panel">
-                {list.map((item) => (
-                    <button
-                        key={item.alias}
-                        onClick={() => this.handleOnClick(item.alias)}
-                        className={`sc-ir ${activeChart === item.alias ? "chart-panel-btn-active" : ""}`}
-                    >
-                        {item.title}
-                    </button>
-                ))}
+                {
+                    list.map((item) => (
+                        <button
+                            key={item.alias}
+                            onClick={() => this.handleOnClick(item.alias)}
+                            className={`sc-ir ${activeChart === item.alias ? "chart-panel-btn-active" : ""}`}
+                        >
+                            {item.title}
+                        </button>
+                    ))
+                }
             </div>
         );
     }
