@@ -20,7 +20,20 @@ export function login(userCredentials) {
 }
 
 export function signup(userCredentials) {
-
+    return dispatch => {
+        dispatch({ type: types.START_PROCESSING });
+        axios.post(`${USER_ENDPOINT}/register`, userCredentials)
+            .then(({ data: user }) => {
+                localStorage.setItem('user', JSON.stringify(user));
+                dispatch({ type: types.SIGN_UP_SUCCESS, user });
+                dispatch({ type: types.FINISH_PROCESSING });
+            })
+            .catch(err => {
+                console.log(err.response.data);
+                dispatch({ type: types.SIGN_UP_FAILURE, errors: err.response.data.errors || err });
+                dispatch({ type: types.FINISH_PROCESSING });
+            })
+    }
 }
 
 export function logout() {

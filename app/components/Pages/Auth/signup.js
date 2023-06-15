@@ -66,17 +66,19 @@ class SignUpPage extends React.Component {
 						/>
 
 						<TextInputGroup
-							placeholder="Passord"
+							placeholder="Password"
 							name='password'
 							error={errors.password}
 							onChange={this.onChange.bind(this)}
+							type="password"
 						/>
 
 						<TextInputGroup
-							placeholder="Confirm Passord"
+							placeholder="Confirm Password"
 							name='passwordConfirmation'
 							error={errors.passwordConfirmation}
 							onChange={this.onChange.bind(this)}
+							type="password"
 						/>
 						<button
 							id="sign_up"
