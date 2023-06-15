@@ -6,7 +6,7 @@ export function login(userCredentials) {
     return dispatch => {
         dispatch({ type: types.START_PROCESSING });
         axios.post(`${USER_ENDPOINT}/login`, userCredentials)
-            .then(user => {
+            .then(({ data: user }) => {
                 localStorage.setItem('user', JSON.stringify(user))
                 dispatch({ type: types.LOG_IN_SUCCESS, user });
                 dispatch({ type: types.FINISH_PROCESSING });

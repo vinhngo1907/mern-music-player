@@ -31,6 +31,12 @@ class Nav extends React.Component {
 
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if (this.state.searchResult.result && !nextState.term.length) {
+            this.setState({ searchResult: {} });
+        }
+    }
+
     clearSearchResult() {
         this.setState({ term: "", searchResult: {} });
     }
@@ -114,15 +120,24 @@ class Nav extends React.Component {
                                 Sign Up
                             </Link>
                         </div>)
-                        : (<div className="user">
-                            <Link to={`/user/${user.username}`} className="animating_link_ellipsis">{user.username}</Link>
-                            <a
-                            href="#"
-                            title="Log out"
-                            onClick={this.logOut.bind(this)}
-                            className="animating_link"
-                            ><img src="/svg/sign-out-option.svg"/></a>
-                        </div>)
+                        : (
+                            <div className="user">
+                                <Link
+                                    to={`/user/${user.username}`}
+                                    className="animating_link ellipsis"
+                                >
+                                    {user.username}
+                                </Link>
+                                <a
+                                    href="#"
+                                    title="Log Out"
+                                    onClick={this.logOut.bind(this)}
+                                    className="animating_link"
+                                >
+                                    <img src="/svg/sign-out-option.svg" />
+                                </a>
+                            </div>
+                        )
                 }
             </nav>
         )
