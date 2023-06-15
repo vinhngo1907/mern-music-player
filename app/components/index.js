@@ -5,6 +5,7 @@ import HomePage from "./HomePage";
 import Queue from "./Queue";
 import Dropdown from "./Dropdown";
 import * as Pages from './Pages';
+import Modal from './Modal';
 
 export {
     Nav,
@@ -13,5 +14,6 @@ export {
     HomePage,
     Pages,
     Queue,
-    Dropdown
+    Dropdown,
+    Modal
 }
