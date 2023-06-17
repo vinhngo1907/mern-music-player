@@ -9,8 +9,8 @@ export function setPageNumber(numberOfPages) {
     }
 }
 
-export function clearArtist() {
+export function clearAlbums() {
     return {
-        type: types.CLEAR_ARTIST
+        type: types.CLEAR_ALBUMS
     }
 }
