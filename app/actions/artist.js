@@ -14,3 +14,18 @@ export function clearArtist() {
         type: types.CLEAR_ARTIST
     }
 }
+
+export function changePageChunkIndex(pageChunkIndex) {
+    return {
+        type: types.CHANGE_PAGE_CHUNK_INDEX,
+        pageChunkIndex,
+    };
+}
+
+export function fetchDefaultArtists(){
+
+}
+
+export function fetchArtists(genre, id, page){
+    
+}

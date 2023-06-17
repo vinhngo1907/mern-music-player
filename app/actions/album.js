@@ -14,3 +14,17 @@ export function clearAlbums() {
         type: types.CLEAR_ALBUMS
     }
 }
+
+export function changePageChunkIndex(pageChunkIndex) {
+    return {
+        type: types.CHANGE_PAGE_CHUNK_INDEX,
+        pageChunkIndex,
+    };
+}
+
+export function changePageChunkIndex(pageChunkIndex) {
+    return {
+        type: types.CHANGE_PAGE_CHUNK_INDEX,
+        pageChunkIndex,
+    };
+}
