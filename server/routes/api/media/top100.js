@@ -22,17 +22,21 @@ module.exports = function getTop100(req, res, next) {
         default:
     }
 
-    const pageNum = req.query.page;
+    const pageNum = Number(req.query.page);
+    console.log({ pageNum });
     const start = pageNum ? (pageNum - 1) * 20 : 0;
     const url = ZingMp3.composeURL(ZingMp3.V2.resources.getDetail, { id })
 
     // Get all 100 data from Zingmp3 Detail Id
-    request(url).then(response => {
-        response = JSON.parse(response);
-        // only fetch 20 items
-        response.data.song.items = response.data.song.items.splice(start, 20);
-        res.send({ items: response.data.song.items })
-    }).catch(error => {
-        next(error);
-    })
+    request(url)
+        .then(response => {
+            response = JSON.parse(response);
+            //only fetch 20 items
+            response.data.song.items = response.data.song.items.splice(start, 20);
+            res.send({ items: response.data.song.items });
+        })
+        .catch(err => {
+            console.log(err);
+            next(err)
+        });
 }

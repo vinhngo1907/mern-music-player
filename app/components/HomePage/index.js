@@ -19,7 +19,9 @@ class ChartPanel extends React.Component {
             { alias: "kpop", title: "K-Pop Chart" },
             { alias: "vpop", title: "V-Pop Chart" },
         ];
+
         const { activeChart } = this.state;
+
         return (
             <div className="chart-panel">
                 {
