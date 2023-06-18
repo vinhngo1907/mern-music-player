@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 
 export default function (ComposedComponent) {
     class IsAuthenticated extends React.Component {
-
-        static contextType = {
-            router: PropTypes.object
+        static contextTypes = {
+            router: PropTypes.object,
         }
 
         redirectTo(route) {
@@ -17,9 +16,10 @@ export default function (ComposedComponent) {
             return <ComposedComponent
                 redirectTo={this.redirectTo.bind(this)}
                 {...this.props}
-            />
+            />;
         }
     }
+
     function mapStateToProps({ auth }) {
         const { authenticated, user } = auth;
 
@@ -29,7 +29,7 @@ export default function (ComposedComponent) {
     IsAuthenticated.propTypes = {
         authenticated: PropTypes.bool.isRequired,
         user: PropTypes.object
-    }
+    };
 
     return connect(mapStateToProps)(IsAuthenticated);
 }
