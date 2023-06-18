@@ -11,7 +11,6 @@ import { getSongUrl, isEmpty } from '../utils/func';
 
 class SongPage extends React.Component {
     componentDidMount() {
-        console.log(">>>>",this.props)
         // this.props.showAnalyer();
 
         const { name, id } = this.props.params;
