@@ -25,11 +25,13 @@ export default function (state = initialState, action) {
 
 		case types.TOGGLE_MODAL:
 			return { ...state, showModal: !state.showModal };
+
 		case types.START_FADING:
 			return { ...state, isFading: true };
 
 		case types.STOP_FADING:
 			return { ...state, isFading: false };
+
 		case types.START_DOWNLOADING:
 			return {
 				...state,
@@ -39,6 +41,13 @@ export default function (state = initialState, action) {
 					percent: 0,
 				},
 			};
+
+		case types.SLIDE_IN_RIGHT:
+			return { ...state, slideInRight: true };
+
+		case types.RESET_SLIDE_IN_RIGHT:
+			return { ...state, slideInRight: false };
+
 		default:
 			return state;
 	}
