@@ -3,7 +3,7 @@ export function isTwoObjectEqual(obj1, obj2) {
 }
 
 export function changeAlias(alias) {
-    console.log({alias});
+    console.log({ alias });
     const arrStr = alias.split("");
     function change(str) {
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -56,4 +56,52 @@ export function range(r) {
 
 export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
+}
+
+export function lrcParser(data) {
+    if (typeof data !== "string") {
+        throw new TypeError("expect first argument to be a string");
+    }
+    // split a long stirng into lines by system's end-of-line marker line \r\n on Windows
+    // or \n on POSIX
+    var lines = data.split(EOL);
+    const timeStart = /\[(\d*\:\d*\.?\d*)\]/; // i.g [00:10.55]
+    const scriptText = /(.+)/; // Havana ooh na-na (ayy)
+    const timeEnd = timeStart;
+    const startAndText = new RegExp(timeStart.source + scriptText.source);
+
+    const infos = [];
+    const scripts = [];
+    const result = {};
+
+    for (var i = 0; startAndText.test(lines[i]) === false; i++) {
+        infos.push(lines[i]);
+    }
+
+    infos.reduce((result, info) => {
+        const [key, value] = extractInfo(info);
+        result[key] = value;
+        return result;
+    }, result);
+
+    lines.splice(0, infos.length); // remove all info lines
+    const qualified = new RegExp(startAndText.source + "|" + timeEnd.source);
+    lines = lines.filter(line => qualified.test(line));
+
+    for (var i = 0, l = lines.length; i < l; i++) {
+        const matches = startAndText.exec(lines[i]);
+        const timeEndMatches = timeEnd.exec(lines[i + 1]);
+        if (matches && timeEndMatches) {
+            const [, start, text] = matches;
+            const [, end] = timeEndMatches;
+            scripts.push({
+                start: convertTime(start),
+                text,
+                end: convertTime(end)
+            });
+        }
+    }
+
+    result.scripts = scripts;
+    return result;
 }

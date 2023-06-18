@@ -1,4 +1,4 @@
-const { request } = require('../../../utils');
+const { request } = require("utils");
 const ZingMP3 = require('../../../lib/ZingMP3');
 const axios = require("axios");
 

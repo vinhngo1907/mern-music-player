@@ -12,7 +12,10 @@ export function removeSongFromQueue(id) {
 }
 
 export function togglePushRoute(bool) {
-
+    return {
+        type: types.TOGGLE_PUSH_ROUTE,
+        flag: bool
+    };
 }
 
 export function tweekSong(songs) {
