@@ -21,9 +21,13 @@ class SongPage extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { routing: { localtionBeforeTransitions: currLoc } } = this.props;
-        const { routing: { localtionBeforeTransitions: nextLoc } } = this.nextProps;
+        const { routing: { locationBeforeTransitions: currLoc } } = this.props;
+        const { routing: { locationBeforeTransitions: nextLoc } } = nextProps;
         const { id: nextId, name } = nextProps.songData;
+
+        if (nextProps.params.id === nextId) {
+            return;
+        }
         if (nextProps.params.id === nextId) {
             return;
         }
