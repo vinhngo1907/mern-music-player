@@ -20,7 +20,8 @@ export function fetchTracks(page, id = 'ZWZB96AB') {
                 dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.items, page, id });
                 dispatch(stopFading());
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 dispatch({ type: types.FETCH_TRACK_FAILURE });
 
                 if (id !== cachedId) {

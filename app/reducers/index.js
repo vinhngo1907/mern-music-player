@@ -14,5 +14,5 @@ export default combineReducers({
     queueState: queueReducer,
     trackState: trackReducer,
     chartState: chartReducer,
-    songData: songReducer 
-})
+    songData: songReducer
+});

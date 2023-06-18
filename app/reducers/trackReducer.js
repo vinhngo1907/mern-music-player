@@ -42,3 +42,28 @@ function fetchTrackSuccess(state, action) {
         isLoading: false,
     };
 }
+
+function compareTwoFirstTrack(track1, track2) {
+    return track1.encodeId === track2.encodeId;
+}
+
+function fetchTrackSuccess(state, action) {
+    let tracks = state.tracks;
+    if (state.tracks.length && !compareTwoFirstTrack(state.tracks[0], action.tracks[0])) {
+        tracks = tracks.concat(action.tracks);
+    }
+    let pageLoaded = action.page ? action.page : state.pageLoaded;
+
+    if (action.id !== state.activeId) {
+        tracks = action.tracks;
+        pageLoaded = 1;
+    }
+
+    return {
+        ...state,
+        tracks,
+        pageLoaded,
+        activeId: action.id,
+        isLoading: false,
+    };
+}  
