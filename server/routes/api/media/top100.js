@@ -23,7 +23,6 @@ module.exports = function getTop100(req, res, next) {
     }
 
     const pageNum = Number(req.query.page);
-    console.log({ pageNum });
     const start = pageNum ? (pageNum - 1) * 20 : 0;
     const url = ZingMp3.composeURL(ZingMp3.V2.resources.getDetail, { id })
 
