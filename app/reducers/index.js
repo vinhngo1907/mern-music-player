@@ -6,6 +6,7 @@ import queueReducer from './queueReducer';
 import trackReducer from './trackReducer';
 import chartReducer from './chartReducer';
 import songReducer from './songReducer';
+import albumReducer from './albumReducer';
 
 export default combineReducers({
     routing: routerReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
     queueState: queueReducer,
     trackState: trackReducer,
     chartState: chartReducer,
-    songData: songReducer
+    songData: songReducer,
+    albumState: albumReducer
 });
