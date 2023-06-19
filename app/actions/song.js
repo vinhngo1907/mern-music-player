@@ -13,9 +13,11 @@ export function fetchSong(name, id) {
             .get(`/api/media/song?name=${name}&id=${id}`)
             .then(response => {
                 let data = response.data;
+                // console.log({ data });
                 axios
                     .get(data.lyric)
                     .then(({ data: lrcString }) => {
+                        // console.log(lrcString)
                         data.lyric = lrcParser(lrcString).scripts;
                     })
                     .catch((err) => console.log(err));
@@ -54,14 +56,16 @@ export function fetchSuggestedSongs({ songId, artistId }) {
             .get(
                 `${MEDIA_ENDPOINT}/suggested-song?artistId=${artistId}&songId=${songId}`
             )
-            .then(({ data }) =>
+            .then(({ data }) => {
+                // console.log({data})
                 dispatch({
                     type: types.FETCH_SUGGESTED_SONG_SUCCESS,
                     songs: data.data.items,
                 })
+            }
             )
             .catch((err) => {
-                console.log(err.response)
+                console.log(err.response || err)
                 dispatch({
                     type: types.FETCH_SUGGESTED_SONG_FAILURE,
                 })

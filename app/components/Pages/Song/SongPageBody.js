@@ -10,7 +10,9 @@ const propTypes = {
 class SongPageBody extends React.Component {
     render() {
         return (
-            <div className="song-body"></div>
+            <div className="song-body">
+                 <SuggestedSection songs={this.props.suggestedSongs} />
+            </div>
         )
     }
 }

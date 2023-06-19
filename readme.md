@@ -21,8 +21,6 @@ Open .env and adjust the `MONGODB_URI` to your MongoDB server name (localhost no
 
 Wait for the build process to complete
 
-![carbon](https://user-images.githubusercontent.com/20469909/41726824-29385c4a-759d-11e8-9c5c-15a48452ad6e.png)
-
 3. Run `npm run dev:server` to start the api server
 
 Navigate to http://localhost:8000 in your browser to explore the app

@@ -58,6 +58,20 @@ export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
+const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
+
+/**
+ *
+ * @param {string} data
+ * @example [length: 03:36]
+ * @return {<Array>{string}} ['length', '03:06']
+ */
+
+function extractInfo(data) {
+    const info = data.trim().slice(1, -1); // remove brackets: length: 03:06
+    return info.split(": ");
+}
+
 export function lrcParser(data) {
     if (typeof data !== "string") {
         throw new TypeError("expect first argument to be a string");
@@ -105,3 +119,22 @@ export function lrcParser(data) {
     result.scripts = scripts;
     return result;
 }
+
+/**
+ * @description 
+ * convert time string to seconds
+ * i.g: [01:09.10] -> 69.10
+ * @param {*} string 
+ * @returns 
+ */
+function convertTime(string) {
+    string = string.split(":");
+    const minutes = parseInt(string[0], 10);
+    const seconds = parseFloat(string[1]);
+    if (minutes > 0) {
+      const sc = minutes * 60 + seconds;
+      return parseFloat(sc.toFixed(2));
+    }
+    return seconds;
+  }
+  
