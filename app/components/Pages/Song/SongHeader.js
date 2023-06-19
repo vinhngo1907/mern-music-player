@@ -13,6 +13,9 @@ const SongHeader = (props) => {
         redirectTo,
         user,
     } = props;
+
+    const artists = songData.artists_names && songData.artists_names.split(/\s*,\s*/);
+
     return (
         <div className="song-header">
             {/* <div className="song-header-img">
@@ -21,14 +24,14 @@ const SongHeader = (props) => {
                 <div className="song-header-song-title">
                     {songData.name}
                 </div>
-                {/* <div className="song-header-song-artist">
+                <div className="song-header-song-artist">
                     <Link
                         to={`/artist/${artists && changeAlias(artists[0])}`}
                         className='ellipsis'
                         title={songData.artist}
                     >{songData.artist}
                     </Link>
-                </div> */}
+                </div>
             </div>
             <div className="song-header-actions">
                 <button className="sc-ir"

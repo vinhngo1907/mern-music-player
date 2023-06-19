@@ -5,6 +5,7 @@ import LoginPage from './LoginPage';
 import SignUpPage from './SignupPage';
 import Queue from './QueueContainer';
 import ChartPage from './ChartPage';
+import Karaoke from './KaraokeContainer';
 
 export {
 	App,
@@ -13,5 +14,6 @@ export {
 	LoginPage,
 	SignUpPage,
 	Queue,
-	ChartPage
+	ChartPage,
+	Karaoke
 }

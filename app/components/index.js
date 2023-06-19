@@ -6,6 +6,7 @@ import HomePage from "./HomePage";
 import Queue from "./Queue";
 import Dropdown from "./Dropdown";
 import Modal from './Modal';
+import Karaoke from './Karaoke';
 import * as Pages from './Pages';
 
 export {
@@ -18,4 +19,5 @@ export {
     Dropdown,
     Modal,
     NotFoundSong,
+    Karaoke
 }

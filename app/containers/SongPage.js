@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-// import { Karaoke as KarokeContainer } from './';
+import { Karaoke as KarokeContainer } from './';
 import { Pages } from '../components';
 import { fetchSong, fetchSuggestedSongs, download } from '../actions/song';
 import { addSongToStoreTemporarily } from '../actions/user_playlist';
@@ -58,6 +58,7 @@ class SongPage extends React.Component {
                     toggleModal={this.props.toggleModal}
                     addSongToStoreTemporarily={this.props.addSongToStoreTemporarily}
                 />
+                 <KarokeContainer className='karaoke-song-page'/>
                 <Pages.SongPageBody suggestedSongs={this.props.suggestedSongs} />
             </div>
         );
