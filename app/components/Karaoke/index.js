@@ -15,6 +15,7 @@ const KLyric = ({ text, per, fontSize }) =>
 const Karaoke = (props) => {
     const { isFetching, fontSize } = props;
     const { per1, per2, lyric1, lyric2 } = props.playerState;
+    
     return (
         <WithBackgroundImg className={`karaoke ${props.className}`} src={props.cover}>
             <div />
@@ -24,7 +25,8 @@ const Karaoke = (props) => {
                     <img src='/svg/three-dots.svg' />
                 </div>
             }
-            {!isFetching && (props.showInfo
+            {!isFetching && (
+                props.showInfo
                 ? <div className="karaoke-info">
                     <h2>{props.name}</h2>
                     <h3>{props.artist}</h3>

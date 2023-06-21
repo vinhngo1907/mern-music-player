@@ -91,6 +91,13 @@ class Player extends React.PureComponent {
 
         return (
             <div className="player">
+                <audio
+                    autoPlay
+                    src={songData.source && songData.source["128"]}
+                    crossOrigin="anonymous"
+                    ref="audio"
+                    loop={this.state.loop}
+                />
                 <img
                     src={songData.thumbnail}
                     className="player-song-thumbnail"

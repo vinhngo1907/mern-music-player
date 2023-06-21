@@ -8,15 +8,27 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case types.CLEAR_QUEUE:
-            return {
-                ...state,
-                queue: action.queue,
-                ids: action.ids
-            }
+        case types.ADD_SONG_TO_QUEUE:
+            return addSongToQueue(state, action);
+
         case types.TOGGLE_PUSH_ROUTE:
-            return { ...state, pushRoute: action.flag }
+            return { ...state, pushRoute: action.flag };
+
+        case types.REPLACE_QUEUE:
+            return { queue: action.songs, ids: action.ids };
+
+        case types.CLEAR_QUEUE:
+            return { ...state, queue: action.queue, ids: action.ids };
+
+        case types.REMOVE_SONG_FROM_QUEUE:
+            return { ...state, queue: action.queue, ids: action.ids };
+
+        case types.PLAY_USER_PLAYLIST:
+            return { ...state, queue: action.queue, ids: action.ids };
+
         default:
             return state;
     }
 }
+
+function addSongToQueue(state, action) { }
