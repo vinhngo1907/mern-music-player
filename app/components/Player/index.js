@@ -10,4 +10,6 @@ import LinksByComma from "../LinksByComma";
 import PlayerLoader from "./PlayerLoader";
 import "./index.sass";
 
-class Player extends React.PureComponent {}
+class Player extends React.PureComponent {
+    
+}

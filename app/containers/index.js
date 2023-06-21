@@ -6,6 +6,8 @@ import SignUpPage from './SignupPage';
 import Queue from './QueueContainer';
 import ChartPage from './ChartPage';
 import Karaoke from './KaraokeContainer';
+import Modal from './ModalConteiner';
+import Player from './PlayerContainer'
 
 export {
 	App,
@@ -15,5 +17,7 @@ export {
 	SignUpPage,
 	Queue,
 	ChartPage,
-	Karaoke
+	Karaoke,
+	Player,
+	Modal
 }

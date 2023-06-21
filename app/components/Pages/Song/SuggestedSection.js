@@ -5,7 +5,7 @@ import LinksByComma from '../../LinksByComma';
 
 const songList = (songList) => {
     return songList.map(song => (
-        <div className='suggesteds-song' key={song.id}>
+        <div className='suggested-song' key={song.id}>
             <img src={song.thumbnail} alt="" />
             <div className='suggested-song-info'>
                 <Link

@@ -1,15 +1,26 @@
-import React from 'react';
-import {Connect} from 'react-redux';
-import {Modal} from '../components';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Modal } from '../components';
 
 class ModalContainer extends Component {
-    render(){
-
+    render() {
+        const { dispatch, playlists, song, authenticated } = this.props;
+        return this.props.showModal
+            ? <Modal />
+            : null;
     }
 }
 
-function mapStateToProps(){
-
+function mapStateToProps({ UIState, playlistState, auth }) {
+    const playlists = playlistState.playlists.length
+        ? playlistState.playlists.map(playlist => playlist.title)
+        : [];
+    return {
+        showModal: UIState.showModal,
+        playlists,
+        song: playlistState.tmpSong,
+        authenticated: auth.authenticated,
+    };
 }
 
-export default connect(mapp)
+export default connect(mapStateToProps)(ModalContainer);

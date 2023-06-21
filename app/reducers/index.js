@@ -8,6 +8,7 @@ import chartReducer from './chartReducer';
 import songReducer from './songReducer';
 import albumReducer from './albumReducer';
 import playerReducer from './playerReducer';
+import playlistReducer from './userPlaylistReducer';
 
 export default combineReducers({
     routing: routerReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
     songData: songReducer,
     albumState: albumReducer,
     playerState: playerReducer,
+    playlistState: playlistReducer
 });

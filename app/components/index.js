@@ -7,6 +7,7 @@ import Queue from "./Queue";
 import Dropdown from "./Dropdown";
 import Modal from './Modal';
 import Karaoke from './Karaoke';
+import Player from './Player';
 import * as Pages from './Pages';
 
 export {
@@ -19,5 +20,6 @@ export {
     Dropdown,
     Modal,
     NotFoundSong,
-    Karaoke
+    Karaoke,
+    Player
 }

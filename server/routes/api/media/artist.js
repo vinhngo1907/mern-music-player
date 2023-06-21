@@ -22,9 +22,11 @@ module.exports = function (req, res, next) {
         case "songs":
             getSongs(name, page, res, next)
             break;
+
         case "biography":
             getBio(name, res, next)
             break;
+
         default:
             break;
     }

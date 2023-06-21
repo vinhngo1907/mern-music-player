@@ -22,8 +22,8 @@ class App extends React.Component {
 					<Analyzer show={show} />
 				</div>
 				<Containers.Queue show={showQueue} />
-				{/* {showPlayer ? <Containers.Player /> : null}
-				<Containers.Modal /> */}
+				{showPlayer ? <Containers.Player /> : null}
+				<Containers.Modal />
 				<ToastContainer position="top-right" autoClose={1000} />
 			</div>
 		);
@@ -34,7 +34,7 @@ function mapStateToProps({ songData, UIState, auth }) {
 	const { showQueue, showAnalyzer, slideInRight } = UIState;
 
 	return {
-		// showPlayer: Object.keys(songData.data).length,
+		showPlayer: Object.keys(songData.data).length,
 		showPlayer: 0,
 		showAnalyzer,
 		showQueue,
