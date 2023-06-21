@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
+import SongResult from "./SongResult";
 import './index.sass';
 
 class SearchMenu extends Component {
@@ -9,9 +10,10 @@ class SearchMenu extends Component {
   }
   render() {
     const { data } = this.props.searchResult;
+    if(!data) return null;
+    
     return (
-
-      <ul className='saearch-menu'>
+      <ul className='search-menu'>
         <SongResult songs={data.songs || []} clearSearchResult={this.props.clearSearchResult} />
       </ul>
     )
@@ -19,8 +21,8 @@ class SearchMenu extends Component {
 }
 
 SearchMenu.propTypes = {
-//   searchResult: PropTypes.object.isRequired,
-//   clearSearchResult: PropTypes.func.isRequired
+  searchResult: PropTypes.object.isRequired,
+  clearSearchResult: PropTypes.func.isRequired
 };
 
 export default onClickOutside(SearchMenu);

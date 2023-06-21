@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const queueFromLocalStorage = loadQueueState();
-console.log({queueFromLocalStorage});
+// console.log({queueFromLocalStorage});
 const persistedData = {
     queueState: queueFromLocalStorage,
     auth: {

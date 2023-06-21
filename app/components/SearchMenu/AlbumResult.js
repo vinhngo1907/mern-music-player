@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import onClickOutside from 'react-onclickoutside';
-import './index.sass';
+import React from 'react';
+import { Link } from 'react-router';
+import { changeAlias } from '../../utils/func';
+import LinksByComma from '../LinksByComma';
 
-class SearchMenu extends Component {
-    handleClickOutside = () => {
-      this.props.clearSearchResult();
-    }
+function AlbumResult({ albums, clearSearchResult }) {
+    return (
+        <ul className='album-result'>
+            <div className='search-li-title'>
+                Albums
+            </div>
+        </ul>
+    )
 }
+
+export default AlbumResult;
