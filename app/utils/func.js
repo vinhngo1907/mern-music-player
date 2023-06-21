@@ -132,9 +132,17 @@ function convertTime(string) {
     const minutes = parseInt(string[0], 10);
     const seconds = parseFloat(string[1]);
     if (minutes > 0) {
-      const sc = minutes * 60 + seconds;
-      return parseFloat(sc.toFixed(2));
+        const sc = minutes * 60 + seconds;
+        return parseFloat(sc.toFixed(2));
     }
     return seconds;
-  }
-  
+}
+
+// Resolve a link to alias
+export const extractAlias = function (link) {
+    if (!link) {
+        return ''
+    }
+
+    return link.split('/')[2]
+}

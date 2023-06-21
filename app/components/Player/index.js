@@ -87,9 +87,9 @@ class Player extends React.PureComponent {
 
     render() {
         const { songData, queue } = this.props;
-        console.log({songData})
+        console.log({ songData })
         const { id, title, link } = songData;
-
+        const alias = extractAlias(link)
         return (
             <div className="player">
                 <audio
@@ -104,7 +104,14 @@ class Player extends React.PureComponent {
                     className="player-song-thumbnail"
                     alt=""
                 />
-                <div className="player-info"></div>
+                <div className="player-info">
+                    <Link
+                        to={`/song/${alias}/${id}`}
+                        className="ellipsis player-song-title"
+                        title={songData.title}
+                    >{title}
+                    </Link>
+                </div>
                 <div className="player-btns"></div>
                 <div className="player-seek"></div>
                 <div className="player-other"></div>
