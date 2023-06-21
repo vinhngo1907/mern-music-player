@@ -112,7 +112,26 @@ class Player extends React.PureComponent {
                     >{title}
                     </Link>
                 </div>
-                <div className="player-btns"></div>
+                <div className="player-btns">
+                    <button
+                        className="sc-ir player-btn"
+                        onClick={this.playPrevOrNextSong.bind(this, "prev")}
+                    >
+                        <i className="ion-ios-rewind"></i>
+                    </button>
+                    <button
+                        className="sc-ir player-btn"
+                        onClick={this.togglePlayBtn.bind(this)}
+                    >
+                        <i className={`ion-${this.state.isPlaying ? "pause" : "play"}`}></i>
+                    </button>
+                    <button
+                        className="sc-ir player-btn"
+                        onClick={this.playPrevOrNextSong.bind(this, "next")}
+                    >
+                        <i className="ion-ios-fastforward"></i>
+                    </button>
+                </div>
                 <div className="player-seek"></div>
                 <div className="player-other"></div>
                 {this.props.isFetching && <PlayerLoader />}
