@@ -33,25 +33,78 @@ class Player extends React.PureComponent {
         initAnalyzer(this.audio);
     }
 
-    onLoadedData(){
+    onLoadedData() {
 
     }
 
-    onPlay(){
+    onPlay() {
 
     }
 
-    onPause(){
+    onPause() {
 
     }
 
-    onEnded(){
+    onEnded() {
 
     }
 
-    componentDidUpdate(){
-        
+    componentDidUpdate(nextProps, nextState) {
+
     }
+
+    playPrevOrNextSong(prevOrNext) {
+
+    }
+
+    togglePlayBtn() {
+        this.setState({ isPlaying: !this.state.isPlaying });
+    }
+
+    updateProgressBar() {
+
+    }
+
+    update() {
+        const lyric = this.props.songData.lyric;
+        if (!lyric.length) {
+            clearInterval(this.timer)
+            return;
+        }
+
+        this.updateProgressBar();
+    }
+
+    handleChange(value) {
+        this.setState({ progress: value, isSeeKing: true });
+    }
+
+    handleChangeComplete(value) {
+        if (value == 100) {
+
+        }
+    }
+
+    render() {
+        const { songData, queue } = this.props;
+        const { id, title, link } = songData;
+
+        return (
+            <div className="player">
+                <img
+                    src={songData.thumbnail}
+                    className="player-song-thumbnail"
+                    alt=""
+                />
+                <div className="player-info"></div>
+                <div className="player-btns"></div>
+                <div className="player-seek"></div>
+                <div className="player-other"></div>
+                {this.props.isFetching && <PlayerLoader />}
+            </div>
+        )
+    }
+
 }
 
 Player.propTypes = {
