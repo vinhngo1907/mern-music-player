@@ -3,20 +3,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 const defaultWrapperStyle = {
     position: 'relative',
     display: 'inline-block',
 };
-
 
 const defaultFontStyle = {
     whiteSpace: 'nowrap',
     fontSize: '25px',
     color: 'white',
     textShadow: '-1px 0 #080d16, 0 1px #080d16',
-  };
-  
+};
 
 const defaultActiveStyle = {
     ...defaultFontStyle,

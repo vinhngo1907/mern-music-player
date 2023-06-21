@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextInputGroup from './TextInputGroup';
-// import { slideInRight } from '../../../actions/ui';
+import { slideInRight } from '../../../actions/ui';
 import { login } from '../../../actions/auth';
 import './index.sass';
 
@@ -31,6 +31,16 @@ class LogInPage extends React.Component {
 		});
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.authenticated) {
+			this.setState({ leave: true });
+			setTimeout(() => {
+				this.props.dispatch(slideInRight()); // UI action
+				this.context.router.push('/');
+			}, 700);
+		}
+	}
+	
 	onChange(e) {
 		this.setState({ [e.target.name]: e.target.value })
 	}

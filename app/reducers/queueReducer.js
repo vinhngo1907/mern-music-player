@@ -31,4 +31,11 @@ export default function (state = initialState, action) {
     }
 }
 
-function addSongToQueue(state, action) { }
+function addSongToQueue(state, action) {
+    console.log({ state });
+    const con = state.ids.find(id => id === action.song.id);
+    if (typeof con === 'undefined') {
+        return { queue: [...state.queue, action.song], ids: [...state.ids, action.song.id] }
+    }
+    return state;
+}
