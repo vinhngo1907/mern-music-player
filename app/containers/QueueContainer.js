@@ -10,6 +10,7 @@ class QueueContainer extends Component {
   }
 
   render() {
+    console.log(">>>>>", this.props)
     return <Queue {...this.props} />;
   }
 }

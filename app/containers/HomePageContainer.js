@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HomePage } from '../components';
 import { changeActiveChart } from '../actions/chart';
 import { fetchTracks } from '../actions/home';
-// import { download } from '../actions/song';
+import { download } from '../actions/song';
 
 class HomePageContainer extends Component {
     render() {
@@ -20,17 +20,18 @@ function mapStateToProps(state) {
 
     return {
         chart: state.chartState[activeChart],
+        downloadProgress: state.UIState.downloadProgress,
+        isFading: state.UIState.isFading,
+        activeChoiceId: state.trackState.activeId,
         isLoading,
         tracks,
         authenticated,
-        downloadProgress: state.UIState.downloadProgress,
-        isFading: state.UIState.isFading,
-        activeChoiceId: state.trackState.activeId
-    }
+    };
 }
 
 export default connect(mapStateToProps,
     {
         changeActiveChart,
+        download,
         fetchTracks,
     })(HomePageContainer);

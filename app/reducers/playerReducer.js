@@ -8,16 +8,16 @@ const initialState = {
     per2: 0,
 };
 
-export default function (state = initialState, aciton) {
-    switch (aciton.type) {
+export default function (state = initialState, action) {
+    switch (action.type) {
         case types.UPDATE_LYRIC:
-            return aciton.lyrics;
+            return action.lyrics;
 
         case types.UPDATE_LYRIC_PERCENT:
-            return Object.assign({}, state, aciton.payload);
+            return Object.assign({}, state, action.payload);
 
         case types.UPDATE_PLAYED_PERCENT:
-            return { ...state, playedPercent: aciton.playedPercent };
+            return { ...state, playedPercent: action.playedPercent };
 
         default:
             return state;
