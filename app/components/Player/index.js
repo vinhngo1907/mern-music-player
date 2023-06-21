@@ -133,7 +133,22 @@ class Player extends React.PureComponent {
                     </button>
                 </div>
                 <div className="player-seek"></div>
-                <div className="player-other"></div>
+                <div className="player-other">
+                    <button className="sc-ir" title="Loop">
+                        <i
+                            className="ion-loop"
+                            style={{ color: this.state.loop ? "#23B89A" : "#adb5bd" }}
+                            onClick={() => this.setState({ loop: !this.state.loop })}
+                        ></i>
+                    </button>
+                    <button
+                        className="sc-ir player-btn queue-btn"
+                        onClick={this.props.toggleQueue}
+                    >
+                        <span className="queue-circle">{queue.length}</span>
+                        <img src="/svg/playlist.svg" />
+                    </button>
+                </div>
                 {this.props.isFetching && <PlayerLoader />}
             </div>
         )
