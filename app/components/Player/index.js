@@ -11,5 +11,52 @@ import PlayerLoader from "./PlayerLoader";
 import "./index.sass";
 
 class Player extends React.PureComponent {
-    
+    constructor() {
+        super();
+        this.state = {
+            progress: 0,
+            isSeeKing: false,
+            isPlaying: false,
+            isLoop: false
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener("blur", this.windowBlur.bind(this));
+        this.audio = this.refs.audio;
+        this.addEventListener("loadeddata", this.onLoadedData.bind(this));
+        this.addEventListener("play", this.onPlay.bind(this));
+        this.addEventListener("pause", this.onPause.bind(this));
+        this.addEventListener("ended", this.onEnded.bind(this));
+
+        // initialize the audio player
+        initAnalyzer(this.audio);
+    }
+
+    onLoadedData(){
+
+    }
+
+    onPlay(){
+
+    }
+
+    onPause(){
+
+    }
+
+    onEnded(){
+
+    }
+
+    componentDidUpdate(){
+        
+    }
 }
+
+Player.propTypes = {
+    playerState: PropTypes.object.isRequired,
+    updateLyric: PropTypes.func.isRequired
+}
+
+export default Player;
