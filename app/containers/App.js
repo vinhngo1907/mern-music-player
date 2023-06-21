@@ -39,7 +39,7 @@ function mapStateToProps({ songData, UIState, auth }) {
 		showAnalyzer,
 		showQueue,
 		slideInRight,
-		auth,
+		auth
 	};
 }
 

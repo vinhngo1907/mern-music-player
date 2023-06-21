@@ -9,11 +9,11 @@ let middleware = [thunk];
 
 if (process.env.NODE_ENV !== 'production') {
     const logger = require('./logger').default;
-
     middleware = [...middleware/* , logger */];
 }
 
 const queueFromLocalStorage = loadQueueState();
+console.log({queueFromLocalStorage});
 const persistedData = {
     queueState: queueFromLocalStorage,
     auth: {
@@ -24,7 +24,6 @@ const persistedData = {
 };
 
 const store = createStore(rootReducer, persistedData, applyMiddleware(...middleware));
-
 store.subscribe(_throttle(() => {
     saveQueueState(store.getState());
 }, 1000 * 60 * 5));

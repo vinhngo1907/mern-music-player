@@ -20,15 +20,23 @@ class Nav extends React.Component {
     }
 
     search(term) {
-        axios.get(`api/media/search?term=${term}`).then(({ data }) => {
-            if (this.state.term.length) {
-                this.setState({ searchResult: data });
-            }
-        }).catch(err => { throw err; })
+        axios.get(`/api/media/search?term=${term}`)
+            .then(({ data }) => {
+                if (this.state.term.length) {
+                    this.setState({ searchResult: data });
+                }
+            }).catch(err => {
+                console.log(err.response.data || err);
+                throw err;
+            })
     }
 
     handleOnChange(e) {
+        let term = e.target.value;
+        if (!term) return;
 
+        this.setState({ term });
+        return this.debounceSearch(encodeURIComponent(term));
     }
 
     componentWillUpdate(nextProps, nextState) {
