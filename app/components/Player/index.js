@@ -22,12 +22,12 @@ class Player extends React.PureComponent {
     }
 
     componentDidMount() {
-        window.addEventListener("blur", this.windowBlur.bind(this));
+        // window.addEventListener("blur", this.windowBlur.bind(this));
         this.audio = this.refs.audio;
-        this.addEventListener("loadeddata", this.onLoadedData.bind(this));
-        this.addEventListener("play", this.onPlay.bind(this));
-        this.addEventListener("pause", this.onPause.bind(this));
-        this.addEventListener("ended", this.onEnded.bind(this));
+        this.audio.addEventListener("loadeddata", this.onLoadedData.bind(this));
+        this.audio.addEventListener("play", this.onPlay.bind(this));
+        this.audio.addEventListener("pause", this.onPause.bind(this));
+        this.audio.addEventListener("ended", this.onEnded.bind(this));
 
         // initialize the audio player
         initAnalyzer(this.audio);
@@ -87,6 +87,7 @@ class Player extends React.PureComponent {
 
     render() {
         const { songData, queue } = this.props;
+        console.log({songData})
         const { id, title, link } = songData;
 
         return (
