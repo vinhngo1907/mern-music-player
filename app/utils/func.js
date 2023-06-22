@@ -3,7 +3,7 @@ export function isTwoObjectEqual(obj1, obj2) {
 }
 
 export function changeAlias(alias) {
-    // console.log({ alias });
+    console.log({ alias });
     const arrStr = alias.split("");
     function change(str) {
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -89,7 +89,7 @@ export function padZero(number){
 }
 
 export function foramtTime(s){
-    
+
 }
 
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";

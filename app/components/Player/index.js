@@ -68,8 +68,8 @@ class Player extends React.PureComponent {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log({nextState});
-        console.log(">>>>",{...this.state})
+        console.log({ nextState });
+        console.log(">>>>", { ...this.state })
         if (nextState.isPlaying !== this.state.isPlaying) {
             if (nextState.isPlaying) {
                 this.audio.play();
@@ -79,8 +79,41 @@ class Player extends React.PureComponent {
         }
     }
 
-    playPrevOrNextSong(prevOrNext) {
+    findSong(prevOrNext) {
+        const queue = this.props.queue;
+        const currId = this.props.songData.id;
+        let index;
 
+        for (let i = 0, length = queue.length; i < length; i++) {
+            if (queue[i].id === currId) {
+                switch (prevOrNext) {
+                    case "next":
+                        index = (i + 1) % length;
+                        break;
+                    case "prev":
+                        index = (i + length - 1) % length;
+                        breakl
+                    default:
+                        return null;
+                }
+                return queue[index];
+            }
+        }
+        return undefined;
+    }
+
+    playPrevOrNextSong(prevOrNext) {
+        const preveOrNextSong = this.findSong(prevOrNext);
+        if(!prevOrNext) return;
+
+        const {name, alias, id} = preveOrNextSong;
+        this.props.togglePushRoute(true); // enable .push for browserHistory
+
+        if(alias){
+            this.props.fetchSong(alias, id);
+        }else{
+            this.props.fetchSong(changeAlias(name), id)
+        }
     }
 
     togglePlayBtn() {
