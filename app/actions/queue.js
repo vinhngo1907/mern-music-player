@@ -21,7 +21,7 @@ export function removeSongFromQueue(id) {
         const queue = [...queueState.queue];
         const newQueue = removeById(queue, id);
         const queueIds = removeById([...queueState.ids], id);
-        
+
         dispatch({
             type: types.REMOVE_SONG_FROM_QUEUE,
             queue: newQueue,
@@ -37,7 +37,7 @@ export function togglePushRoute(bool) {
     };
 }
 
-export function tweekSongs(songs) {
+export function tweakSongs(songs) {
 
 }
 
@@ -46,7 +46,15 @@ export function replaceQueue(songs) {
 }
 
 export function clearQueue() {
-
+    return (dispatch, getState) => {
+        const state = getState();
+        console.log({ state })
+        const playingSongId = state.songData.data.id;
+        const queueState = state.queueState;
+        const clearedQueue = queueState.queue.filter(
+            song => song.id === playingSongId
+        )
+    }
 }
 
 export function playUserPlaylist(songs) {

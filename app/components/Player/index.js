@@ -68,8 +68,14 @@ class Player extends React.PureComponent {
         clearRequestInterval(this.timer);
     }
 
-    componentDidUpdate(nextProps, nextState) {
-
+    componentWillUpdate(nextProps, nextState) {
+        if (nextState.isPlaying !== this.state.isPlaying) {
+            if (nextState.isPlaying) {
+                this.audio.play();
+            } else {
+                this.audio.pause();
+            }
+        }
     }
 
     playPrevOrNextSong(prevOrNext) {
