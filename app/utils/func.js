@@ -58,6 +58,12 @@ export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
+
+
+export function isObject(obj) {
+    return Object.prototype.toString.call(obj) === "[object Object]";
+}
+
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
 
 /**
