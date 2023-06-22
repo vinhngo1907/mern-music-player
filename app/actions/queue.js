@@ -16,7 +16,17 @@ export function addSongToQueue(song) {
 }
 
 export function removeSongFromQueue(id) {
-
+    return (dispatch, getState) => {
+        const state = getState()
+        console.log(">>>>>", {state})
+        const queueState = getState().queueState;
+        const queue = [...queueState.queue];
+        const newQueue =removeById(queue, id);
+        dispatch({
+            type: types.REMOVE_SONG_FROM_QUEUE,
+            queue:newQueue
+        })
+    }
 }
 
 export function togglePushRoute(bool) {

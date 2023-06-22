@@ -84,6 +84,10 @@ export function removeById(arr, id){
     return arr;
 }
 
+export function padZero(number){
+    return number <= 9 ? `0${number}` : number.toString();
+}
+
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
 
 /**
