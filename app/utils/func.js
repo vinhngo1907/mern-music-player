@@ -69,6 +69,16 @@ export function findIndex(arr, entry, value) {
     return undefined;
 }
 
+export function removeById(arr, id){
+    if(isObject(arr[0])){
+        arr.splice(findIndex(arr, "id", id), 1);
+        return arr;
+    }
+
+    arr.splice(arr.indexOf(id), 1);
+    return arr;
+}
+
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
 
 /**
