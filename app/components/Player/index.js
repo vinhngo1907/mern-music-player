@@ -45,7 +45,7 @@ class Player extends React.PureComponent {
 
     onLoadedData() {
         if (this.audio.readyState >= 2) {
-            this.audio.play();
+            this.audio && this.audio.play();
         }
     }
 
@@ -255,6 +255,16 @@ class Player extends React.PureComponent {
                         title={songData.title}
                     >{title}
                     </Link>
+                    <LinksByComma
+                        className="ellipsis player-info-artists comma"
+                        data={songData.artists}
+                        titleEntry="name"
+                        pathEntry="link"
+                        definePath={link => link.replace("/nghe-si/", "/artist/")}
+                        defineTitle={title =>
+                            title.replace("Nhiều nghệ sĩ", "Various artists")
+                        }
+                    />
                 </div>
                 <div className="player-btns">
                     <button

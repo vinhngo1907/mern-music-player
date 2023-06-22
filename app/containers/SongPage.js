@@ -11,7 +11,7 @@ import { getSongUrl, isEmpty } from '../utils/func';
 
 class SongPage extends React.Component {
     componentDidMount() {
-        // this.props.showAnalyer();
+        this.props.showAnalyzer();
 
         const { name, id } = this.props.params;
 
@@ -28,9 +28,6 @@ class SongPage extends React.Component {
         if (nextProps.params.id === nextId) {
             return;
         }
-        if (nextProps.params.id === nextId) {
-            return;
-        }
 
         if (nextProps.canPushRoute && nextId !== this.props.songData.id) {
             browserHistory.push(getSongUrl(name, nextId));
@@ -38,11 +35,12 @@ class SongPage extends React.Component {
         }
 
         if (((!currLoc && nextLoc) ||
-            (currLoc && nextLoc && currLoc.pathname !== nextLoc.pathname)) && /song\/.+/.test(nextLoc.pathname)
-        ) {
+            (currLoc && nextLoc && currLoc.pathname !== nextLoc.pathname)) &&
+            /song\/.+/.test(nextLoc.pathname)) {
             if (this.props.params.id !== nextId) {
                 return;
             }
+
             const { name, id } = nextProps.params;
             this.props.fetchSong(name, id);
         }
@@ -58,7 +56,7 @@ class SongPage extends React.Component {
                     toggleModal={this.props.toggleModal}
                     addSongToStoreTemporarily={this.props.addSongToStoreTemporarily}
                 />
-                 <KarokeContainer className='karaoke-song-page'/>
+                <KarokeContainer className='karaoke-song-page' />
                 <Pages.SongPageBody suggestedSongs={this.props.suggestedSongs} />
             </div>
         );
@@ -78,7 +76,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps,
     {
         fetchSong,
-        // showAnalyzer,
+        showAnalyzer,
         fetchSuggestedSongs,
         download,
         addSongToStoreTemporarily,

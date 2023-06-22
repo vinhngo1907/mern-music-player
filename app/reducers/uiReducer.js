@@ -15,6 +15,7 @@ const initialState = {
 	},
 };
 
+
 export default function (state = initialState, action) {
 	switch (action.type) {
 		case types.SHOW_ANALYZER:
@@ -32,6 +33,12 @@ export default function (state = initialState, action) {
 		case types.TOGGLE_MODAL:
 			return { ...state, showModal: !state.showModal };
 
+		case types.SLIDE_IN_RIGHT:
+			return { ...state, slideInRight: true };
+
+		case types.RESET_SLIDE_IN_RIGHT:
+			return { ...state, slideInRight: false };
+
 		case types.START_FADING:
 			return { ...state, isFading: true };
 
@@ -48,11 +55,23 @@ export default function (state = initialState, action) {
 				},
 			};
 
-		case types.SLIDE_IN_RIGHT:
-			return { ...state, slideInRight: true };
+		case types.UPDATE_DOWNLOAD_PROGRESS:
+			return { ...state, downloadProgress: { ...state.downloadProgress, percent: action.percent } };
 
-		case types.RESET_SLIDE_IN_RIGHT:
-			return { ...state, slideInRight: false };
+		case types.FINISH_DOWNLOADING:
+			return {
+				...state,
+				downloadProgress: {
+					isDownloading: false,
+					id: '',
+				},
+			};
+
+		case types.START_LOADING:
+			return { ...state, isLoading: true };
+
+		case types.FINISH_LOADING:
+			return { ...state, isLoading: false };
 
 		default:
 			return state;
@@ -61,6 +80,7 @@ export default function (state = initialState, action) {
 
 function toggleTrackDropDown(state, action) {
 	const { activeId, where } = action.dropDown;
+
 	return {
 		...state,
 		dropDown: {
