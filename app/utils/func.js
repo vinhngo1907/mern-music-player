@@ -69,6 +69,11 @@ export function findIndex(arr, entry, value) {
     return undefined;
 }
 
+/**
+ * @param {*} arr 
+ * @param {*} id 
+ * @returns {<Array>} 
+ */
 export function removeById(arr, id){
     if(isObject(arr[0])){
         arr.splice(findIndex(arr, "id", id), 1);
