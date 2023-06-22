@@ -58,10 +58,15 @@ export function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
-
-
 export function isObject(obj) {
     return Object.prototype.toString.call(obj) === "[object Object]";
+}
+
+export function findIndex(arr, entry, value) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i][entry] === value) return i;
+    }
+    return undefined;
 }
 
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
