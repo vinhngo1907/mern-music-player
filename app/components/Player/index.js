@@ -76,6 +76,20 @@ class Player extends React.PureComponent {
                 this.audio.pause();
             }
         }
+
+        if (
+            !isTwoObjectEqual(nextProps.queueIds, this.props.queueIds) &&
+            !nextProps.queueIds.includes(this.props.songData.id) &&
+            nextProps.queue[0]
+          ) {
+            const { name, id } = nextProps.queue[0];
+            this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
+            if (/\/song\//.test(window.location.href)) {
+              // only redirect if is on the song route
+              browserHistory.push(`/song/${changeAlias(name)}/${id}`);
+            }
+          }
+      
     }
 
     findSong(prevOrNext) {

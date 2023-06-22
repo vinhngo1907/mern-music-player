@@ -13,6 +13,7 @@ export default (
         <Route path='login' component={Containers.LoginPage} />
         <Route path='signup' component={Containers.SignUpPage} />
         <Route path='/notfound/song' component={NotFoundSong} />
+        <Route path='charts' component={Containers.ChartPage} onEnter={getCharts} />
         <Route path="*" component={NotFound} />
     </Route>
 )
