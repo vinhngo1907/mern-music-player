@@ -34,7 +34,6 @@ class Player extends React.PureComponent {
     }
 
     windowBlur() {
-        console.log(">>>>>>>", this.state);
         if (this.state.isPlaying) {
             clearInterval(this.timer);
         }
@@ -68,8 +67,8 @@ class Player extends React.PureComponent {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log({ nextState });
-        console.log(">>>>", { ...this.state })
+        // console.log({ nextState });
+        // console.log(">>>>", { ...this.state })
         if (nextState.isPlaying !== this.state.isPlaying) {
             if (nextState.isPlaying) {
                 this.audio.play();
@@ -138,7 +137,7 @@ class Player extends React.PureComponent {
             updateLyricPercent,
             updateLyric
         } = this.props;
-
+        // console.log(">>>>>", this.audio)
         // reset lyric state
         if (
             this.audio.currentTime > lyric[lyric.length - 1].end ||
@@ -190,7 +189,7 @@ class Player extends React.PureComponent {
 
     render() {
         const { songData, queue } = this.props;
-        console.log({ songData })
+        // console.log({ songData })
         const { id, title, link } = songData;
         const alias = extractAlias(link)
         return (
