@@ -81,15 +81,23 @@ class Player extends React.PureComponent {
             !isTwoObjectEqual(nextProps.queueIds, this.props.queueIds) &&
             !nextProps.queueIds.includes(this.props.songData.id) &&
             nextProps.queue[0]
-          ) {
+        ) {
             const { name, id } = nextProps.queue[0];
             this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
             if (/\/song\//.test(window.location.href)) {
-              // only redirect if is on the song route
-              browserHistory.push(`/song/${changeAlias(name)}/${id}`);
+                console.log('>>>>>>', /\/song\//.test(window.location.href));
+                console.log(">>>>>>", `/song/${changeAlias(name)}/${id}`);
+
+                // only redirect if is on the song route
+                browserHistory.push(`/song/${changeAlias(name)}/${id}`);
             }
-          }
-      
+        }
+        const nextPercent = nextProps.playerState.playedPercent;
+        const currentPercent = this.props.playerState.playedPercent;
+
+        if (nextPercent !== currentPercent && nextPercent) {
+            this.audio.currentTime = (this.audio.duration * nextPercent) / 100;
+        }
     }
 
     findSong(prevOrNext) {

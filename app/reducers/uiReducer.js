@@ -17,6 +17,12 @@ const initialState = {
 
 export default function (state = initialState, action) {
 	switch (action.type) {
+		case types.SHOW_ANALYZER:
+			return { ...state, showAnalyzer: true };
+
+		case types.HIDE_ANALYZER:
+			return { ...state, showAnalyzer: false };
+
 		case types.TOGGLE_TRACK_DROPDOWN:
 			return toggleTrackDropDown(state, action);
 
