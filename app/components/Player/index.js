@@ -120,7 +120,17 @@ class Player extends React.PureComponent {
     }
 
     updateProgressBar() {
+        // console.log(">>> current time", this.audio.currentTime);
+        // console.log(">>> duration", this.audio.duration);
 
+        let val = 0;
+        if (this.audio.currentTime > 0) {
+            val = ((this.audio.currentTime / this.audio.duration) * 100).toFixed(2);
+        }
+
+        if (!this.state.isSeeKing) {
+            this.setState({ progress: val });
+        }
     }
 
     update() {
@@ -178,13 +188,23 @@ class Player extends React.PureComponent {
     }
 
     handleChange(value) {
+        // console.log(">>>>>", { value });
         this.setState({ progress: value, isSeeKing: true });
     }
 
     handleChangeComplete(value) {
+        // console.log({ value });
         if (value == 100) {
-
+            this.props.updateLyric([], [])
         }
+
+        this.audio.play();
+
+        if (this.audio.duration) {
+            this.audio.currentTime = (value / 100) * this.audio.duration;
+        }
+
+        this.setState({ isSeeKing: false });
     }
 
     render() {
@@ -234,7 +254,29 @@ class Player extends React.PureComponent {
                         <i className="ion-ios-fastforward"></i>
                     </button>
                 </div>
-                <div className="player-seek"></div>
+                <div className="player-seek">
+                    <span>
+                        {
+                            this.audio && this.audio.currentTime
+                                ? formatTime(this.audio.currentTime)
+                                : "0:00"
+                        }
+                    </span>
+                    <InputRange
+                        maxValue={100}
+                        minValue={0}
+                        value={parseInt(this.state.progress, 10)}
+                        onChange={this.handleChange.bind(this)}
+                        onChangeComplete={this.handleChangeComplete.bind(this)}
+                    />
+                    <span>
+                        {
+                            this.audio &&
+                            !isNaN(this.audio.duration) &&
+                            formatTime(this.audio.duration)
+                        }
+                    </span>
+                </div>
                 <div className="player-other">
                     <button className="sc-ir" title="Loop">
                         <i

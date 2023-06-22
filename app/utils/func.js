@@ -74,8 +74,8 @@ export function findIndex(arr, entry, value) {
  * @param {*} id 
  * @returns {<Array>} 
  */
-export function removeById(arr, id){
-    if(isObject(arr[0])){
+export function removeById(arr, id) {
+    if (isObject(arr[0])) {
         arr.splice(findIndex(arr, "id", id), 1);
         return arr;
     }
@@ -84,11 +84,14 @@ export function removeById(arr, id){
     return arr;
 }
 
-export function padZero(number){
+export function padZero(number) {
     return number <= 9 ? `0${number}` : number.toString();
 }
 
-export function foramtTime(s){
+export function formatTime(s) {
+    const min = Math.floor(s / 60);
+    const sec = Math.floor(s) % 60;
+    return `${min}:${padZero(sec)}`
 
 }
 
