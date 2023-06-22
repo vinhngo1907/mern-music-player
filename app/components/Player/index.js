@@ -20,9 +20,20 @@ class Player extends React.PureComponent {
             isLoop: false
         }
     }
-
+    componentWillUnmount() {
+        clearRequestInterval(this.timer);
+    }
+    
+    windowBlur() {
+        console.log(">>>>>>>", this.state);
+        console.log("Timer", this.timer);
+        if (this.state.isPlaying) {
+            clearInterval(this.timer);
+        }
+    }
+    
     componentDidMount() {
-        // window.addEventListener("blur", this.windowBlur.bind(this));
+        window.addEventListener("blur", this.windowBlur.bind(this));
         this.audio = this.refs.audio;
         this.audio.addEventListener("loadeddata", this.onLoadedData.bind(this));
         this.audio.addEventListener("play", this.onPlay.bind(this));
@@ -33,16 +44,22 @@ class Player extends React.PureComponent {
         initAnalyzer(this.audio);
     }
 
+
+
     onLoadedData() {
 
     }
 
     onPlay() {
-
+        console.log("Play")
+        this.timer = requestInterval(this.update.bind(this), 50);
+        this.setState({ isPlaying: true });
     }
 
     onPause() {
-
+        console.log("Pause");
+        clearRequestInterval(this.timer);
+        this.setState({ isPlaying: false });
     }
 
     onEnded() {
