@@ -92,7 +92,7 @@ class Player extends React.PureComponent {
                         break;
                     case "prev":
                         index = (i + length - 1) % length;
-                        breakl
+                        break;
                     default:
                         return null;
                 }
@@ -104,14 +104,14 @@ class Player extends React.PureComponent {
 
     playPrevOrNextSong(prevOrNext) {
         const preveOrNextSong = this.findSong(prevOrNext);
-        if(!prevOrNext) return;
+        if (!prevOrNext) return;
 
-        const {name, alias, id} = preveOrNextSong;
+        const { name, alias, id } = preveOrNextSong;
         this.props.togglePushRoute(true); // enable .push for browserHistory
 
-        if(alias){
+        if (alias) {
             this.props.fetchSong(alias, id);
-        }else{
+        } else {
             this.props.fetchSong(changeAlias(name), id)
         }
     }
@@ -132,6 +132,50 @@ class Player extends React.PureComponent {
         }
 
         this.updateProgressBar();
+
+        const {
+            playerState: { lyric1, lyric2 },
+            updateLyricPercent,
+            updateLyric
+        } = this.props;
+
+        // reset lyric state
+        if (
+            this.audio.currentTime > lyric[lyric.length - 1].end ||
+            this.audio.currentTime
+        ) {
+            // clear lyric when the this.audio is playing with beat only
+            updateLyric([], []);
+        }
+
+        for (let i = 0; i < lyric.length; i++) {
+            if (
+                i < lyric.length - 1 &&
+                i % 2 == 0 &&
+                this.audio.currentTime >= lyric[i].start &&
+                this.audio.currentTime <= lyric[i + 1].end
+            ) {
+                updateLyric(lyric[i], lyric[i + 1]);
+            }
+        }
+
+        if (this.audio.currentTime <= lyric1.end) {
+            let width =
+                ((this.audio.currentTime - lyric1.start) /
+                    (lyric1.end - lyric1.start)) *
+                100;
+            width = Math.ceil(width);
+            updateLyricPercent(width, 0);
+        } else if (this.audio.currentTime <= lyric2.end) {
+            updateLyricPercent(null, 0);
+            let width =
+                ((this.audio.currentTime - lyric2.start) /
+                    (lyric2.end - lyric2.start)) *
+                100;
+            width = Math.ceil(width);
+            width = width <= 0 ? 0 : width > 96 ? 100 : width; // fill the karaoke text
+            updateLyricPercent(100, width);
+        }
     }
 
     handleChange(value) {
