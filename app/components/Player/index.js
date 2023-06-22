@@ -20,18 +20,7 @@ class Player extends React.PureComponent {
             isLoop: false
         }
     }
-    componentWillUnmount() {
-        clearRequestInterval(this.timer);
-    }
-    
-    windowBlur() {
-        console.log(">>>>>>>", this.state);
-        console.log("Timer", this.timer);
-        if (this.state.isPlaying) {
-            clearInterval(this.timer);
-        }
-    }
-    
+
     componentDidMount() {
         window.addEventListener("blur", this.windowBlur.bind(this));
         this.audio = this.refs.audio;
@@ -44,26 +33,39 @@ class Player extends React.PureComponent {
         initAnalyzer(this.audio);
     }
 
+    windowBlur() {
+        console.log(">>>>>>>", this.state);
+        console.log("Timer", this.timer);
+        if (this.state.isPlaying) {
+            clearInterval(this.timer);
+        }
+    }
 
+    componentWillUnmount() {
+        clearRequestInterval(this.timer);
+    }
 
     onLoadedData() {
-
+        if (this.audio.readyState >= 2) {
+            this.audio.play();
+        }
     }
 
     onPlay() {
-        console.log("Play")
+        console.log(["Play"])
         this.timer = requestInterval(this.update.bind(this), 50);
         this.setState({ isPlaying: true });
     }
 
     onPause() {
-        console.log("Pause");
+        console.log(["Pause"]);
         clearRequestInterval(this.timer);
         this.setState({ isPlaying: false });
     }
 
     onEnded() {
-
+        this.playPrevOrNextSong("next");
+        clearRequestInterval(this.timer);
     }
 
     componentDidUpdate(nextProps, nextState) {
