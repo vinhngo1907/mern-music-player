@@ -88,6 +88,10 @@ export function padZero(number){
     return number <= 9 ? `0${number}` : number.toString();
 }
 
+export function foramtTime(s){
+    
+}
+
 const EOL = typeof window === "undefined" ? require("os").EOL : "\n";
 
 /**

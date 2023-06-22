@@ -18,13 +18,16 @@ export function addSongToQueue(song) {
 export function removeSongFromQueue(id) {
     return (dispatch, getState) => {
         const state = getState()
-        console.log(">>>>>", {state})
+        console.log(">>>>>", { state })
         const queueState = getState().queueState;
         const queue = [...queueState.queue];
-        const newQueue =removeById(queue, id);
+        const newQueue = removeById(queue, id);
+        const queueIds = removeById([...queueState.ids], id);
+        
         dispatch({
             type: types.REMOVE_SONG_FROM_QUEUE,
-            queue:newQueue
+            queue: newQueue,
+            ids: queueIds
         })
     }
 }
@@ -40,14 +43,14 @@ export function tweekSongs(songs) {
 
 }
 
-export function replaceQueue(songs){
+export function replaceQueue(songs) {
 
 }
 
-export function clearQueue(){
+export function clearQueue() {
 
 }
 
-export function playUserPlaylist(songs){
+export function playUserPlaylist(songs) {
 
 }
