@@ -53,7 +53,14 @@ export function clearQueue() {
         const queueState = state.queueState;
         const clearedQueue = queueState.queue.filter(
             song => song.id === playingSongId
-        )
+        );
+        // const queueIds = removeById([...queueState.ids], playingSongId);
+        const queueIds = queueState.ids.filter(id => id !== playingSongId);
+        dispatch({
+            type: types.CLEAR_QUEUE,
+            queue: clearedQueue,
+            ids: queueIds
+        })
     }
 }
 

@@ -35,7 +35,6 @@ class Player extends React.PureComponent {
 
     windowBlur() {
         console.log(">>>>>>>", this.state);
-        console.log("Timer", this.timer);
         if (this.state.isPlaying) {
             clearInterval(this.timer);
         }
@@ -69,6 +68,8 @@ class Player extends React.PureComponent {
     }
 
     componentWillUpdate(nextProps, nextState) {
+        console.log({nextState});
+        console.log(">>>>",{...this.state})
         if (nextState.isPlaying !== this.state.isPlaying) {
             if (nextState.isPlaying) {
                 this.audio.play();
