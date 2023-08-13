@@ -9,6 +9,7 @@ import Karaoke from './KaraokeContainer';
 import Modal from './ModalConteiner';
 import Player from './PlayerContainer'
 import UserPage from "./UserPageContainer";
+import AlbumGenrePage from './AlbumGenrePage';
 import AlbumPlaylist from './AlbumPlaylist';
 import ArtistPage from './ArtistPage';
 import ArtistGenrePage from './ArtistGenrePage';
@@ -25,6 +26,7 @@ export {
 	Player,
 	Modal,
 	UserPage,
+	AlbumGenrePage,
 	AlbumPlaylist,
 	ArtistGenrePage,
 	ArtistPage
