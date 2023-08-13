@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Pages } from '../components';
 import { isTwoObjectEqual } from '../utils/func';
-import { fetchDefaultAlbums, fetchAlbums, changePageChunkIndex } from '../actions/album';
+import { fetchDefaultAlbums, fetchAlbums, changePageChunkIndex, clearAlbums } from '../actions/album';
 
 class AlbumGenrePage extends React.Component {
     componentDidMount() {
