@@ -7,12 +7,20 @@ import { isAuthenticated } from '../HOC';
 class UserPageContainer extends Component {
     componentDidMount() {
         const { authenticated, params, user, redirectTo } = this.props;
+        if (authenticated && params.username !== user.username) {
+            this.props.dispatch(logout());
+            redirectTo("/login");
+        } else if (!authenticated) {
+            redirectTo("/login");
+        }
     }
 
-    render(){
+    render() {
         return (
             <Pages.UserPage
-            
+                playlists={this.props.playlists}
+                dispatch={this.props.dispatch}
+                song={this.props.songData}
             />
         )
     }
