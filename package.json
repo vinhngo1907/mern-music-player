@@ -90,5 +90,13 @@
         "request": "^2.81.0",
         "request-promise": "^4.2.1",
         "validator": "^8.0.0"
-    }
+    },
+    "repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/vinhngo1907/mern-music-player.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vinhngo1907/mern-music-player/issues"
+	},
+	"homepage": "https://github.com/vinhngo1907/mern-music-player#readme"
 }
