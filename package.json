@@ -1,8 +1,16 @@
 {
-    "name": "bt-music-player",
+    "name": "bto-music-player",
     "version": "1.0.0",
     "main": "index.js",
-    "license": "MIT",
+    "license": "ISC",
+    "author": "Koo Kuu",
+    "keywords": [
+        "music player",
+        "v's projects",
+        "v's gang",
+        "streaming music"
+    ],
+    "description": "This is an app for playing and streaming music",
     "scripts": {
         "start": "npm run build && npm run server",
         "server": "cross-env NODE_ENV=production node server",
@@ -92,11 +100,11 @@
         "validator": "^8.0.0"
     },
     "repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com/vinhngo1907/mern-music-player.git"
-	},
-	"bugs": {
-		"url": "https://github.com/vinhngo1907/mern-music-player/issues"
-	},
-	"homepage": "https://github.com/vinhngo1907/mern-music-player#readme"
+        "type": "git",
+        "url": "git+ssh://git@github.com/vinhngo1907/mern-music-player.git"
+    },
+    "bugs": {
+        "url": "https://github.com/vinhngo1907/mern-music-player/issues"
+    },
+    "homepage": "https://github.com/vinhngo1907/mern-music-player#readme"
 }
