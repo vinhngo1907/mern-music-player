@@ -13,8 +13,9 @@ export default (
         <Route path='login' component={Containers.LoginPage} />
         <Route path='signup' component={Containers.SignUpPage} />
         <Route path='/notfound/song' component={NotFoundSong} />
-        {/* <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} /> */}
         <Route path='albums(/:genre)(/:id)' component={Containers.ChartPage} onEnter={getCharts} />
+        {/* <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} /> */}
+        <Route path='artists(/:genre)(/:id)' component={Containers.ArtistGenrePage} />
         <Route path='user/:username' component={Containers.UserPage} onEnter={getPlaylistOnEnter} />
         <Route path='/notfound/song' component={NotFoundSong} />
         <Route path="*" component={NotFound} />
