@@ -20,6 +20,7 @@ class UserPage extends React.Component {
     handleOnSubmit(e) {
         e.preventDefault();
     }
+    
     renderInputField() {
         return this.state.showInput &&
             <form onSubmit={this.handleOnSubmit.bind(this)}>
