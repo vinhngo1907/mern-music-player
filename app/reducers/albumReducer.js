@@ -17,7 +17,7 @@ export default function (state = initialState, action) {
             return { ...state, defaultAlbums: action.defaultAlbums }
 
         case types.FETCH_ALBUMS:
-            return { ...state, albums: action.album }
+            return { ...state, albums: action.albums }
 
         case types.CLEAR_ALBUMS:
             return { ...state, albums: [] }
@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 numberOfPages: action.numberOfPages,
-                pageChunks: action.pageChunks
+                pageChunks: chunk(range(action.numberOfPages), 7)
             }
 
         case types.CLEAR_PLAYLIST:

@@ -22,3 +22,11 @@ class ArtistGenrePage extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return { ...state.artistState, isLoading: state.UIState.isLoading };
+  }
+  
+  export default connect(mapStateToProps,
+  { fetchDefaultArtists, fetchArtists, changePageChunkIndex, clearArtists })(ArtistGenrePage);
+  
