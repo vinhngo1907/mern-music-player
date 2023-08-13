@@ -5,11 +5,18 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './index.sass';
 
 class UserPage extends React.Component {
-
+    render() {
+        return (
+            <div className="user-page">
+                <div className="user-page-left">
+                </div>
+            </div>
+        )
+    }
 }
 
-class Playlist extends React.Component {}
+class Playlist extends React.Component { }
 
-const List = ({ songs, dispatch, playlistTitle }) => {}
+const List = ({ songs, dispatch, playlistTitle }) => { }
 
 export default UserPage;
