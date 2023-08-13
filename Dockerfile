@@ -1,13 +1,15 @@
 FROM node:14
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/bto
 
-COPY ./package*.json ./
+ADD ./package*.json ./
 
 RUN npm install
 
-COPY ./ ./
+COPY . .
 
-EXPOSE 8000
+RUN npm run build
 
-CMD [ "node", "index.js" ]
+CMD ["npm", "run", "server" ]
+
+EXPOSE 3000
