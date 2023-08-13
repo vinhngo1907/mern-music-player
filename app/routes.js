@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import * as Containers from './containers';
 import { NotFound, NotFoundSong } from './components';
-import { fetchDataForHomePage, getCharts } from './route_callbacks';
+import { fetchDataForHomePage, getCharts, getPlaylistOnEnter } from './route_callbacks';
 import { fetchOnScroll } from './HOC';
 
 export default (
@@ -13,7 +13,10 @@ export default (
         <Route path='login' component={Containers.LoginPage} />
         <Route path='signup' component={Containers.SignUpPage} />
         <Route path='/notfound/song' component={NotFoundSong} />
-        <Route path='charts' component={Containers.ChartPage} onEnter={getCharts} />
+        {/* <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} /> */}
+        <Route path='albums(/:genre)(/:id)' component={Containers.ChartPage} onEnter={getCharts} />
+        <Route path='user/:username' component={Containers.UserPage} onEnter={getPlaylistOnEnter} />
+        <Route path='/notfound/song' component={NotFoundSong} />
         <Route path="*" component={NotFound} />
     </Route>
 )

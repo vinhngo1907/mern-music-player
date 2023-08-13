@@ -3,7 +3,7 @@ import { isEmpty, changeAlias } from './utils/func';
 import { fetchTracks } from './actions/home';
 import { fetchSong, fetchSuggestedSongs } from './actions/song';
 import { getChart, changeActiveChart } from './actions/chart';
-// import { getPlaylistCollection } from './actions/user_playlist';
+import { getPlaylistCollection } from './actions/user_playlist';
 import { loadUserData } from './localStorage';
 
 export function fetchDataForHomePage() {
@@ -41,4 +41,12 @@ export function getCharts() {
     if (shouldGetChart(charts, 'pop')) store.dispatch(getChart('pop'));
     if (shouldGetChart(charts, 'kpop')) store.dispatch(getChart('kpop'));
     if (shouldGetChart(charts, 'vpop')) store.dispatch(getChart('vpop'));
+}
+
+export function getPlaylistOnEnter(){
+    const userPlaylistCollection = store.getState().playlistState.playlists;
+
+    if(loadUserData() && !userPlaylistCollection.length){
+        store.dispatch(getPlaylistCollection());
+    }
 }

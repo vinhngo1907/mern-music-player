@@ -8,6 +8,7 @@ import ChartPage from './ChartPage';
 import Karaoke from './KaraokeContainer';
 import Modal from './ModalConteiner';
 import Player from './PlayerContainer'
+import UserPage from "./UserPageContainer";
 
 export {
 	App,
@@ -19,5 +20,6 @@ export {
 	ChartPage,
 	Karaoke,
 	Player,
-	Modal
+	Modal,
+	UserPage
 }
