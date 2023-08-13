@@ -3,7 +3,7 @@ import * as types from '../constant/action_constant';
 import { startLoading, finishLoading } from './ui';
 import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
 
-export function setPageNumber(numberOfPages) {
+export function setNumberOfPages(numberOfPages) {
     return {
         type: types.SET_NUMBER_OF_PAGES,
         numberOfPages
