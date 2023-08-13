@@ -2,7 +2,7 @@
     "name": "bto-music-player",
     "version": "1.0.0",
     "main": "index.js",
-    "license": "ISC",
+    "license": "UNLICENSED-1.0",
     "author": "Koo Kuu",
     "keywords": [
         "music player",
