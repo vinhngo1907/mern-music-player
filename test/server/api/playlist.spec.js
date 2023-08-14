@@ -22,3 +22,18 @@ test.before(async () => {
 test.after.always('clean up the database', async () => {
     Playlist.collection.drop();
 });
+
+test("Should create playlist", async (t) => {
+    t.plan(2);
+    const res = await request(app).post('/api/playlist/zayn').send({ title: "rap" });
+    t.is(res.status, 200);
+    const newPlaylist = res.body.playlists(playlist => playlist.title === 'rap');
+    if (newPlaylist) { t.pass() };
+});
+
+test('shoud get a playlist', async t => {
+    t.plan(2);
+    const res = await request(app).get('/api/playlist/zayn/rap');
+    t.is(res.status, 200);
+    t.is(res.body.playlists.length, 1);
+});
