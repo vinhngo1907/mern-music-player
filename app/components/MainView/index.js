@@ -19,8 +19,15 @@ const MainView = (props) => {
 	)
 }
 
-MainView.PropTypes = {
-	defaultAlbums: PropTypes.array
+MainView.propTypes = {
+	defaultAlbums: PropTypes.array,
+	albums: PropTypes.array,
+	pageChunks: PropTypes.array,
+	pageChunkIndex: PropTypes.number,
+	changePageChunkIndex: PropTypes.func,
+	chunkSize: PropTypes.number.isRequired,
+	type: PropTypes.string.isRequired,
+	isLoading: PropTypes.bool.isRequired,
 }
 
 const AlbumView = (props) => {
