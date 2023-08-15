@@ -26,7 +26,7 @@ export function changePageChunkIndex(pageChunkIndex) {
 export function fetchDefaultArtists() {
     return dispatch => {
         dispatch(startLoading());
-        axios.get('/api/media/artists/default')
+        axios.get(`${MEDIA_ENDPOINT}/artists/default`)
             .then(({ data }) => {
                 console.log(data)
                 dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
