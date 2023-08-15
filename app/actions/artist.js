@@ -26,22 +26,18 @@ export function changePageChunkIndex(pageChunkIndex) {
 export function fetchDefaultArtists() {
     return dispatch => {
         dispatch(startLoading());
-
-        axios.get(`${MEDIA_ENDPOINT}/artists/default`)
+        axios.get('/api/media/artists/default')
             .then(({ data }) => {
-                console.log(data);
-                if (data) {
-                    dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultAlbums: data });
-                    dispatch(clearArtists()); // clear the albums data
-                    dispatch(finishLoading());
-                }
+                console.log(data)
+                dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
+                dispatch(finishLoading());
             })
             .catch(error => {
                 dispatch(finishLoading());
                 throw error;
             });
     };
-}
+};
 
 export function fetchArtists(name, type = 'songs', page) {
     const pageQuery = page ? `?page=${page}` : '';

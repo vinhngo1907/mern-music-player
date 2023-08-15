@@ -32,16 +32,18 @@ export function fetchDefaultAlbums() {
                 console.log(data);
                 if (data) {
                     dispatch({ type: types.FETCH_DEFAULT_ALBUMS, defaultAlbums: data });
+
                     dispatch(clearAlbums()); // clear the albums data
                     dispatch(finishLoading());
                 }
             })
-            .catch(error => {
+            .catch(err => {
                 dispatch(finishLoading());
-                throw error;
+                throw err;
             });
     };
 }
+
 
 export function fetchAlbums(genre, id, page) {
     const pageQuery = page ? `&page=${page}` : '';
