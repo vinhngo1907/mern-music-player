@@ -28,7 +28,13 @@ export default function (state = initialState, action) {
         case types.FETCH_SINGLE_ARTIST_ALBUMS:
             return {
                 ...state,
-                pageChunks: chunk(range(action.numberOfPages), 7)
+                pageChunks: chunk(range(action.numberOfPages), 7),
+                artist: {
+                    cover: action.cover,
+                    avatar: action.avatar,
+                    artistName: action.artistName,
+                    song: { songs: action.songs, numberOfPages: action.numberOfPages },
+                }
             };
 
         case types.FETCH_DEFAULT_ARTISTS:
@@ -36,7 +42,28 @@ export default function (state = initialState, action) {
                 ...state,
                 defaultArtists: action.defaultArtists,
                 artists: []
-            }
+            };
+
+        case types.FETCH_ARTISTS:
+            return {
+                ...state,
+                artists: action.artists,
+                pageChunks: chunk(range(action.numberOfPages), 7)
+            };
+
+        case types.CHANGE_PAGE_CHUNK_INDEX:
+            return { ...state, pageChunkIndex: action.pageChunkIndex };
+
+        case types.CLEAR_ARTIST:
+            return {
+                ...state,
+                artist: { song: { songs: [] }, cover: '', avatar: '', artistName: '' },
+                pageChunks: [],
+                pageChunkIndex: 0,
+            };
+
+        case types.CLEAR_ARTISTS:
+            return { ...state, artists: [] };
 
         default:
             return state;

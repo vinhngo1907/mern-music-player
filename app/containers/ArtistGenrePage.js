@@ -27,7 +27,6 @@ class ArtistGenrePage extends Component {
         const currPage = this.props.location.query.page;
 
         // fetch new albums if the album route genre changes
-
         if (!isTwoObjectEqual(nextProps.params, this.props.params)) {
             const { id, genre } = nextProps.params;
             this.props.fetchArtists(genre, id);
@@ -35,7 +34,6 @@ class ArtistGenrePage extends Component {
         }
 
         // fetch new albums if the current album route is appended with the `?page=` query
-
         if (nextPage && nextPage !== currPage) {
             const { id, genre } = this.props.params;
             this.props.fetchArtists(genre, id, nextPage);
