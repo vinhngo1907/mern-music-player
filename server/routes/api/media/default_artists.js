@@ -4,15 +4,14 @@ const cheerio = require("cheerio");
 const rp = require("request-promise");
 
 module.exports = function getDefaultArtists(req, res, next) {
-    require("http://mp3.zing.vn/the-loai-nghe-si")
+    request(`http://mp3.zing.vn/the-loai-nghe-si`)
         .then(html => {
             const parser = new Scraper(html);
-            console.log({parser})
+            console.log(parser)
             parser
                 .list(".title-section")
-                .setkey("titles")
-                .extractAttr("title", "a", "title")
-                .get();
+                .setKey("titles")
+                .extractAttr("title", "a", "title").get();
 
             const data = parser
                 .list('.pone-of-five .item')
@@ -21,6 +20,7 @@ module.exports = function getDefaultArtists(req, res, next) {
                 .extractAttr('text', 'a.txt-primary', 'name')
                 .extractAttr('href', 'a', 'link')
                 .get();
+
 
             const artists = [...data.artists];
             const items = [];
@@ -33,9 +33,9 @@ module.exports = function getDefaultArtists(req, res, next) {
                     title: data.titles[index].title,
                     items: item
                 }
-            });
+            })
 
             res.json({ origins: response });
         })
         .catch(err => next(err));
-}
+};

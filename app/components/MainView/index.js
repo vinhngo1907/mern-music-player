@@ -32,29 +32,26 @@ MainView.propTypes = {
 
 const AlbumView = (props) => {
 	const { albums, params, chunkSize, defaultAlbums, Card, location } = props;
-	console.log({defaultAlbums})
+	console.log({ defaultAlbums })
 	return (
 		<div className="view">
 			{
-				!albums.length && location.pathName === '/albums' &&
-				<Default origin={defaultAlbums} Card={Card} chunkSize={chunkSize} />
+				!albums.length && location.pathname === '/albums' &&
+				<Default origins={defaultAlbums} Card={Card} chunkSize={chunkSize} />
 			}
+			{chunk(albums, chunkSize).map((chunk, index) =>
+				<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
+			)}
 			{
-				chunk(albums, chunkSize).map((chunk, index) =>
-					<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
-				)
-			}
-			{
-				params.id && params.genre && albums.length
-					? <Pagination
+				params.id && params.genre && albums.length ?
+					<Pagination
 						{...params}
 						pageChunks={props.pageChunks}
 						pageChunkIndex={props.pageChunkIndex}
 						changePageChunkIndex={props.changePageChunkIndex}
 						type='album'
 						activePage={location.query.page}
-					/>
-					: null
+					/> : null
 			}
 		</div>
 	);
@@ -62,45 +59,41 @@ const AlbumView = (props) => {
 
 const ArtistView = (props) => {
 	const { params, chunkSize, defaultArtists, artists, Card, location } = props;
+
 	return (
-		<div className='view'>
-			{
-				!artists.length && location.pathName === "/artists" &&
-				<Default origin={defaultArtists} Card={Card} chunkSize={chunkSize} />
-			}
-			{
-				chunk(artists, chunkSize).map((chunk, index) =>
-					<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
-				)
+		<div className="view">
+			{!artists.length && location.pathname === '/artists' &&
+				<Default origins={defaultArtists || []} Card={Card} chunkSize={chunkSize} />
 			}
 
+			{chunk(artists, chunkSize).map((chunk, index) =>
+				<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
+			)}
 			{
-				params.id && params.genre && artists.length
-					? <Pagination
+				params.id && params.genre && artists.length ?
+					<Pagination
 						{...params}
 						pageChunks={props.pageChunks}
 						pageChunkIndex={props.pageChunkIndex}
 						changePageChunkIndex={props.changePageChunkIndex}
 						type='artist'
 						activePage={location.query.page}
-					/>
-					: null
-
+					/> : null
 			}
 		</div>
-	)
+	);
+};
 
-}
 
-const Default = ({ origins, Card, chunkSize }) => {
+const Default = ({ origins, Card, chunkSize }) => (
 	<div>
 		{origins.map((origin, index) =>
 			<DefaultCards key={"default cards " + index} {...origin} Card={Card} chunkSize={chunkSize} />
 		)}
 	</div>
-}
+);
 
-const DefaultCards = ({ title, id, albums, artists, Card, chunkSize, items }) => {
+const DefaultCards = ({ title, id, albums, artists, Card, chunkSize, items }) => (
 	<div className="view-cards">
 		<div className="view-cards-title">
 			<a href='#'>{title} <i className='ion-chevron-right'></i></a>
@@ -109,12 +102,12 @@ const DefaultCards = ({ title, id, albums, artists, Card, chunkSize, items }) =>
 			<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} chunkSize={chunkSize} />
 		))}
 	</div>
-}
+);
 
-const Row = ({ chunk, Card }) => {
+const Row = ({ chunk, Card }) => (
 	<div className="view-cards-row">
 		{chunk.map(item => <Card key={item.encodeId || item.name} {...item} />)}
 	</div>
-}
+);
 
 export default MainView;

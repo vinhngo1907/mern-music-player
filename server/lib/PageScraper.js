@@ -39,7 +39,7 @@ PageScraper.pluralize = function (string) {
 */
 
 PageScraper.prototype.list = function (selector) {
-	// test the validation of the passed selector see if it has the prefix '.' or '#'
+	// test the alidation of the passed selector see if it has the prefix '.' or '#'
 	this.testSelector(selector);
 	this.elements = this.$(selector);
 	return this;

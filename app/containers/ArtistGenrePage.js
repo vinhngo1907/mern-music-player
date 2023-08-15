@@ -8,6 +8,7 @@ import { isTwoObjectEqual } from '../utils/func';
 class ArtistGenrePage extends Component {
     componentDidMount() {
         const { id, genre } = this.props.params;
+
         if (id && genre) {
             this.props.fetchArtists(genre, id);
         } else {

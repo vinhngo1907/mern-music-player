@@ -32,8 +32,7 @@ export function fetchDefaultArtists() {
     return dispatch => {
         dispatch(startLoading());
         axios.get('/api/media/artists/default')
-            .then((res) => {
-                const data = res
+            .then(({ data }) => {
                 console.log(data)
                 dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
                 dispatch(finishLoading());
@@ -48,7 +47,6 @@ export function fetchArtists(genre, id, page) {
         dispatch(startLoading());
         axios.get(`/api/media/artists?genre=${genre}&id=${id}${pageQuery}`)
             .then(({ data }) => {
-                console.log(data);
                 dispatch({
                     type: types.FETCH_ARTISTS,
                     artists: data.artists,
@@ -65,7 +63,6 @@ export function fetchArtist(name, type = 'songs', page) {
     return dispatch => {
         axios.get(`/api/media/artist/${name}/${type}${pageQuery}`)
             .then(({ data }) => {
-                console.log({data})
                 switch (type) {
                     case 'songs':
                         dispatch(fetchSong(data));

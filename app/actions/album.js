@@ -31,7 +31,7 @@ export function fetchDefaultAlbums() {
             .then(({ data }) => {
                 console.log(data);
                 if (data) {
-                    dispatch({ type: types.FETCH_DEFAULT_ALBUMS, defaultAlbums: data.genre });
+                    dispatch({ type: types.FETCH_DEFAULT_ALBUMS, defaultAlbums: data.topic });
 
                     dispatch(clearAlbums()); // clear the albums data
                     dispatch(finishLoading());
