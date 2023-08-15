@@ -3,6 +3,7 @@ const Scraper = require("lib/PageScraper");
 
 module.exports = function getArtists(req, res, next) {
     const { genre, id, page } = req.query;
+
     request(`http://mp3.zing.vn/the-loai-nghe-si/${genre}/${id}.html?${pageQuery(page)}`)
         .then(html => {
             const parser = new Scraper(html);
@@ -14,6 +15,7 @@ module.exports = function getArtists(req, res, next) {
                 .extractAttr('text', 'a.txt-primary', 'name')
                 .extractAttr('href', 'a', 'link')
                 .paginate();
+
 
             res.json(parser.get());
         })

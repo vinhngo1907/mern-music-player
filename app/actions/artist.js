@@ -32,7 +32,8 @@ export function fetchDefaultArtists() {
     return dispatch => {
         dispatch(startLoading());
         axios.get('/api/media/artists/default')
-            .then(({ data }) => {
+            .then((res) => {
+                const data = res
                 console.log(data)
                 dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
                 dispatch(finishLoading());
