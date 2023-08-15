@@ -57,7 +57,7 @@ const AlbumView = (props) => {
 					: null
 			}
 		</div>
-	)
+	);
 }
 
 const ArtistView = (props) => {
