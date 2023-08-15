@@ -8,13 +8,19 @@ const ArtistPage = (props) => {
     return (
         <div className="artist-page">
             <WithBackgroundImage className="artist-page-header" src={cover}>
-
+                <div className="artist-box">
+                    <LazyloadImage className="artist-avatar image-wrapper" src={avatar}>
+                    </LazyloadImage>
+                    <div className="aritst-name">
+                        {artistName}
+                    </div>
+                </div>
             </WithBackgroundImage>
             <button onClick={() => props.replaceQueue(songs)} className="sc-ir" title="play">
                 <img src="/svg/play-button-inside-a-circle.svg" className="circle-play-icon" />
             </button>
-            
-            <Pagination 
+            {/* <Playlist className='artist-playlist' songs={songs} pathEntry="alias" /> */}
+            <Pagination
                 pageChunkIndex={pageChunkIndex}
                 pageChunks={pageChunks}
                 type="single-artist"

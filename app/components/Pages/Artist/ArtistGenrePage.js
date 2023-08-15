@@ -3,7 +3,7 @@ import MainView from '../../MainView';
 import GenreMenu from '../../GenreMenu';
 import ArtistCard from './ArtistCard';
 
-const AlbumGenrePage = (props) => {
+const ArtistGenrePage = (props) => {
   return (
     <div>
       <GenreMenu type="artist"/>
@@ -12,4 +12,4 @@ const AlbumGenrePage = (props) => {
   );
 };
 
-export default AlbumGenrePage;
+export default ArtistGenrePage;

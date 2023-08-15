@@ -32,7 +32,7 @@ MainView.propTypes = {
 
 const AlbumView = (props) => {
 	const { albums, params, chunkSize, defaultAlbums, Card, location } = props;
-
+	console.log({defaultAlbums})
 	return (
 		<div className="view">
 			{

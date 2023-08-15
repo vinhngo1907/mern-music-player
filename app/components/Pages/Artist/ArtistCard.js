@@ -4,9 +4,22 @@ import LazyloadImage from "../../LazyLoadImage";
 import "./artist_card.sass";
 
 const ArtistCard = (props) => {
-    return(
+    let alias;
+    if (props.link) {
+        alias = props.link.substring(props.link.lastIndexOf("/") + 1);
+    }
+
+    const url = `/artist/${alias}`;
+    return (
         <div className="artist-card">
-            
+            <Link to={url}>
+                <LazyloadImage className="artist-image" src={props.thumb} />
+            </Link>
+            <div className="artist-detail">
+                <div className="artist-title">
+                    <Link to={url}>{props.name}</Link>
+                </div>
+            </div>
         </div>
     )
 }
