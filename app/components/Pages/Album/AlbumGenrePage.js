@@ -1,5 +1,5 @@
 import React from 'react';
-import MainView from '../../ManiView';
+import MainView from '../../MainView';
 import GenreMenu from '../../GenreMenu';
 import AlbumCard from './AlbumCard';
 

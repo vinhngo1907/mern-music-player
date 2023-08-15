@@ -1,0 +1,113 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import chunk from 'lodash.chunk';
+import Pagination from '../Pagination';
+import './index.sass';
+
+const MainView = (props) => {
+	const { type, isLoading } = props;
+	if (isLoading) return <div className="loader"></div>;
+
+	return (
+		<div>
+			{
+				type === 'album'
+					? <AlbumView {...props} />
+					: <ArtistView {...props} />
+			}
+		</div>
+	)
+}
+
+MainView.PropTypes = {
+	defaultAlbums: PropTypes.array
+}
+
+const AlbumView = (props) => {
+	const { albums, params, chunkSize, defaultAlbums, Card, location } = props;
+
+	return (
+		<div className="view">
+			{
+				!albums.length && location.pathName === '/albums' &&
+				<Default origin={defaultAlbums} Card={Card} chunkSize={chunkSize} />
+			}
+			{
+				chunk(albums, chunkSize).map((chunk, index) =>
+					<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
+				)
+			}
+			{
+				params.id && params.genre && albums.length
+					? <Pagination
+						{...params}
+						pageChunks={props.pageChunks}
+						pageChunkIndex={props.pageChunkIndex}
+						changePageChunkIndex={props.changePageChunkIndex}
+						type='album'
+						activePage={location.query.page}
+					/>
+					: null
+			}
+		</div>
+	)
+}
+
+const ArtistView = (props) => {
+	const { params, chunkSize, defaultArtists, artists, Card, location } = props;
+	return (
+		<div className='view'>
+			{
+				!artists.length && location.pathName === "/artists" &&
+				<Default origin={defaultArtists} Card={Card} chunkSize={chunkSize} />
+			}
+			{
+				chunk(artists, chunkSize).map((chunk, index) =>
+					<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} />
+				)
+			}
+
+			{
+				params.id && params.genre && artists.length
+					? <Pagination
+						{...params}
+						pageChunks={props.pageChunks}
+						pageChunkIndex={props.pageChunkIndex}
+						changePageChunkIndex={props.changePageChunkIndex}
+						type='artist'
+						activePage={location.query.page}
+					/>
+					: null
+
+			}
+		</div>
+	)
+
+}
+
+const Default = ({ origins, Card, chunkSize }) => {
+	<div>
+		{origins.map((origin, index) =>
+			<DefaultCards key={"default cards " + index} {...origin} Card={Card} chunkSize={chunkSize} />
+		)}
+	</div>
+}
+
+const DefaultCards = ({ title, id, albums, artists, Card, chunkSize, items }) => {
+	<div className="view-cards">
+		<div className="view-cards-title">
+			<a href='#'>{title} <i className='ion-chevron-right'></i></a>
+		</div>
+		{chunk(items || albums || artists, chunkSize).map((chunk, index) => (
+			<Row key={`row-chunk${index}`} chunk={chunk} Card={Card} chunkSize={chunkSize} />
+		))}
+	</div>
+}
+
+const Row = ({ chunk, Card }) => {
+	<div className="view-cards-row">
+		{chunk.map(item => <Card key={item.encodeId || item.name} {...item} />)}
+	</div>
+}
+
+export default MainView;
