@@ -7,7 +7,6 @@ module.exports = function getDefaultArtists(req, res, next) {
     request(`http://mp3.zing.vn/the-loai-nghe-si`)
         .then(html => {
             const parser = new Scraper(html);
-            console.log(parser)
             parser
                 .list(".title-section")
                 .setKey("titles")

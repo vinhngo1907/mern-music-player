@@ -7,7 +7,6 @@ module.exports = function getArtists(req, res, next) {
     request(`http://mp3.zing.vn/the-loai-nghe-si/${genre}/${id}.html?${pageQuery(page)}`)
         .then(html => {
             const parser = new Scraper(html);
-
             parser
                 .list('.pone-of-five .item')
                 .setKey('artist')
