@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const getSong = require("./song");
-// const downloadSong = require("./download");
+const downloadSong = require("./download");
 const getSuggestedSongs = require('./suggested_songs');
 const getTop100 = require('./top100');
 const search = require('./search');
@@ -15,7 +15,7 @@ const getChart = require('./chart');
 
 router.get('/song', getSong);
 
-// router.get('/download', downloadSong);
+router.get('/download', downloadSong);
 
 router.get('/suggested-song', getSuggestedSongs);
 
