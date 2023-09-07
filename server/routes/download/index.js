@@ -18,7 +18,10 @@ router.get("/song/:songTitle/:id", (req, res, next) => {
             );
             request(songURI).pipe(res);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            console.log(err);
+            next(err);
+        });
 });
 
 module.exports = router;
