@@ -3,7 +3,7 @@ const router = express.Router();
 const user = require("./user");
 const media = require("./media");
 const playlist = require('./playlist');
-const requireAuth = require('middlewares/require_authentication');
+const requireAuth = require('middlewares/auth');
 
 router.use('/user', user);
 router.use('/media', media);
