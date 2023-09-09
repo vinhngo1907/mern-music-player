@@ -9,15 +9,18 @@ class ArtistPage extends Component {
     componentDidMount() {
         const { artistName } = this.props; // check if there is already artist data or not
         if (!artistName || this.props.artistName !== this.props.params.name) {
+            // clear the previous artist data
             if (this.props.artistName) {
-                this.props.cleartArtist();
+                this.props.clearArtist();
             }
+
             this.props.fetchArtist(this.props.params.name);
         }
     }
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.params.name !== this.props.params.name) {
-            this.props.cleartArtist();
+            this.props.clearArtist();
             this.props.fetchArtist(nextProps.params.name);
         }
 
@@ -45,8 +48,15 @@ function mapStateToProps(state) {
 
     const { pageChunkIndex, pageChunks } = state.artistState;
     return {
-        cover, avatar, artistName, numberOfPages, pageChunks, pageChunkIndex, queueIds: state.queueState.ids
-    }
+        cover,
+        avatar,
+        songs,
+        numberOfPages,
+        artistName,
+        pageChunks,
+        pageChunkIndex,
+        queueIds: state.queueState.ids,
+    };
 }
 
 export default connect(mapStateToProps, {

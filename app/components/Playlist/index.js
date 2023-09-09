@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import LinksByComma from '../LinksByComma';
+import { Link, withRouter } from 'react-router';
 import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
