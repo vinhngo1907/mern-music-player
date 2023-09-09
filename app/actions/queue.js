@@ -2,7 +2,6 @@ import * as types from "../constant/action_constant";
 import { changeAlias, isEmpty, removeById } from "../utils/func";
 import { fetchSong } from "./song";
 
-
 export function addSongToQueue(song) {
     const { name, id } = song;
     return (dispatch, getState) => {
@@ -38,7 +37,18 @@ export function togglePushRoute(bool) {
 }
 
 export function tweakSongs(songs) {
-
+    const ids = [];
+    songs = songs.map(song => {
+        ids.push(song.id);
+        return {
+            id: song.id,
+            name: song.title,
+            artist:
+                song.artist_text || (song.artist && Array.isArray(song.artists) && song.artists.map(artist => artist.name).join(", ")),
+            alias: song.alias,
+            ...(song.thumbnail && { thumbnail: song.thumbnail })
+        }
+    });
 }
 
 export function replaceQueue(songs) {
@@ -63,7 +73,7 @@ export function clearQueue() {
         const clearedQueue = queueState.queue.filter(
             song => song.id === playingSongId
         );
-        // const queueIds = removeById([...queueState.ids], playingSongId);
+
         const queueIds = queueState.ids.filter(id => id !== playingSongId);
         dispatch({
             type: types.CLEAR_QUEUE,
