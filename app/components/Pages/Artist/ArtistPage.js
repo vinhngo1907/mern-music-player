@@ -1,6 +1,9 @@
 import React from "react";
+import Playlist from '../../Playlist';
 import WithBackgroundImage from "../../WithBgImg";
 import Pagination from "../../Pagination";
+import LazyloadImage from "../../LazyLoadImage";
+import './index.sass';
 
 const ArtistPage = (props) => {
     const { avatar, cover, songs, artistName, pageChunks, pageChunkIndex } = props;
@@ -19,16 +22,17 @@ const ArtistPage = (props) => {
             <button onClick={() => props.replaceQueue(songs)} className="sc-ir" title="play">
                 <img src="/svg/play-button-inside-a-circle.svg" className="circle-play-icon" />
             </button>
-            {/* <Playlist className='artist-playlist' songs={songs} pathEntry="alias" /> */}
+            <Playlist className='artist-playlist' songs={songs} pathEntry="alias" />
             <Pagination
-                pageChunkIndex={pageChunkIndex}
                 pageChunks={pageChunks}
+                pageChunkIndex={pageChunkIndex}
                 type="single-artist"
                 artistName={artistName}
+                changePageChunkIndex={props.changePageChunkIndex}
                 activePage={props.activePage}
             />
         </div>
     )
 }
 
-export default ArtistPage
+export default ArtistPage;

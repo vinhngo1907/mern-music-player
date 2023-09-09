@@ -1,110 +1,44 @@
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { useContext, useState, useEffect } from 'react'
-import { PostContext } from '../../contexts/PostContext'
+import React from 'react';
+import { Link, withRouter } from 'react-router';
+import PropTypes from 'prop-types';
+import LinksByComma from '../LinksByComma';
+import { getSongUrl } from '../../utils/func';
+import './index.sass';
 
-const UpdatePostModal = () => {
-	// Contexts
-	const {
-		postState: { post },
-		showUpdatePostModal,
-		setShowUpdatePostModal,
-		updatePost,
-		setShowToast
-	} = useContext(PostContext)
-
-	// State
-	const [updatedPost, setUpdatedPost] = useState(post)
-
-	useEffect(() => setUpdatedPost(post), [post])
-
-	const { title, description, url, status } = updatedPost
-
-	const onChangeUpdatedPostForm = event =>
-		setUpdatedPost({ ...updatedPost, [event.target.name]: event.target.value })
-
-	const closeDialog = () => {
-		setUpdatedPost(post)
-		setShowUpdatePostModal(false)
-	}
-
-	const onSubmit = async event => {
-		event.preventDefault()
-		const { success, message } = await updatePost(updatedPost)
-		setShowUpdatePostModal(false)
-		setShowToast({ show: true, message, type: success ? 'success' : 'danger' })
-	}
-
-	// const resetAddPostData = () => {
-	// 	setNewPost({ title: '', description: '', url: '', status: 'TO LEARN' })
-	// 	setShowAddPostModal(false)
-	// }
+const Playlist = (props) => {
+	const { songs, className, pathEntry } = props;
+	const page = props.location.query.page;
 
 	return (
-		<Modal show={showUpdatePostModal} onHide={closeDialog}>
-			<Modal.Header closeButton>
-				<Modal.Title>Making progress?</Modal.Title>
-			</Modal.Header>
-			<Form onSubmit={onSubmit}>
-				<Modal.Body>
-					<Form.Group>
-						<Form.Control
-							type='text'
-							placeholder='Title'
-							name='title'
-							required
-							aria-describedby='title-help'
-							value={title}
-							onChange={onChangeUpdatedPostForm}
-						/>
-						<Form.Text id='title-help' muted>
-							Required
-						</Form.Text>
-					</Form.Group>
-					<Form.Group>
-						<Form.Control
-							as='textarea'
-							rows={3}
-							placeholder='Description'
-							name='description'
-							value={description}
-							onChange={onChangeUpdatedPostForm}
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Control
-							type='text'
-							placeholder='Youtube Tutorial URL'
-							name='url'
-							value={url}
-							onChange={onChangeUpdatedPostForm}
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Control
-							as='select'
-							value={status}
-							name='status'
-							onChange={onChangeUpdatedPostForm}
-						>
-							<option value='TO LEARN'>TO LEARN</option>
-							<option value='LEARNING'>LEARNING</option>
-							<option value='LEARNED'>LEARNED</option>
-						</Form.Control>
-					</Form.Group>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant='secondary' onClick={closeDialog}>
-						Cancel
-					</Button>
-					<Button variant='primary' type='submit'>
-						LearnIt!
-					</Button>
-				</Modal.Footer>
-			</Form>
-		</Modal>
-	)
-}
+		<ul className={`${className} playlist-tracks`}>
+			{songs.map((song, index) => (
+				<li className="playlist-track" key={`playlist-${song.id}`}>
+					<span className='playlist-track-order'>
+						{page ? (((page - 1) * 20) + index + 1) : (index + 1)}
+					</span>
+					<div className='playlist-track-title ellipsis'>
+						<Link to={getSongUrl(song[pathEntry] || song.title, song.id)}>{song.title}</Link>
+					</div>
+					<div className="playlist-track-artist">
+						{
+							song.artist_text || <LinksByComma
+								data={song.artists}
+								titleEntry="name"
+								pathEntry="alias"
+								definePath={(alias) => `/artist/${alias}`}
+							/>
+						}
+					</div>
+				</li>
+			))}
+		</ul>
+	);
+};
 
-export default UpdatePostModal
+Playlist.propTypes = {
+	songs: PropTypes.array.isRequired,
+	className: PropTypes.string,
+	pathEntry: PropTypes.string,
+};
+
+export default withRouter(Playlist);

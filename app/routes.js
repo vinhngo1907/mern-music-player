@@ -25,6 +25,8 @@ export default (
         
         <Route path='artists(/:genre)(/:id)' component={Containers.ArtistGenrePage} />
         
+        <Route path='artist/:name' component={Containers.ArtistPage} />
+        
         <Route path='user/:username' component={Containers.UserPage} onEnter={getPlaylistOnEnter} />
         
         <Route path='/notfound/song' component={NotFoundSong} />
