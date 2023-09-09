@@ -42,7 +42,16 @@ export function tweakSongs(songs) {
 }
 
 export function replaceQueue(songs) {
-
+    return (dispatch, getState) => {
+        const songData = getState().songData.data;
+        if (isEmpty(songData)) {
+            dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
+            const { alias, name, id } = songs[0];
+            dispatch(fetchSong(alias || changeAlias(name), id));
+        } else {
+            dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
+        }
+    }
 }
 
 export function clearQueue() {
