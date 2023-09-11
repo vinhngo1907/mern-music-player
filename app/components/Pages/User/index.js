@@ -19,8 +19,12 @@ class UserPage extends React.Component {
 
     handleOnSubmit(e) {
         e.preventDefault();
+        // sanitize playlist's title before submitting to server
+        const playlistTitle = changeAlias(this.input.value);
+        this.props.dispatch(createPlaylist(playlistTitle));
+        this.setState({ showInput: false });
     }
-    
+
     renderInputField() {
         return this.state.showInput &&
             <form onSubmit={this.handleOnSubmit.bind(this)}>
@@ -58,8 +62,32 @@ class UserPage extends React.Component {
     }
 }
 
-class Playlist extends React.Component { }
+UserPage.propTypes = {
+    playlists: PropTypes.array.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    songData: PropTypes.object.isRequired,
+};
 
-const List = ({ songs, dispatch, playlistTitle }) => { }
+class Playlist extends React.Component {
+    state = { expand: false };
+    toggleExpand(e) {
+        // do nothing if the playlist has no songs
+    }
+
+    play() {
+
+    }
+    render() {
+        return (
+            <div className="user-playlist"></div>
+        )
+    }
+}
+
+const List = ({ songs, dispatch, playlistTitle }) => {
+    return (
+        <ul className="user-playlist-inside"></ul>
+    )
+}
 
 export default UserPage;
