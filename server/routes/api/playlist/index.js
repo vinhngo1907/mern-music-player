@@ -4,7 +4,7 @@ const addSongToPlaylist = require('./add_song_to_playlist');
 const createPlaylist = require('./create_playlist');
 const getPlaylist = require('./get_playlist');
 const deleteSongFromPlaylist = require('./delete_song');
-// const addSongToPlaylist = require('./add_song_to_playlist');
+const deletePlaylist = require('./delete_playlist');
 
 const router = express.Router();
 
@@ -36,26 +36,21 @@ router.post('/:username', isValidUser, createPlaylist);
 */
 router.get('/:username/:title', isValidUser, getPlaylist);
 
-// @route DELETE api/posts
-// @desc Delete post
-// @access Private
-// router.delete('/:id', verifyToken, async (req, res) => {
-// 	try {
-// 		const postDeleteCondition = { _id: req.params.id, user: req.userId }
-// 		const deletedPost = await Post.findOneAndDelete(postDeleteCondition)
+/** 
+ * @route DELETE
+ * @desc Delete a playlist
+ * @access Private
+*/
+router.delete('/:username/:playlistTitle', isValidUser, deletePlaylist);
 
-// 		// User not authorised or post not found
-// 		if (!deletedPost)
-// 			return res.status(401).json({
-// 				success: false,
-// 				message: 'Post not found or user not authorised'
-// 			})
+// add a song to a playlist
+router.put('/:username/:playlistTitle', isValidUser, addSongToPlaylist);
 
-// 		res.json({ success: true, post: deletedPost })
-// 	} catch (error) {
-// 		console.log(error)
-// 		res.status(500).json({ success: false, message: 'Internal server error' })
-// 	}
-// })
+/** 
+ * @route DELETE
+ * @desc Delete a song from a playlist
+ * @access Private
+*/
+router.delete('/:username/:playlistTitle/:songId', isValidUser, deleteSongFromPlaylist);
 
 module.exports = router;

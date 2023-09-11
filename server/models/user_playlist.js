@@ -1,26 +1,24 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const SongSchema = new Schema({
 	id: { type: String, required: true },
 	name: { type: String, required: true },
 	artists: { type: Schema.Types.Mixed, required: true }, // string or array
 	thumbnail: String,
-	url_alias: String
-}, { _id: false });
+	url_alias: String,
+}, { _id: false, versionKey: false });
 
 const PlaylistSchema = new Schema({
-	title: {
-		type: String,
-		required: true
-	},
-	songs: [SongSchema]
-});
+	songs: [SongSchema],
+	title: { type: String, required: true },
+}, { versionKey: false });
 
 const UserPlaylistSchema = new Schema({
-	playlist: [PlaylistSchema],
-	_username: { type: String, required: true }
+	playlists: [PlaylistSchema],
+	_username: { type: String, required: true },
+}, { versionKey: false });
 
-});
+const Playlist = mongoose.model('UserPlaylist', UserPlaylistSchema);
 
-module.exports = mongoose.model('UserPlaylist', UserPlaylistSchema)
+module.exports = Playlist;
