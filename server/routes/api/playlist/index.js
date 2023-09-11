@@ -1,5 +1,6 @@
 const express = require('express')
-
+// controllers
+const getPlaylistCollection = require('./get_playlist_collection');
 const addSongToPlaylist = require('./add_song_to_playlist');
 const createPlaylist = require('./create_playlist');
 const getPlaylist = require('./get_playlist');
@@ -16,7 +17,14 @@ const isValidUser = (req, res, next) => {
 }
 
 /** 
- * @route GET api/posts
+ * @route GET
+ * @desc get user playlist collection
+ * @access Private
+*/
+router.get('/:username', isValidUser, getPlaylistCollection);
+
+/** 
+ * @route PUT 
  * @desc add a song to a playlist
  * @access Private
 */
