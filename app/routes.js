@@ -21,7 +21,7 @@ export default (
         
         <Route path='albums(/:genre)(/:id)' component={Containers.AlbumGenrePage} onEnter={getCharts} />
         
-        {/* <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} /> */}
+        <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} />
         
         <Route path='artists(/:genre)(/:id)' component={Containers.ArtistGenrePage} />
         

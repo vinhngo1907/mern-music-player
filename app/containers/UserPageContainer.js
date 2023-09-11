@@ -9,20 +9,21 @@ class UserPageContainer extends Component {
         const { authenticated, params, user, redirectTo } = this.props;
         if (authenticated && params.username !== user.username) {
             this.props.dispatch(logout());
-            redirectTo("/login");
+            redirectTo('/login');
         } else if (!authenticated) {
-            redirectTo("/login");
+            redirectTo('/login');
         }
     }
+
 
     render() {
         return (
             <Pages.UserPage
                 playlists={this.props.playlists}
                 dispatch={this.props.dispatch}
-                song={this.props.songData}
+                songData={this.props.songData}
             />
-        )
+        );
     }
 }
 
