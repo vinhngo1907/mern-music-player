@@ -23,12 +23,22 @@ function getUser() {
     return cachedUser;
 }
 
+const instance = (accessToken) => {
+    return axios.create({
+        baseURL: PLAYLIST_ENDPOINT,
+        ...accessToken && { headers: { Authorization: accessToken } }
+    })
+}
+
 export function getPlaylistCollection() {
     const { username, access_token } = getUser();
+    return dispatch => {
+        instance()
+    }
 }
 
 export function addSongToPlaylist(playlistTitle, songObj) {
-    
+    const { username, access_token } = getUser();
 }
 
 export function addSongToStoreTemporarily(song) {

@@ -22,5 +22,5 @@ export default combineReducers({
     albumState: albumReducer,
     playerState: playerReducer,
     playlistState: playlistReducer,
-    artistState: artistReducer
+    artistState: artistReducer,
 });

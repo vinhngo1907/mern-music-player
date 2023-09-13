@@ -17,8 +17,6 @@ export default (
         
         <Route path='signup' component={Containers.SignUpPage} />
         
-        <Route path='/notfound/song' component={NotFoundSong} />
-        
         <Route path='albums(/:genre)(/:id)' component={Containers.AlbumGenrePage} onEnter={getCharts} />
         
         <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist} />

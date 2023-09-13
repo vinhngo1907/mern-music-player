@@ -1,5 +1,5 @@
 import * as types from '../constant/action_constant';
-// import { findIndex } from '../utils/func';
+import { findIndex } from '../utils/func';
 
 const initialState = {
     playlists: [],
@@ -11,12 +11,23 @@ export default function (state = initialState, action) {
 
         case types.GET_PLAYLIST_COLLECTION:
             return { ...state, playlists: action.playlists };
-        
+
+        case types.CREATE_PLAYLIST:
+            return {
+                ...state,
+                playlists: [...state.playlists, {
+                    title: action.title,
+                    songs: []
+                }]
+            }
+        case types.ADD_SONG_TO_PLAYLIST:
+            return { ...state, tmpSong: action.song }
+
         case types.DELETE_PLAYLIST:
             return { ...state, playlists: action.playlists };
 
         case types.CLEAR_USER_PLAYLIST:
-            return initialState
+            return initialState;
 
         default:
             return state;
