@@ -1,3 +1,4 @@
+const co = require('co');
 const Playlist = require("models/user_playlist");
 module.exports = (req, res, next) => {
     co(function* () {
@@ -15,5 +16,8 @@ module.exports = (req, res, next) => {
         return [];
     })
         .then(collection => res.json(collection))
-        .catch(err => next(err));
+        .catch(err => {
+            console.log(err.message);
+            next(err)
+        });
 }

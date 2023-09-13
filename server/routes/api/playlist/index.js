@@ -10,7 +10,7 @@ const deletePlaylist = require('./delete_playlist');
 const router = express.Router();
 
 const isValidUser = (req, res, next) => {
-    if (req.currentUser.username) {
+    if (req.currentUser.username !== req.params.username) {
         return res.status(401).send('You are not allow to access this route');
     }
     return next();
