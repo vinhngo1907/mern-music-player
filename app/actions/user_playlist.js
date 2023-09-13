@@ -42,6 +42,7 @@ export function getPlaylistCollection() {
             .catch(err => { throw err; })
     }
 }
+
 export function createPlaylist(title) {
     const { username, access_token } = getUser();
     return dispatch => {
@@ -117,6 +118,19 @@ export function deleteSong(playlistTitle, id) {
             .then(({ data }) => dispatch({
                 type: types.DELETE_SONG_FROM_PLAYLIST,
                 playlists: data,
+            }))
+            .catch(err => { throw err });
+    }
+}
+
+export function deletePlaylist(playlistTitle) {
+    const { username, access_token } = getUser();
+    return dispatch => {
+        instance(access_token)
+            .delete(`${username}/${playlistTitle}`)
+            .then(({ data }) => dispatch({
+                type: types.DELETE_PLAYLIST,
+                playlists: data
             }))
             .catch(err => { throw err });
     }

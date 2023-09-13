@@ -15,7 +15,6 @@ class UserPageContainer extends Component {
         }
     }
 
-
     render() {
         return (
             <Pages.UserPage
