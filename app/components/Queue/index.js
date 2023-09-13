@@ -17,7 +17,7 @@ function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue, show }) {
                     <button className="sc-ir" onClick={toggleQueue}>Hide queue</button>
                 </div>
             </div>
-            <QueueList songs={songs} removeSongFromQueue={removeSongFromQueue}/>
+            <QueueList songs={songs} removeSongFromQueue={removeSongFromQueue} />
         </div>
     );
 }
