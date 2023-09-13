@@ -108,3 +108,16 @@ export function clearUserPlaylist() {
         type: types.CLEAR_USER_PLAYLIST
     };
 }
+
+export function deleteSong(playlistTitle, id) {
+    const { username, access_token } = getUser();
+    return dispatch => {
+        instance(access_token)
+            .delete(`${username}/${playlistTitle}/${id}`)
+            .then(({ data }) => dispatch({
+                type: types.DELETE_SONG_FROM_PLAYLIST,
+                playlists: data,
+            }))
+            .catch(err => { throw err });
+    }
+}
