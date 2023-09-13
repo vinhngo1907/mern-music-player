@@ -17,30 +17,10 @@ export default function (state = initialState, action) {
 
         case types.FETCH_TRACK_FAILURE:
             return { ...state, isLoading: false };
+
         default:
             return state;
     }
-}
-
-function fetchTrackSuccess(state, action) {
-    let tracks = state.tracks;
-    if (state.tracks.length && !compareTwoFirstTrack(state.tracks[0], action.tracks[0])) {
-        tracks = tracks.concat(action.tracks);
-    }
-    let pageLoaded = action.page ? action.page : state.pageLoaded;
-
-    if (action.id !== state.activeId) {
-        tracks = action.tracks;
-        pageLoaded = 1;
-    }
-
-    return {
-        ...state,
-        tracks,
-        pageLoaded,
-        activeId: action.id,
-        isLoading: false,
-    };
 }
 
 function compareTwoFirstTrack(track1, track2) {
@@ -66,4 +46,4 @@ function fetchTrackSuccess(state, action) {
         activeId: action.id,
         isLoading: false,
     };
-}  
+}

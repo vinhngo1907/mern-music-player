@@ -50,13 +50,13 @@ class Player extends React.PureComponent {
     }
 
     onPlay() {
-        console.log(["Play"])
+        // console.log(["Play"]);
         this.timer = requestInterval(this.update.bind(this), 50);
         this.setState({ isPlaying: true });
     }
 
     onPause() {
-        console.log(["Pause"]);
+        // console.log(["Pause"]);
         clearRequestInterval(this.timer);
         this.setState({ isPlaying: false });
     }
@@ -67,8 +67,6 @@ class Player extends React.PureComponent {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        // console.log({ nextState });
-        // console.log(">>>>", { ...this.state })
         if (nextState.isPlaying !== this.state.isPlaying) {
             if (nextState.isPlaying) {
                 this.audio.play();

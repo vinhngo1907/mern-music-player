@@ -64,7 +64,7 @@ export function addSongToPlaylist(playlistTitle, songObj) {
     const { username, access_token } = getUser();
     return dispatch => {
         instance(access_token)
-            .put(`${username}/${playlistTitle}`, { songObj })
+            .put(`${username}/${playlistTitle}`, songObj)
             .then(() => {
                 dispatch({
                     type: types.ADD_SONG_TO_PLAYLIST,

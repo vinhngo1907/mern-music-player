@@ -31,7 +31,6 @@ class App extends React.Component {
 }
 
 function mapStateToProps({ songData, UIState, auth }) {
-	// console.log({songData})
 	const { showQueue, showAnalyzer, slideInRight } = UIState;
 
 	return {
@@ -39,7 +38,7 @@ function mapStateToProps({ songData, UIState, auth }) {
 		showAnalyzer,
 		showQueue,
 		slideInRight,
-		auth
+		auth,
 	};
 }
 

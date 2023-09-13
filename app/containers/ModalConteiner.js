@@ -5,6 +5,7 @@ import { Modal } from '../components';
 class ModalContainer extends Component {
     render() {
         const { dispatch, playlists, song, authenticated } = this.props;
+
         return this.props.showModal
             ? <Modal
                 dispatch={dispatch}
@@ -20,6 +21,7 @@ function mapStateToProps({ UIState, playlistState, auth }) {
     const playlists = playlistState.playlists.length
         ? playlistState.playlists.map(playlist => playlist.title)
         : [];
+
     return {
         showModal: UIState.showModal,
         playlists,
