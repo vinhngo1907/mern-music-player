@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from '../components';
 
@@ -6,7 +6,12 @@ class ModalContainer extends Component {
     render() {
         const { dispatch, playlists, song, authenticated } = this.props;
         return this.props.showModal
-            ? <Modal />
+            ? <Modal
+                dispatch={dispatch}
+                playlists={playlists}
+                song={song}
+                authenticated={authenticated}
+            />
             : null;
     }
 }
