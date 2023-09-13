@@ -51,7 +51,11 @@ router.get('/:username/:title', isValidUser, getPlaylist);
 */
 router.delete('/:username/:playlistTitle', isValidUser, deletePlaylist);
 
-// add a song to a playlist
+/**
+ * @route PUT
+ * @desc add a song to a playlist
+ * @access Private
+ */
 router.put('/:username/:playlistTitle', isValidUser, addSongToPlaylist);
 
 /** 
