@@ -16,7 +16,10 @@ module.exports = function getAlbumPlaylist(req, res, next) {
             request(`https://mp3.zing.vn/hrx/${playlistUrl}`),
             promiseParsing(parser),
         ]);
-    });
+    }).then(([playlistRawText, result]) => {
+        result.songs = JSON.parse(playlistRawText).data.items;
+        res.json(result);
+    }).catch(err => next(err));
 }
 
 const promiseParsing = (parser) => {
