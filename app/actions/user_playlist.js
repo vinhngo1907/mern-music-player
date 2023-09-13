@@ -42,13 +42,25 @@ export function getPlaylistCollection() {
             .catch(err => { throw err; })
     }
 }
-
-export function addSongToPlaylist(playlistTitle, songObj) {
+export function createPlaylist(title) {
     const { username, access_token } = getUser();
-    // return dipatch => {
-    //     instance(access_token).post(`/${username}`, {title})
-    //     .then(() => )
-    // }
+    return dispatch => {
+        instance(access_token)
+            .post(`/${username}`, { title })
+            .then(() => dispatch({
+                type: types.ADD_SONG_TO_PLAYLIST,
+                title
+            })).catch(err => toast.error(
+                <div
+                    className='custom-toast-content ellipsis'
+                    title={`${title} playlist already exists`}
+                    dangerouslySetInnerHTML={{ __html: err.response.data }}>
+                </div>
+            ));
+    };
+}
+export function addSongToPlaylist(playlistTitle, songObj) {
+
 }
 
 export function addSongToStoreTemporarily(song) {
