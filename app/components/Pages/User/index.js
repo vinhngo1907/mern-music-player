@@ -10,9 +10,7 @@ import LinksByComma from '../../LinksByComma';
 import './index.sass';
 
 class UserPage extends React.Component {
-    state = {
-        showInput: false,
-    };
+    state = { showInput: false, };
 
     handleClickOutSide() {
         this.setState({ showInput: false });
