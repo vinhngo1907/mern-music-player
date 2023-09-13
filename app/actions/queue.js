@@ -84,5 +84,9 @@ export function clearQueue() {
 }
 
 export function playUserPlaylist(songs) {
-
+    return {
+        type: types.PLAY_USER_PLAYLIST,
+        ids: songs.map(song => song.id),
+        queue: songs
+    }
 }

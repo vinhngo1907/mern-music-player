@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getSongUrl, changeAlias, isEmpty } from '../../../utils/func';
 import { createPlaylist, deleteSong, deletePlaylist } from '../../../actions/user_playlist';
+import { playUserPlaylist } from '../../../actions/queue';
+import { fetchSong, fetchSuggestedSongs } from '../../../actions/song';
 import LinksByComma from '../../LinksByComma';
 import './index.sass';
 
@@ -77,7 +79,7 @@ class Playlist extends React.Component {
         // do nothing if the playlist has no songs
         if (!this.props.playlist.songs.length) { return; }
 
-        const $list = e.target.closet('.user-playlist-header').nextSibling;
+        const $list = e.target.closest('.user-playlist-header').nextSibling;
         this.setState({ expand: !this.state.expand });
 
         if ($list.style.maxHeight) {
@@ -98,6 +100,7 @@ class Playlist extends React.Component {
             dispatch(fetchSong(changeAlias(name), id));
             // dispatch(fetchSuggestedSongs(id));
         }
+
         dispatch(playUserPlaylist(this.props.playlist.songs));
     }
 
@@ -133,6 +136,12 @@ class Playlist extends React.Component {
         )
     }
 }
+
+Playlist.propTypes = {
+    playlist: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    songData: PropTypes.object.isRequired,
+};
 
 const List = ({ songs, dispatch, playlistTitle }) => {
     return (
@@ -179,5 +188,11 @@ const List = ({ songs, dispatch, playlistTitle }) => {
         </ul>
     )
 }
+
+List.propTypes = {
+    songs: PropTypes.array.isRequired,
+    playlistTitle: PropTypes.string,
+    dispatch: PropTypes.func.isRequired,
+};
 
 export default UserPage;
