@@ -17,7 +17,8 @@ class Player extends React.PureComponent {
             progress: 0,
             isSeeKing: false,
             isPlaying: false,
-            isLoop: false
+            isLoop: false,
+            isMuted: false
         }
     }
 
@@ -65,6 +66,12 @@ class Player extends React.PureComponent {
         this.playPrevOrNextSong("next");
         clearRequestInterval(this.timer);
     }
+
+    toggleMute = () => {
+        this.setState(prevState => ({
+            isMuted: !prevState.isMuted,
+        }));
+    };
 
     componentWillUpdate(nextProps, nextState) {
         if (nextState.isPlaying !== this.state.isPlaying) {
@@ -230,8 +237,9 @@ class Player extends React.PureComponent {
     render() {
         const { songData, queue } = this.props;
         // console.log({ songData })
+        const { isMuted } = this.state;
         const { id, title, link } = songData;
-        const alias = extractAlias(link)
+        const alias = extractAlias(link);
         return (
             <div className="player">
                 <audio
@@ -240,6 +248,7 @@ class Player extends React.PureComponent {
                     crossOrigin="anonymous"
                     ref="audio"
                     loop={this.state.loop}
+                    muted={isMuted}
                 />
                 <img
                     src={songData.thumbnail}
@@ -282,6 +291,9 @@ class Player extends React.PureComponent {
                         onClick={this.playPrevOrNextSong.bind(this, "next")}
                     >
                         <i className="ion-ios-fastforward"></i>
+                    </button>
+                    <button onClick={this.toggleMute}>
+                        {isMuted ? 'Unmute' : 'Mute'}
                     </button>
                 </div>
                 <div className="player-seek">
