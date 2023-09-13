@@ -80,7 +80,14 @@ export function addSongToPlaylist(playlistTitle, songObj) {
                         was added to <span>{playlistTitle}</span> playlist
                     </div>
                 );
-            });
+            })
+            .catch(err => toast.error(
+                <div
+                    className='custom-toast-content ellipsis'
+                    title={`${songObj.name} already exists in ${playlistTitle} playlist`}
+                    dangerouslySetInnerHTML={{ __html: err.response.data }}>
+                </div>
+            ));
     }
 }
 
