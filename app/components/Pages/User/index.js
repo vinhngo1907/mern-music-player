@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './index.sass';
+import { isEmpty } from '../../../utils/func';
 
 class UserPage extends React.Component {
     state = {
@@ -72,14 +73,60 @@ class Playlist extends React.Component {
     state = { expand: false };
     toggleExpand(e) {
         // do nothing if the playlist has no songs
+        if (!this.props.playlist.songs.length) { return; }
+
+        const $list = e.target.closet('.user-playlist-header').nextSibling;
+        this.setState({ expand: !this.state.expand });
+
+        if ($list.style.maxHeight) {
+            $list.style.maxHeight = null;
+        } else {
+            $list.style.maxHeight = `${$list.scrollHeight}px`;
+        }
     }
 
     play() {
+        if (!this.props.playlist.songs.length) { return; }
 
+        const { dispatch, songData } = this.props;
+        const firstSong = this.props.playlist.songs[0];
+        const { name, id } = firstSong;
+        // play the first song if there is no song in the queue
+        if (isEmpty(songData)) {
+            dispatch(fetchSong(changeAlias(name), id));
+            // dispatch(fetchSuggestedSongs(id));
+        }
+        dispatch(playUserPlaylist(this.props.playlist.songs));
     }
     render() {
+        const { songs, title } = this.props.playlist;
+        const { playlist, dispatch } = this.props;
+        const whichIcon = this.state.expand ? 'down' : 'right';
+        const iconCLassName = `ion-arrow-${whichIcon}-b`;
+        
         return (
-            <div className="user-playlist"></div>
+            <div className="user-playlist">
+                <div
+                    className="user-playlist-header"
+                    onClick={this.toggleExpand.bind(this)}
+                >
+                    <div className="user-playlist-title">{title}</div>
+                    <div className="user-playlist-play-btn">
+                        <button className="sc-ir playlist-play-btn" onClick={this.play.bind(this)}>
+                            <img src="/svg/play-button-inside-a-circle.svg" alt="" />
+                        </button>
+                    </div>
+                    <b>{songs.length}</b> songs
+                    <button
+                        className="sc-ir playlist-remove-btn"
+                        onClick={() => dispatch(deletePlaylist(title))}
+                    >
+                        <i className="ion-android-close"></i>
+                    </button>
+                    <i className={iconCLassName}></i>
+                </div>
+                <List songs={songs} dispatch={dispatch} playlistTitle={playlist.title} />
+            </div>
         )
     }
 }
