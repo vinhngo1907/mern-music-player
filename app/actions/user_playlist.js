@@ -60,7 +60,28 @@ export function createPlaylist(title) {
     };
 }
 export function addSongToPlaylist(playlistTitle, songObj) {
+    const { username, access_token } = getUser();
+    return dispatch => {
+        instance(access_token)
+            .put(`${username}/${playlistTitle}`, { songObj })
+            .then(() => {
+                dispatch({
+                    type: types.ADD_SONG_TO_PLAYLIST,
+                    song: songObj,
+                    title: playlistTitle,
+                });
 
+                toast(
+                    <div
+                        className='custom-toast-content ellipsis'
+                        title={`${songObj.name} was added to ${playlistTitle} playlist`}
+                    >
+                        <span>{songObj.name}</span>
+                        was added to <span>{playlistTitle}</span> playlist
+                    </div>
+                );
+            });
+    }
 }
 
 export function addSongToStoreTemporarily(song) {
