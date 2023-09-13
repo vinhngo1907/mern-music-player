@@ -33,12 +33,22 @@ const instance = (accessToken) => {
 export function getPlaylistCollection() {
     const { username, access_token } = getUser();
     return dispatch => {
-        instance()
+        instance(access_token)
+            .get(`/${username}`)
+            .then(({ data }) => dispatch({
+                type: types.GET_PLAYLIST_COLLECTION,
+                playlists: data
+            }))
+            .catch(err => { throw err; })
     }
 }
 
 export function addSongToPlaylist(playlistTitle, songObj) {
     const { username, access_token } = getUser();
+    // return dipatch => {
+    //     instance(access_token).post(`/${username}`, {title})
+    //     .then(() => )
+    // }
 }
 
 export function addSongToStoreTemporarily(song) {
