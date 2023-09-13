@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { getSongUrl, changeAlias, isEmpty } from '../../../utils/func';
+import { createPlaylist, deleteSong, deletePlaylist } from '../../../actions/user_playlist';
+import LinksByComma from '../../LinksByComma';
 import './index.sass';
-import { isEmpty } from '../../../utils/func';
 
 class UserPage extends React.Component {
     state = {
@@ -98,12 +100,13 @@ class Playlist extends React.Component {
         }
         dispatch(playUserPlaylist(this.props.playlist.songs));
     }
+
     render() {
         const { songs, title } = this.props.playlist;
         const { playlist, dispatch } = this.props;
         const whichIcon = this.state.expand ? 'down' : 'right';
         const iconCLassName = `ion-arrow-${whichIcon}-b`;
-        
+
         return (
             <div className="user-playlist">
                 <div
@@ -133,7 +136,47 @@ class Playlist extends React.Component {
 
 const List = ({ songs, dispatch, playlistTitle }) => {
     return (
-        <ul className="user-playlist-inside"></ul>
+        <ul className="user-playlist-inside">
+            <ReactCSSTransitionGroup
+                transitionName="playlist-song"
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={300}>
+                {
+                    songs.map((song) => (
+                        <li className="playlist-song" key={`playlist-song${song.id}`}>
+                            <div className="playlist-song-thumbnail">
+                                <img src={song.thumbnail} />
+                            </div>
+                            <div className="playlist-song-title ellipsis">
+                                <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
+                            </div>
+                            <div className="playlist-song-artists">
+                                {
+                                    Array.isArray(song.artists)
+                                        ? <LinksByComma
+                                            data={song.artists}
+                                            titleEntry="name"
+                                            pathEntry="link"
+                                            definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+                                            defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+                                        />
+                                        : song.artists
+                                }
+
+                            </div>
+                            <div className="playlist-song-remove-btn">
+                                <button
+                                    className="sc-ir"
+                                    onClick={() => dispatch(deleteSong(playlistTitle, song.id))}
+                                >
+                                    <i className="ion-android-close"></i>
+                                </button>
+                            </div>
+                        </li>
+                    ))
+                }
+            </ReactCSSTransitionGroup>
+        </ul>
     )
 }
 
