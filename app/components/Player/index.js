@@ -332,7 +332,7 @@ class Player extends React.PureComponent {
                         <img src="/svg/playlist.svg" />
                     </button>
                     <button  className="sc-ir" title="Mute">
-                        <i class="ion-mute"
+                        <i className="ion-loop"
                             onClick={this.toggleMute}
                             style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}
                         ></i>

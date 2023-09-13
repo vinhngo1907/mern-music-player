@@ -49,7 +49,7 @@ export function createPlaylist(title) {
         instance(access_token)
             .post(`/${username}`, { title })
             .then(() => dispatch({
-                type: types.ADD_SONG_TO_PLAYLIST,
+                type: types.CREATE_PLAYLIST,
                 title
             })).catch(err => toast.error(
                 <div

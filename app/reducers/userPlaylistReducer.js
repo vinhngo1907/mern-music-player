@@ -20,6 +20,7 @@ export default function (state = initialState, action) {
                     songs: []
                 }]
             }
+
         case types.ADD_SONG_TO_PLAYLIST:
             return addSongToPlaylist(state, action);
 
@@ -30,7 +31,7 @@ export default function (state = initialState, action) {
             return { ...state, playlists: action.playlists };
 
         case types.DELETE_SONG_FROM_PLAYLIST:
-            return { ...state, tmpSong: action.song }
+            return { ...state, playlists: action.playlists };
 
         case types.CLEAR_USER_PLAYLIST:
             return initialState;
