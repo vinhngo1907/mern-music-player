@@ -21,10 +21,16 @@ export default function (state = initialState, action) {
                 }]
             }
         case types.ADD_SONG_TO_PLAYLIST:
-            return { ...state, tmpSong: action.song }
+            return addSongToPlaylist(state, action);
+
+        case types.ADD_SONG_TO_STORE_TEMPORARILY:
+            return { ...state, tmpSong: action.song };
 
         case types.DELETE_PLAYLIST:
             return { ...state, playlists: action.playlists };
+
+        case types.DELETE_SONG_FROM_PLAYLIST:
+            return { ...state, tmpSong: action.song }
 
         case types.CLEAR_USER_PLAYLIST:
             return initialState;
@@ -32,4 +38,18 @@ export default function (state = initialState, action) {
         default:
             return state;
     }
+}
+
+function addSongToPlaylist(state, action) {
+    const index = findIndex(state.playlists, 'title', action.title);
+    const clonePlaylists = [...state.playlists];
+    clonePlaylists.splice(index, 1, {
+        title: action.title,
+        songs: [...state.playlists[index].songs, action.song],
+    });
+
+    return {
+        ...state,
+        playlists: clonePlaylists,
+    };
 }

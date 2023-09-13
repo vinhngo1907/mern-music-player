@@ -292,9 +292,6 @@ class Player extends React.PureComponent {
                     >
                         <i className="ion-ios-fastforward"></i>
                     </button>
-                    <button onClick={this.toggleMute}>
-                        {isMuted ? 'Unmute' : 'Mute'}
-                    </button>
                 </div>
                 <div className="player-seek">
                     <span>
@@ -334,7 +331,18 @@ class Player extends React.PureComponent {
                         <span className="queue-circle">{queue.length}</span>
                         <img src="/svg/playlist.svg" />
                     </button>
+                    <button  className="sc-ir" title="Mute">
+                        <i class="ion-mute"
+                            onClick={this.toggleMute}
+                            style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}
+                        ></i>
+                    </button>
+
                 </div>
+                {/* <div onClick={this.toggleMute} className="player-mute">
+                      
+                        <i class="fas fa-volume-mute" style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}/>
+                    </div> */}
                 {this.props.isFetching && <PlayerLoader />}
             </div>
         )
