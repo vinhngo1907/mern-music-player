@@ -42,6 +42,7 @@ class UserPage extends React.Component {
 
     render() {
         const { playlists } = this.props;
+        console.log({playlists})
         return (
             <div className="user-page">
                 <div className="user-page-left">
@@ -52,13 +53,15 @@ class UserPage extends React.Component {
                         <i className="ion-plus"></i>
                     </button>
                     {this.renderInputField()}
-                    {playlists.map((playlist, index) => (
-                        <Playlist
-                            playlist={playlist}
-                            key={`playlist-${index}-${playlist.title}`}
-                            {...this.props}
-                        />
-                    ))}
+                    {
+                        playlists.map((playlist, index) => (
+                            <Playlist
+                                playlist={playlist}
+                                key={`playlist-${index}-${playlist.title}`}
+                                {...this.props}
+                            />
+                        ))
+                    }
                 </div>
             </div>
         )
