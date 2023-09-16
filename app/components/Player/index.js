@@ -248,9 +248,9 @@ class Player extends React.PureComponent {
     render() {
         const { songData, queue } = this.props;
         // console.log({ songData })
-        const { isMuted } = this.state;
         const { id, title, link } = songData;
         const alias = extractAlias(link);
+
         return (
             <div className="player">
                 <audio
@@ -260,7 +260,7 @@ class Player extends React.PureComponent {
                     ref="audio"
                     loop={this.state.loop}
                     muted={this.state.isMuted}
-                    volume={this.state.volume / 100}
+                    volume={this.state.isMuted ? 0 : this.state.volume / 100}
                 />
                 <img
                     src={songData.thumbnail}
@@ -308,11 +308,13 @@ class Player extends React.PureComponent {
                 <div className="player-volume">
                     <button
                         className="sc-ir player-btn"
-                        onClick={this.toggleMute.bind(this)}
+                        onClick={this.toggleMute.bind(this)} 
+                        title="Volume"
                     >
-                        <i className={`ion-volume-${this.state.isMuted ? 'off' : 'up'}`}
-                            style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}
-                        ></i>
+                        <i
+                            className={`icon ion-${this.state.isMuted ? 'android-volume-mute' : 'volume-medium'}`}
+                            style={{ color: this.state.loop ? "#23B89A" : "#adb5bd" }}
+                        />
                     </button>
                     <input
                         type="range"
