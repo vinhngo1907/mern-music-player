@@ -30,6 +30,7 @@ class Player extends React.PureComponent {
         this.audio.addEventListener("play", this.onPlay.bind(this));
         this.audio.addEventListener("pause", this.onPause.bind(this));
         this.audio.addEventListener("ended", this.onEnded.bind(this));
+        this.audio.addEventListener('volumechange', this.handleVolumeChange);
 
         // initialize the audio player
         initAnalyzer(this.audio);
@@ -43,12 +44,12 @@ class Player extends React.PureComponent {
 
     componentWillUnmount() {
         clearRequestInterval(this.timer);
+        this.audio.removeEventListener('volumechange', this.handleVolumeChange);
     }
 
     onLoadedData() {
-        if (this.audio.readyState >= 2) {
-            this.audio && this.audio.play();
-            // this.audio.play();
+        if (this.audio && this.audio.readyState >= 2) {
+            this.audio.play();
         }
     }
 
@@ -70,24 +71,34 @@ class Player extends React.PureComponent {
     }
 
     toggleMute = () => {
-        // this.setState({ isMuted: !this.state.isMuted });
-        // if (this.audio) {
-        //     this.audio.muted = !this.state.isMuted;
-        // }
         this.setState((prevState) => ({
             isMuted: !prevState.isMuted,
-            volume: prevState.isMuted ? 100 : prevState.volume, // Restore previous volume when unmuting
-          }));
+            volume: prevState.isMuted ? 100 : this.state.volume, // Restore volume when unmuting
+        }));
     };
 
     handleVolumeChange = (e) => {
-        const volume = e.target.value;
-        this.setState({ volume });
-        if (this.audio) {
-            this.audio.volume = volume / 100;
-        }
-    };
+        // const volume = e.target.value;
+        // this.setState({ volume });
+        // if (this.audio) {
+        //     this.audio.volume = volume / 100;
+        // }
+        const newVolume = Math.round(this.audio.volume * 100);
+        this.setState({ volume: newVolume });
+        // const newVolume = parseInt(e.target.value, 10);
+        // this.setState({ volume: newVolume });
 
+        // if (newVolume === 0) {
+        //     this.setState({ isMuted: true });
+        // } else {
+        //     this.setState({ isMuted: false });
+        // }
+    };
+    handleVolumeSliderChange = (event) => {
+        const newVolume = parseInt(event.target.value, 10);
+        this.setState({ volume: newVolume });
+        this.audio.volume = newVolume / 100;
+    }
     componentWillUpdate(nextProps, nextState) {
         if (nextState.isPlaying !== this.state.isPlaying) {
             if (nextState.isPlaying) {
@@ -326,7 +337,7 @@ class Player extends React.PureComponent {
                         max="100"
                         // value={this.state.volume}
                         value={this.state.isMuted ? 0 : this.state.volume}
-                        onChange={this.handleVolumeChange.bind(this)}
+                        onChange={this.handleVolumeSliderChange.bind(this)}
                     />
                 </div>
                 <div className="player-seek">
