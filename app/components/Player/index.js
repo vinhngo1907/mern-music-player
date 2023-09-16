@@ -46,7 +46,8 @@ class Player extends React.PureComponent {
 
     onLoadedData() {
         if (this.audio.readyState >= 2) {
-            this.audio && this.audio.play();
+            // this.audio && this.audio.play();
+            this.audio.play();
         }
     }
 

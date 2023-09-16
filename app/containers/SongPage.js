@@ -8,7 +8,6 @@ import { addSongToStoreTemporarily } from '../actions/user_playlist';
 import { showAnalyzer, toggleModal } from '../actions/ui';
 import { getSongUrl, isEmpty } from '../utils/func';
 
-
 class SongPage extends React.Component {
     componentDidMount() {
         this.props.showAnalyzer();
