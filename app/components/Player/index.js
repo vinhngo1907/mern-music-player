@@ -47,8 +47,8 @@ class Player extends React.PureComponent {
 
     onLoadedData() {
         if (this.audio.readyState >= 2) {
-            // this.audio && this.audio.play();
-            this.audio.play();
+            this.audio && this.audio.play();
+            // this.audio.play();
         }
     }
 
@@ -70,10 +70,14 @@ class Player extends React.PureComponent {
     }
 
     toggleMute = () => {
-        this.setState({ isMuted: !this.state.isMuted });
-        if (this.audio) {
-            this.audio.muted = !this.state.isMuted;
-        }
+        // this.setState({ isMuted: !this.state.isMuted });
+        // if (this.audio) {
+        //     this.audio.muted = !this.state.isMuted;
+        // }
+        this.setState((prevState) => ({
+            isMuted: !prevState.isMuted,
+            volume: prevState.isMuted ? 100 : prevState.volume, // Restore previous volume when unmuting
+          }));
     };
 
     handleVolumeChange = (e) => {
@@ -82,7 +86,7 @@ class Player extends React.PureComponent {
         if (this.audio) {
             this.audio.volume = volume / 100;
         }
-    }
+    };
 
     componentWillUpdate(nextProps, nextState) {
         if (nextState.isPlaying !== this.state.isPlaying) {
@@ -308,7 +312,7 @@ class Player extends React.PureComponent {
                 <div className="player-volume">
                     <button
                         className="sc-ir player-btn"
-                        onClick={this.toggleMute.bind(this)} 
+                        onClick={this.toggleMute.bind(this)}
                         title="Volume"
                     >
                         <i
@@ -320,7 +324,8 @@ class Player extends React.PureComponent {
                         type="range"
                         min="0"
                         max="100"
-                        value={this.state.volume}
+                        // value={this.state.volume}
+                        value={this.state.isMuted ? 0 : this.state.volume}
                         onChange={this.handleVolumeChange.bind(this)}
                     />
                 </div>
