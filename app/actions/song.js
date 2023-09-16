@@ -4,6 +4,7 @@ import * as types from "../constant/action_constant";
 import { MEDIA_ENDPOINT, ROOT_URL } from "../constant/endpoint_constant";
 import { lrcParser } from "../utils/func";
 import { togglePushRoute } from "./queue";
+import { startDownloading, updateDownloadProgress } from "./ui";
 
 export function fetchSong(name, id) {
     return (dispatch) => {
@@ -76,6 +77,37 @@ export function fetchSuggestedSongs({ songId, artistId }) {
 
 export function download({ songName, id, filename }) {
     return (dispatch) => {
-
+        dispatch(startDownloading(id));
+        axios.get(`${MEDIA_ENDPOINT}/download?id=${id}`)
+            .then(response => {
+                const url = response.data["128"] ? response.data["128"] : null;
+                if (!url) {
+                    alert("Cannot download this song, you must Vip user");
+                    return;
+                }
+                axios.get({
+                    method: "get",
+                    url,
+                    responseType: "arraybuffer",
+                    onDownloadProgress: (progressEvent) => {
+                        const percentComplete = Math.floor(
+                            (progressEvent.loaded * 100) / progressEvent.total
+                        );
+                        dispatch(updateDownloadProgress(percentComplete));
+                    }
+                })
+                .then((response) => {
+                    const blob = new Blob([response.data], {type: "audio/mpeg"});
+                    const link = document.createElement("a");
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = `${songName}.mp3`;
+                    link.click();
+            
+                    dispatch(finishDownloading());
+                })
+                .catch((err) => {
+                    throw err;
+                });
+            });
     }
 }
