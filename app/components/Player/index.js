@@ -18,7 +18,8 @@ class Player extends React.PureComponent {
             isSeeKing: false,
             isPlaying: false,
             isLoop: false,
-            isMuted: false
+            isMuted: false,
+            volume: 100
         }
     }
 
@@ -69,10 +70,19 @@ class Player extends React.PureComponent {
     }
 
     toggleMute = () => {
-        this.setState(prevState => ({
-            isMuted: !prevState.isMuted,
-        }));
+        this.setState({ isMuted: !this.state.isMuted });
+        if (this.audio) {
+            this.audio.muted = !this.state.isMuted;
+        }
     };
+
+    handleVolumeChange = (e) => {
+        const volume = e.target.value;
+        this.setState({ volume });
+        if (this.audio) {
+            this.audio.volume = volume / 100;
+        }
+    }
 
     componentWillUpdate(nextProps, nextState) {
         if (nextState.isPlaying !== this.state.isPlaying) {
@@ -249,7 +259,8 @@ class Player extends React.PureComponent {
                     crossOrigin="anonymous"
                     ref="audio"
                     loop={this.state.loop}
-                    muted={isMuted}
+                    muted={this.state.isMuted}
+                    volume={this.state.volume / 100}
                 />
                 <img
                     src={songData.thumbnail}
@@ -294,6 +305,23 @@ class Player extends React.PureComponent {
                         <i className="ion-ios-fastforward"></i>
                     </button>
                 </div>
+                <div className="player-volume">
+                    <button
+                        className="sc-ir player-btn"
+                        onClick={this.toggleMute.bind(this)}
+                    >
+                        <i className={`ion-volume-${this.state.isMuted ? 'off' : 'up'}`}
+                            style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}
+                        ></i>
+                    </button>
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={this.state.volume}
+                        onChange={this.handleVolumeChange.bind(this)}
+                    />
+                </div>
                 <div className="player-seek">
                     <span>
                         {
@@ -332,18 +360,8 @@ class Player extends React.PureComponent {
                         <span className="queue-circle">{queue.length}</span>
                         <img src="/svg/playlist.svg" />
                     </button>
-                    <button  className="sc-ir" title="Mute">
-                        <i className="ion-loop"
-                            onClick={this.toggleMute}
-                            style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}
-                        ></i>
-                    </button>
 
                 </div>
-                {/* <div onClick={this.toggleMute} className="player-mute">
-                      
-                        <i class="fas fa-volume-mute" style={{ color: this.state.isMuted ? "#23B89A" : "#adb5bd" }}/>
-                    </div> */}
                 {this.props.isFetching && <PlayerLoader />}
             </div>
         )

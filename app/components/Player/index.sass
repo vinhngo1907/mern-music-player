@@ -80,7 +80,6 @@ img.player-song-thumbnail
   &:hover
     opacity: 1.0
   i
-
     color: #34495E
     font-size: 16px
 
@@ -140,20 +139,18 @@ img.player-song-thumbnail
   right: 0px;
   bottom: 10px;
 
-.player-mute
+.player-volume
+  float: left
+  height: inherit
+  width: 20%
   display: flex
   align-items: center
-  justify-content: center
-  padding: 10px
-  cursor: pointer
-  &:hover
-    opacity: 1.0
-
-.mute-icon
-  color: #34495E
-  font-size: 16px
-  margin-right: 5px
-
-.mute-label
-  font-size: 15px
-  color: #70777d
+  padding-left: 20px
+  span
+    color: $grey-text
+    font-size: 13px
+  button
+    padding: 15px
+    cursor: pointer
+    i
+      font-size: 18px
