@@ -85,7 +85,7 @@ export function download({ songName, id, filename }) {
                     alert("Cannot download this song, you must Vip user");
                     return;
                 }
-                axios.get({
+                axios({
                     method: "get",
                     url,
                     responseType: "arraybuffer",
