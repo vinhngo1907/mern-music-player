@@ -6,6 +6,7 @@ const createPlaylist = require('./create_playlist');
 const getPlaylist = require('./get_playlist');
 const deleteSongFromPlaylist = require('./delete_song');
 const deletePlaylist = require('./delete_playlist');
+const schedulePlaylist = require("./schedule_playlist");
 
 const router = express.Router();
 
@@ -64,5 +65,13 @@ router.put('/:username/:playlistTitle', isValidUser, addSongToPlaylist);
  * @access Private
 */
 router.delete('/:username/:playlistTitle/:songId', isValidUser, deleteSongFromPlaylist);
+
+
+/** 
+ * @route POST
+ * @desc Post a schedule a playlist
+ * @access Private
+*/
+router.post("/schedule/:username", isValidUser, schedulePlaylist);
 
 module.exports = router;
