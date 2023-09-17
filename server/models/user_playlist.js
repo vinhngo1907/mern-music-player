@@ -9,9 +9,15 @@ const SongSchema = new Schema({
 	url_alias: String,
 }, { _id: false, versionKey: false });
 
+const ScheduledPlaytimeSchema = new Schema({
+	time: { type: String, required: true }, // Store scheduled time as a string (e.g., "14:30")
+	days: [String], // Store the days of the week when the playlist should play (e.g., ["Monday", "Wednesday"])
+}, { _id: false, versionKey: false });
+
 const PlaylistSchema = new Schema({
 	songs: [SongSchema],
 	title: { type: String, required: true },
+	scheduledPlaytimes: [ScheduledPlaytimeSchema],
 }, { versionKey: false });
 
 const UserPlaylistSchema = new Schema({
