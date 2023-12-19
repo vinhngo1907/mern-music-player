@@ -9,3 +9,5 @@ public/*
 .env
 .gitlab-ci.yml
 request.http
+package-lock.json
+yarn.lock
